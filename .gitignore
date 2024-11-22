@@ -1,0 +1,20 @@
+# IDE
+.idea/
+.vs/
+.vsc/
+*.code-workspace
+
+# Node Modules
+node_modules/
+npm-debug.log
+
+# Foundry
+*.lock
+jsconfig.json
+foundry
+
+# Boilerplate
+build/
+
+helpful reminders.txt
+screenshots/

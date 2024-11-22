@@ -1,0 +1,46 @@
+<div class="flexcol flex-group-center">
+	<div class='grid grid-5col'>
+		<span class="grid-span-4">
+			{{localize (lookup @root.config.skills "pluralLabel")}}
+		</span>
+		<a data-action="create" title='{{localize (lookup @root.config.skills "new")}}'>
+			<i class='fas fa-plus'></i>
+		</a>
+	</div>
+	<ol>
+		{{#each entries as |entry index|}}
+			<li class="flexrow grid grid-6col">
+				<div class="flexrow">
+					<label for="entry.id">Identifier</label>
+					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
+						data-index="{{@index}}" data-key="id" />
+				</div>
+				<div class="flexrow grid-span-2">
+					<label for="entry.label">Label</label>
+					<input class="entry-input" type="text" name="entry.label" value="{{entry.label}}"
+						data-dtype="String" data-index="{{@index}}" data-key="label" />
+				</div>
+				<div class="flexrow">
+					<label for="entry.attribute">Attribute</label>
+					<input class="entry-input" type="text" name="entry.attribute" value="{{entry.attribute}}"
+						data-dtype="String" data-index="{{@index}}" data-key="attribute" />
+				</div>
+				<div class="flexrow">
+					<a data-action="toggle" data-index="{{@index}}"
+						title='{{localize (lookup @root.config.skills "toggle")}}'>
+						<label for="entry.core">Display Core</label>
+						{{#if entry.core}}
+							<i class='fa-solid fa-toggle-on' name="entry.core"></i>
+						{{else}}
+							<i class='fa-solid fa-toggle-off' name="entry.core"></i>
+						{{/if}}
+					</a>
+				</div>
+				<a data-action="remove" data-index="{{@index}}"
+					title='{{localize (lookup @root.config.skills "remove")}}'>
+					<i class='fas fa-trash'></i>
+				</a>
+			</li>
+		{{/each}}
+	</ol>
+</div>

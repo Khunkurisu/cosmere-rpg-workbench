@@ -1,0 +1,15 @@
+{
+	"id": "cosmere-rpg-workbench",
+	"title": "Cosmere RPG Workbench",
+	"version": "0.0.1",
+	"compatibility": {
+		"minimum": "12",
+		"verified": "12"
+	},
+	"styles": [
+		"style.css"
+	],
+	"esmodules": [
+		"module/cosmere-rpg-workbench.mjs"
+	]
+}

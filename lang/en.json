@@ -1,0 +1,13 @@
+{
+	"COSMERE_WORKBENCH": {
+		"applications": {
+			"customSkills": "Custom Skills Menu"
+		},
+		"customSkills": {
+			"label": "Custom Skill",
+			"pluralLabel": "Custom Skills",
+			"new": "New Custom Skill",
+			"remove": "Remove Custom Skill"
+		}
+	}
+}
