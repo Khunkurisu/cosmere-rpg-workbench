@@ -4,8 +4,7 @@ import { COSMERE_WORKBENCH } from './helpers/config.mjs';
 Hooks.once('init', async function () {
 	CONFIG.COSMERE_WORKBENCH = COSMERE_WORKBENCH;
 	await registerSettings();
-});
-Hooks.once('ready', function () {
+
 	const customSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
 	customSkills.forEach((skill) => {
 		console.log(skill);
