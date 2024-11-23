@@ -1,7 +1,12 @@
 {
 	"id": "cosmere-rpg-workbench",
 	"title": "Cosmere RPG Workbench",
-	"version": "0.0.1",
+	"authors": [
+		{
+			"name": "Khunkurisu"
+		}
+	],
+	"version": "0.1.0",
 	"compatibility": {
 		"minimum": "12",
 		"verified": "12"
@@ -11,5 +16,21 @@
 	],
 	"esmodules": [
 		"module/cosmere-rpg-workbench.mjs"
-	]
+	],
+	"relationships": {
+		"requires": [
+			{
+				"id": "cosmere-rpg",
+				"type": "system",
+				"manifest": "https://raw.githubusercontent.com/stanavdb/cosmere-rpg/main/src/system.json",
+				"compatibility": {
+					"verified": "0.2.1",
+					"minimum": "0.2.0"
+				}
+			}
+		]
+	},
+	"url": "https://github.com/Khunkurisu/cosmere-rpg-workbench",
+	"manifest": "https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/master/module.json",
+	"download": ""
 }
