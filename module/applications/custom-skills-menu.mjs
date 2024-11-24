@@ -19,7 +19,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		},
 		tag: 'form',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.customSkills',
+			title: 'COSMERE_WORKBENCH.applications.customSkills.menu',
 			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
 		},
 	}
