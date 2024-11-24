@@ -1,9 +1,9 @@
 <div class="flexcol flex-group-center">
 	<div class='grid grid-5col'>
 		<span class="grid-span-4">
-			{{localize (lookup @root.config.skills "pluralLabel")}}
+			{{localize (lookup @root.config.applications.skills "pluralLabel")}}
 		</span>
-		<a data-action="create" title='{{localize (lookup @root.config.skills "new")}}'>
+		<a data-action="create" title='{{localize (lookup @root.config.applications.skills "new")}}'>
 			<i class='fas fa-plus'></i>
 		</a>
 	</div>
@@ -27,7 +27,7 @@
 				</div>
 				<div class="flexrow">
 					<a data-action="toggle" data-index="{{@index}}"
-						title='{{localize (lookup @root.config.skills "toggle")}}'>
+						title='{{localize (lookup @root.config.applications.skills "toggle")}}'>
 						<label for="entry.core">Display Core</label>
 						{{#if entry.core}}
 							<i class='fa-solid fa-toggle-on' name="entry.core"></i>
@@ -37,7 +37,7 @@
 					</a>
 				</div>
 				<a data-action="remove" data-index="{{@index}}"
-					title='{{localize (lookup @root.config.skills "remove")}}'>
+					title='{{localize (lookup @root.config.applications.skills "remove")}}'>
 					<i class='fas fa-trash'></i>
 				</a>
 			</li>

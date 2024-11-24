@@ -14,9 +14,9 @@ Hooks.once('init', async function () {
 
 async function registerSettings() {
 	game.settings.registerMenu('cosmere-rpg-workbench', 'customSkillsMenu', {
-		name: 'Custom Skills',
-		label: 'Custom Skills Menu',
-		hint: 'Allows you to add custom skills to the Cosmere RPG system.',
+		name: 'COSMERE_WORKBENCH.applications.customSkills.pluralLabel',
+		label: 'COSMERE_WORKBENCH.applications.customSkills.menu',
+		hint: 'COSMERE_WORKBENCH.applications.customSkills.desc',
 		icon: 'fas fa-bars',
 		type: CustomSkillMenu,
 		restricted: true,

@@ -1,12 +1,21 @@
 export const COSMERE_WORKBENCH = {};
 
 COSMERE_WORKBENCH.skills = {
-	label: 'COSMERE_WORKBENCH.customSkills.label',
-	pluralLabel: 'COSMERE_WORKBENCH.customSkills.pluralLabel',
-	new: 'COSMERE_WORKBENCH.customSkills.new',
-	remove: 'COSMERE_WORKBENCH.customSkills.remove',
 };
 
 COSMERE_WORKBENCH.applications = {
-	customSkills: 'COSMERE_WORKBENCH.applications.customSkills',
+	skills: {
+		menu: 'COSMERE_WORKBENCH.applications.customSkills.menu',
+		label: 'COSMERE_WORKBENCH.applications.customSkills.label',
+		pluralLabel: 'COSMERE_WORKBENCH.applications.customSkills.pluralLabel',
+		new: 'COSMERE_WORKBENCH.applications.customSkills.new',
+		remove: 'COSMERE_WORKBENCH.applications.customSkills.remove',
+		desc: 'COSMERE_WORKBENCH.applications.customSkills.desc',
+	},
+	id: {
+		full: 'COSMERE_WORKBENCH.applications.id.full',
+		abbr: 'COSMERE_WORKBENCH.applications.id.abbr'
+	}
 };
+
+COSMERE_WORKBENCH.attribute = 'COSMERE_WORKBENCH.attribute';
