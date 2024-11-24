@@ -7,7 +7,11 @@
 				"pluralLabel": "Custom Skills",
 				"new": "New Custom Skill",
 				"remove": "Remove Custom Skill",
-				"desc": "Allows you to add custom skills to the Cosmere RPG system."
+				"desc": "Allows you to add custom skills to the Cosmere RPG system.",
+				"core": {
+					"label": "Display Core",
+					"desc": "Toggles appearance in core skills."
+				}
 			},
 			"id": {
 				"full": "Identifier",

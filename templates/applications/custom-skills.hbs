@@ -11,24 +11,25 @@
 		{{#each entries as |entry index|}}
 			<li class="flexrow grid grid-6col">
 				<div class="flexrow">
-					<label for="entry.id">Identifier</label>
+					<label for="entry.id">{{localize (lookup @root.config.applications.id "full")}}</label>
 					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
 						data-index="{{@index}}" data-key="id" />
 				</div>
 				<div class="flexrow grid-span-2">
-					<label for="entry.label">Label</label>
+					<label for="entry.label">{{localize (lookup @root.config.applications.skills "label")}}</label>
 					<input class="entry-input" type="text" name="entry.label" value="{{entry.label}}"
 						data-dtype="String" data-index="{{@index}}" data-key="label" />
 				</div>
 				<div class="flexrow">
-					<label for="entry.attribute">Attribute</label>
+					<label for="entry.attribute">{{localize (lookup @root.config "attribute")}}</label>
 					<input class="entry-input" type="text" name="entry.attribute" value="{{entry.attribute}}"
 						data-dtype="String" data-index="{{@index}}" data-key="attribute" />
 				</div>
 				<div class="flexrow">
 					<a data-action="toggle" data-index="{{@index}}"
-						title='{{localize (lookup @root.config.applications.skills "toggle")}}'>
-						<label for="entry.core">Display Core</label>
+						title='{{localize (lookup @root.config.applications.skills.core "desc")}}'>
+						<label
+							for="entry.core">{{localize (lookup @root.config.applications.skills.core "label")}}</label>
 						{{#if entry.core}}
 							<i class='fa-solid fa-toggle-on' name="entry.core"></i>
 						{{else}}
