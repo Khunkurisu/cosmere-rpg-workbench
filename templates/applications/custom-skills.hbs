@@ -1,5 +1,5 @@
 <div class="flexcol flex-group-center">
-	<div class='grid grid-5col'>
+	<div class='grid grid-5col' style="margin-left:5%">
 		<span class="grid-span-4">
 			{{localize (lookup @root.config.applications.skills "pluralLabel")}}
 		</span>
@@ -8,32 +8,34 @@
 		</a>
 	</div>
 	<ol>
+		<li class="flexrow grid grid-6col">
+			<label>{{localize (lookup @root.config.applications.id "full")}}</label>
+			<label>{{localize (lookup @root.config.applications.skills "label")}}</label>
+			<label>{{localize (lookup @root.config "attribute")}}</label>
+			<label>{{localize (lookup @root.config.applications.skills.core "label")}}</label>
+			<label></label>
+		</li>
 		{{#each entries as |entry index|}}
 			<li class="flexrow grid grid-6col">
 				<div class="flexrow">
-					<label for="entry.id">{{localize (lookup @root.config.applications.id "full")}}</label>
 					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
 						data-index="{{@index}}" data-key="id" />
 				</div>
 				<div class="flexrow grid-span-2">
-					<label for="entry.label">{{localize (lookup @root.config.applications.skills "label")}}</label>
 					<input class="entry-input" type="text" name="entry.label" value="{{entry.label}}"
 						data-dtype="String" data-index="{{@index}}" data-key="label" />
 				</div>
 				<div class="flexrow">
-					<label for="entry.attribute">{{localize (lookup @root.config "attribute")}}</label>
 					<input class="entry-input" type="text" name="entry.attribute" value="{{entry.attribute}}"
 						data-dtype="String" data-index="{{@index}}" data-key="attribute" />
 				</div>
-				<div class="flexrow">
-					<a data-action="toggle" data-index="{{@index}}"
+				<div class="flexrow" style="margin-right:15px">
+					<a style="text-align:center;" data-action="toggle" data-index="{{@index}}"
 						title='{{localize (lookup @root.config.applications.skills.core "desc")}}'>
-						<label
-							for="entry.core">{{localize (lookup @root.config.applications.skills.core "label")}}</label>
 						{{#if entry.core}}
-							<i class='fa-solid fa-toggle-on' name="entry.core"></i>
+							<i class='fa-solid fa-toggle-on fa-xl' name="entry.core"></i>
 						{{else}}
-							<i class='fa-solid fa-toggle-off' name="entry.core"></i>
+							<i class='fa-solid fa-toggle-off fa-xl' name="entry.core"></i>
 						{{/if}}
 					</a>
 				</div>
