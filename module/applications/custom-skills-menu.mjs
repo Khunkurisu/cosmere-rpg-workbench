@@ -43,13 +43,15 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		if (this.entries.length === 1) {
 			if (!this.entries[0].id) this.entries = [];
 		}
+		console.log(CONFIG.COSMERE.attributes);
 		return {
 			entries: [...this.entries],
 			buttons: [
 				{ type: "submit", icon: "fa-solid fa-save", label: "SETTINGS.Save" },
 				{ type: "button", icon: "fa-solid fa-ban", label: "Cancel", action: "cancel" },
 			],
-			config: CONFIG.COSMERE_WORKBENCH,
+			attributes: CONFIG.COSMERE.attributes,
+			config: CONFIG,
 		};
 	}
 
@@ -97,6 +99,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		const html = $(this.element);
 
 		html.on("change", ".entry-input", this.onEntryChange.bind(this));
+		html.on("change", ".entry-attribute", this.onAttributeChange.bind(this));
 	}
 
 	/**
@@ -109,11 +112,29 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		const element = event.currentTarget;
 		const dataset = element.dataset;
 		const entries = this.entries;
-		console.log(entries);
-		console.log(dataset.index);
-		console.log(dataset.key);
 
 		entries[dataset.index][dataset.key] = element.value;
+
+		this.render({ force: false });
+	}
+
+	/**
+	 * Handle changing entry attribute.
+	 * @param {Event} event   The originating change event
+	 * @private
+	 */
+	onAttributeChange(event) {
+		event.preventDefault();
+		const element = event.currentTarget;
+		const dataset = element.dataset;
+		const entries = this.entries;
+
+		console.log(dataset.index);
+		console.log(element);
+
+		console.log(entries[dataset.index]);
+		entries[dataset.index].attribute = element.value;
+		console.log(entries[dataset.index]);
 
 		this.render({ force: false });
 	}

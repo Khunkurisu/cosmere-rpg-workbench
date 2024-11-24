@@ -12,6 +12,10 @@ Hooks.once('init', async function () {
 	});
 });
 
+Handlebars.registerHelper('isSelected', function (arg1, arg2) {
+	return (arg1 == arg2) ? "selected" : "";
+});
+
 async function registerSettings() {
 	game.settings.registerMenu('cosmere-rpg-workbench', 'customSkillsMenu', {
 		name: 'COSMERE_WORKBENCH.applications.customSkills.pluralLabel',
