@@ -7,7 +7,6 @@ Hooks.once('init', async function () {
 
 	const customSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
 	customSkills.forEach((skill) => {
-		console.log(skill);
 		cosmereRPG.api.registerSkill(skill);
 	});
 });
