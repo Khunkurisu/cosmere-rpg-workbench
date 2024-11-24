@@ -7,7 +7,16 @@ Hooks.once('init', async function () {
 
 	const customSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
 	customSkills.forEach((skill) => {
-		cosmereRPG.api.registerSkill(skill);
+		let isValid = true;
+		if (!CONFIG.COSMERE.attributes[skill.attribute]) {
+			isValid = false;
+		}
+		if (!skill.label || !skill.id) {
+			isValid = false;
+		}
+		if (isValid) {
+			cosmereRPG.api.registerSkill(skill);
+		}
 	});
 });
 
