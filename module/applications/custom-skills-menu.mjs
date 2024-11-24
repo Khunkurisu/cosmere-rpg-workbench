@@ -5,7 +5,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		id: 'custom-skill-menu',
 		form: {
 			handler: CustomSkillMenu.#onSubmit,
-			closeOnSubmit: true,
+			closeOnSubmit: false,
 		},
 		position: {
 			width: 640,
@@ -43,7 +43,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		if (this.entries.length === 1) {
 			if (!this.entries[0].id) this.entries = [];
 		}
-		console.log(CONFIG.COSMERE.attributes);
+
 		return {
 			entries: [...this.entries],
 			buttons: [
@@ -57,7 +57,24 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 
 	static #onSubmit(event, form, formData) {
 		const data = [...this.entries];
-		game.settings.set('cosmere-rpg-workbench', 'customSkills', data);
+		let lastChecked;
+		let isValid = true;
+		data.every((skill => {
+			if (lastChecked) {
+				if (skill.id === lastChecked.id) {
+					isValid = false;
+				}
+			}
+			lastChecked = skill;
+			return isValid;
+		}));
+
+		if (isValid) {
+			game.settings.set('cosmere-rpg-workbench', 'customSkills', data);
+			this.close();
+		} else {
+			ui.notifications.error("Identifiers must be unique.");
+		}
 	}
 
 	static onCancel(event, target) {
@@ -68,8 +85,8 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		const entries = this.entries;
 
 		entries.push({
-			id: 'new-custom-skill',
-			label: 'New Custom Skill',
+			id: 'ncs',
+			label: 'New Skill',
 			attribute: 'str',
 			core: false
 		});
@@ -129,12 +146,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		const dataset = element.dataset;
 		const entries = this.entries;
 
-		console.log(dataset.index);
-		console.log(element);
-
-		console.log(entries[dataset.index]);
 		entries[dataset.index].attribute = element.value;
-		console.log(entries[dataset.index]);
 
 		this.render({ force: false });
 	}
