@@ -18,3 +18,8 @@ build/
 
 helpful reminders.txt
 screenshots/
+
+# archives
+*.zip
+*.7z
+*.rar
