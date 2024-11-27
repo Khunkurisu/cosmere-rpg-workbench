@@ -6,6 +6,10 @@ Hooks.once('init', async function () {
 	await registerSettings();
 
 	const customSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
+	if (!Hooks.call('customSkillRegistry', customSkills)) {
+		return;
+	}
+
 	customSkills.forEach((skill) => {
 		let isValid = true;
 		if (!CONFIG.COSMERE.attributes[skill.attribute]) {
