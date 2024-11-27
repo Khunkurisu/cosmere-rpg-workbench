@@ -1,16 +1,18 @@
 import { CustomSkillMenu } from './applications/custom-skills-menu.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
 
+let registeredSkills;
+
 Hooks.once('init', async function () {
 	CONFIG.COSMERE_WORKBENCH = COSMERE_WORKBENCH;
 	await registerSettings();
 
-	const customSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
-	if (!Hooks.call('customSkillRegistry', customSkills)) {
+	registeredSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
+	if (!Hooks.call('customSkillRegistry', registeredSkills)) {
 		return;
 	}
 
-	customSkills.forEach((skill) => {
+	registeredSkills.forEach((skill) => {
 		let isValid = true;
 		if (!CONFIG.COSMERE.attributes[skill.attribute]) {
 			isValid = false;
@@ -22,6 +24,13 @@ Hooks.once('init', async function () {
 			cosmereRPG.api.registerSkill(skill);
 		}
 	});
+});
+
+Hooks.once('ready', () => {
+	registeredSkills.forEach((skill) => {
+		game.i18n.translations.COSMERE.Skill[skill.id] = skill.label;
+	});
+	console.log(game.i18n.translations.COSMERE.Skill);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
