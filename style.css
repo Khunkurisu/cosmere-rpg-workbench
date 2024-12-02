@@ -1,3 +1,10 @@
+.currency-bar {
+	min-width: 90%;
+}
+/* .currency-header {
+	min-width: 90%;
+} */
+
 .grid,
 .grid-2col {
 	display: grid;

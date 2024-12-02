@@ -21,5 +21,17 @@ COSMERE_WORKBENCH.applications = {
 		abbr: 'COSMERE_WORKBENCH.applications.id.abbr',
 	},
 };
+COSMERE_WORKBENCH.currency = {
+	labels: {
+		mark: 'COSMERE_WORKBENCH.currency.spheres.mark.label',
+		spheres: 'COSMERE_WORKBENCH.currency.spheres.label',
+	},
+	abbr: {
+		mark: 'COSMERE_WORKBENCH.currency.spheres.mark.abbr',
+	},
+	total: 'COSMERE_WORKBENCH.currency.total',
+	currency: 'COSMERE_WORKBENCH.currency.currency',
+	loot: 'COSMERE_WORKBENCH.currency.loot',
+};
 
 COSMERE_WORKBENCH.attribute = 'COSMERE_WORKBENCH.attribute';

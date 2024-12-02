@@ -18,6 +18,18 @@
 				"abbr": "ID"
 			}
 		},
-		"attribute": "Attribute"
+		"attribute": "Attribute",
+		"currency": {
+			"spheres": {
+				"label": "Spheres",
+				"mark": {
+					"label": "Marks",
+					"abbr": "mk"
+				}
+			},
+			"total": "Total",
+			"currency": "Currency",
+			"loot": "Loot"
+		}
 	}
 }
