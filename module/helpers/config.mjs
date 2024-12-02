@@ -21,6 +21,7 @@ COSMERE_WORKBENCH.applications = {
 		abbr: 'COSMERE_WORKBENCH.applications.id.abbr',
 	},
 };
+
 COSMERE_WORKBENCH.currency = {
 	labels: {
 		mark: 'COSMERE_WORKBENCH.currency.spheres.mark.label',
