@@ -1,5 +1,6 @@
 import { CustomSkillMenu } from './applications/custom-skills-menu.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
+import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 
 let registeredSkills;
 
@@ -8,9 +9,11 @@ Hooks.once('init', async function () {
 	await registerSettings();
 
 	registeredSkills = game.settings.get('cosmere-rpg-workbench', 'customSkills');
+	console.log(registeredSkills);
 	if (!Hooks.call('customSkillRegistry', registeredSkills)) {
 		return;
 	}
+	console.log(registeredSkills);
 
 	registeredSkills.forEach((skill) => {
 		let isValid = true;
@@ -31,6 +34,10 @@ Hooks.once('ready', () => {
 		game.i18n.translations.COSMERE.Skill[skill.id] = skill.label;
 	});
 	console.log(game.i18n.translations.COSMERE.Skill);
+});
+
+Hooks.on('renderActorSheetV2', (o, i, n) => {
+	InjectCurrencyCounter(o, i);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
