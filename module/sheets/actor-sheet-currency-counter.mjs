@@ -1,9 +1,14 @@
-export function InjectCurrencyCounter(sheet, html) {
+const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-currency-counter.hbs';
+
+export async function InjectCurrencyCounter(sheet, html) {
+	console.log(sheet);
 	console.log($(html));
 	const search = $(html).find('#equipment-search');
 	console.log(search);
 	const data = GetData(sheet);
 	console.log(data);
+	const currencyBar = await renderTemplate(templatePath, data);
+	$(search).after(currencyBar);
 }
 
 function GetData(sheet) {

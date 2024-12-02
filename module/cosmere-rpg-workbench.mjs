@@ -1,5 +1,6 @@
 import { CustomSkillMenu } from './applications/custom-skills-menu.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
+import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 
 let registeredSkills;
@@ -27,6 +28,9 @@ Hooks.once('init', async function () {
 			cosmereRPG.api.registerSkill(skill);
 		}
 	});
+
+	// Preload Handlebars templates.
+	return preloadHandlebarsTemplates();
 });
 
 Hooks.once('ready', () => {
@@ -36,8 +40,9 @@ Hooks.once('ready', () => {
 	console.log(game.i18n.translations.COSMERE.Skill);
 });
 
-Hooks.on('renderActorSheetV2', (o, i, n) => {
-	InjectCurrencyCounter(o, i);
+Hooks.on('renderActorSheetV2', async (o, i, n) => {
+	await InjectCurrencyCounter(o, i);
+	return true;
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
