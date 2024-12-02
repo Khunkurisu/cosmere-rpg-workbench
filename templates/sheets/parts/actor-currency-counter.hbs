@@ -1,29 +1,29 @@
 <section id="currency-counter" class="currency-bar flex-group-center">
 	{{#each currencies as |currency index|}}
 		<label class="currency-header">
-			{{localize (lookup @root.config.currency.labels "{{index}}")}}
+			{{localize (lookup @root.config.currency.labels index)}}
 			{{log @root.config.currency.labels.spheres}}
 		</label>
 		<ul>
 			{{#each currency as |denomination key|}}
 				<li class="grid grid-4col flexrow">
 					<label class="currency-label">
-						{{localize (lookup @root.config.currency.labels "{{key}}")}}
+						{{localize (lookup @root.config.currency.labels key)}}
 					</label>
-					<label class="currency-label">
+					<label class="currency-value">
 						{{localize (lookup @root.config.currency "total")}}:
 						{{denomination.total}}
-						{{localize (lookup @root.config.currency.abbr "{{key}}")}}
+						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
-					<label class="currency-label">
+					<label class="currency-value">
 						{{localize (lookup @root.config.currency "currency")}}:
 						{{denomination.currency}}
-						{{localize (lookup @root.config.currency.abbr "{{key}}")}}
+						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
-					<label class="currency-label">
+					<label class="currency-value">
 						{{localize (lookup @root.config.currency "loot")}}:
 						{{denomination.loot}}
-						{{localize (lookup @root.config.currency.abbr "{{key}}")}}
+						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
 				</li>
 			{{/each}}
