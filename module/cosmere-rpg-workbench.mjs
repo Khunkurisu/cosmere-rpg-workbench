@@ -32,23 +32,25 @@ Hooks.once('ready', () => {
 
 	if (registeredCurrency) {
 		registeredCurrency.forEach((currency) => {
-			const dict = game.i18n.translations.COSMERE.Currencies;
+			const dict = game.i18n.translations.COSMERE_WORKBENCH.currency;
+			const config = CONFIG.COSMERE_WORKBENCH.currency;
 			dict[currency.id] = { label: currency.label };
-			dict[currency.id].denominations = {};
-			const denom = dict[currency.id].denominations;
+			config.labels[currency.id] = `COSMERE_WORKBENCH.currency.${currency.id}.label`;
 			currency.denominations.primary.forEach((denomination) => {
-				denom.primary = {};
-				denom.primary[denomination.id] = {
+				dict[currency.id][denomination.id] = {
 					label: denomination.label,
 					abbr: denomination.unit
 				};
+				config.labels[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.label`;
+				config.abbr[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.abbr`
 			});
 			currency.denominations.secondary.forEach((denomination) => {
-				denom.secondary = {};
-				denom.secondary[denomination.id] = {
+				dict[currency.id][denomination.id] = {
 					label: denomination.label,
 					abbr: denomination.unit
 				};
+				config.labels[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.label`;
+				config.abbr[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.abbr`
 			});
 		});
 	}

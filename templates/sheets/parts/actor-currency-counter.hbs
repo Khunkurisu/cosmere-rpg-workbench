@@ -2,6 +2,7 @@
 	{{#each currencies as |currency index|}}
 		<label class="currency-header">
 			{{localize (lookup @root.config.currency.labels index)}}
+			{{log @root.config.currency.labels}}
 		</label>
 		<ul>
 			{{#each currency as |denomination key|}}
