@@ -16,6 +16,28 @@ COSMERE_WORKBENCH.applications = {
 			desc: 'COSMERE_WORKBENCH.applications.customSkills.core.desc'
 		},
 	},
+	currency: {
+		menu: 'COSMERE_WORKBENCH.applications.customCurrency.menu',
+		label: 'COSMERE_WORKBENCH.applications.customCurrency.label',
+		pluralLabel: 'COSMERE_WORKBENCH.applications.customCurrency.pluralLabel',
+		new: 'COSMERE_WORKBENCH.applications.customCurrency.new',
+		remove: 'COSMERE_WORKBENCH.applications.customCurrency.remove',
+		desc: 'COSMERE_WORKBENCH.applications.customCurrency.desc',
+		denomination: {
+			label: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.label',
+			type: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.type',
+			primary: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.primary',
+			secondary: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.secondary',
+			unit: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.unit',
+			conversion: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.conversion',
+			new: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.new',
+			remove: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.remove',
+			base: {
+				label: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.base.label',
+				desc: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.base.desc'
+			},
+		}
+	},
 	id: {
 		full: 'COSMERE_WORKBENCH.applications.id.full',
 		abbr: 'COSMERE_WORKBENCH.applications.id.abbr',

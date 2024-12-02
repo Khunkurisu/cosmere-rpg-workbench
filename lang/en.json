@@ -13,6 +13,29 @@
 					"desc": "Toggles appearance in core skills."
 				}
 			},
+			"customCurrency": {
+				"menu": "Custom Currency Menu",
+				"label": "Custom Currency",
+				"pluralLabel": "Custom Currencies",
+				"new": "New Custom Currency",
+				"remove": "Remove Custom Currency",
+				"desc": "Allows you to add custom currency to the Cosmere RPG system.",
+				"denomination": {
+					"label": "Denomination",
+					"pluralLabel": "Denominations",
+					"type": "Type",
+					"primary": "Primary",
+					"secondary": "Secondary",
+					"unit": "Unit",
+					"conversion": "Conversion Rate",
+					"new": "New Denomination",
+					"remove": "Remove Denomination",
+					"base": {
+						"label": "Base Unit",
+						"desc": "Indicates this is used as the base unit for conversion rate."
+					}
+				}
+			},
 			"id": {
 				"full": "Identifier",
 				"abbr": "ID"

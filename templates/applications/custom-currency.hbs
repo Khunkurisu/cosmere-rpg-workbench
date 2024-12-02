@@ -1,0 +1,156 @@
+<div class="flexcol flex-group-center">
+	<div class='grid grid-5col' style="margin-left:5%">
+		<span class="grid-span-4">
+			{{localize (lookup @root.config.applications.currency "pluralLabel")}}
+		</span>
+		<a data-action="create" data-target="currency"
+			title='{{localize (lookup @root.config.applications.currency "new")}}'>
+			<i class='fas fa-plus'></i>
+		</a>
+	</div>
+	<ol>
+		<li class="flexrow grid grid-3col">
+			<label>{{localize (lookup @root.config.applications.id "full")}}</label>
+			<label>{{localize (lookup @root.config.applications.currency "label")}}</label>
+			<label></label>
+		</li>
+		{{#each entries as |entry index|}}
+			<li class="flexrow grid grid-3col">
+				<div class="flexrow">
+					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
+						data-index="{{index}}" data-key="id" data-target="currency" />
+				</div>
+				<div class="flexrow grid-span-2">
+					<input class="entry-input" type="text" name="entry.label" value="{{entry.label}}"
+						data-dtype="String" data-index="{{index}}" data-key="label" data-target="currency" />
+				</div>
+				<a data-action="remove" data-index="{{index}}" data-target="currency"
+					title='{{localize (lookup @root.config.applications.currency "remove")}}'>
+					<i class='fas fa-trash'></i>
+				</a>
+			</li>
+			<li class="flexcol">
+				<div class='grid grid-5col' style="margin-left:5%">
+					<label class="denomination-header grid-span-4">
+						{{localize (lookup @root.config.applications.currency.denomination "primary")}}
+						{{localize (lookup @root.config.applications.currency.denomination "pluralLabel")}}
+					</label>
+					<a data-action="create" data-index="{{index}}" data-target="primary"
+						title='{{localize (lookup @root.config.applications.currency.denomination "new")}}'>
+						<i class='fas fa-plus'></i>
+					</a>
+				</div>
+				<ul>
+					<li class="flexrow grid grid-6col">
+						<label>{{localize (lookup @root.config.applications.id "full")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "label")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "conversion")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "unit")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination.base "label")}}</label>
+						<label></label>
+					</li>
+					{{#each entry.denominations.primary as |pdom key|}}
+						<li class="flexrow grid grid-6col">
+							<div class="flexrow">
+								<input class="entry-input" type="text" name="pdom.id" value="{{pdom.id}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="primary" data-key="id" />
+							</div>
+							<div class="flexrow grid-span-2">
+								<input class="entry-input" type="text" name="pdom.label" value="{{pdom.label}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="primary" data-key="label" />
+							</div>
+							<div class="flexrow">
+								<input class="entry-input" type="number" name="pdom.conversionRate"
+									value="{{pdom.conversionRate}}" data-dtype="Number" data-index="{{index}}"
+									data-denom="{{key}}" data-target="primary" data-key="conversionRate" />
+							</div>
+							<div class="flexrow">
+								<input class="entry-input" type="text" name="pdom.unit" value="{{pdom.unit}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="primary" data-key="unit" />
+							</div>
+							<div class="flexrow" style="margin-right:15px">
+								<a style="text-align:center;" data-action="toggle" data-index="{{index}}"
+									data-key="{{key}}" data-target="primary"
+									title='{{localize (lookup @root.config.applications.currency.denomination.base "desc")}}'>
+									{{#if pdom.base}}
+										<i class='fa-solid fa-toggle-on fa-xl' name="pdom.base"></i>
+									{{else}}
+										<i class='fa-solid fa-toggle-off fa-xl' name="pdom.base"></i>
+									{{/if}}
+								</a>
+							</div>
+							<a data-action="remove" data-index="{{index}}" data-key="{{key}}" data-target="primary"
+								title='{{localize (lookup @root.config.applications.currency "remove")}}'>
+								<i class='fas fa-trash'></i>
+							</a>
+						</li>
+					{{/each}}
+				</ul>
+			</li>
+			<li class="flexcol">
+				<div class='grid grid-5col' style="margin-left:5%">
+					<label class="denomination-header grid-span-4">
+						{{localize (lookup @root.config.applications.currency.denomination "secondary")}}
+						{{localize (lookup @root.config.applications.currency.denomination "pluralLabel")}}
+					</label>
+					<a data-action="create" data-index="{{index}}" data-target="secondary"
+						title='{{localize (lookup @root.config.applications.currency.denomination "new")}}'>
+						<i class='fas fa-plus'></i>
+					</a>
+				</div>
+				<ul>
+					<li class="flexrow grid grid-6col">
+						<label>{{localize (lookup @root.config.applications.id "full")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "label")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "conversion")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination "unit")}}</label>
+						<label>{{localize (lookup @root.config.applications.currency.denomination.base "label")}}</label>
+						<label></label>
+					</li>
+					{{#each entry.denominations.secondary as |sdom key|}}
+						<li class="flexrow grid grid-6col">
+							<div class="flexrow">
+								<input class="entry-input" type="text" name="sdom.id" value="{{sdom.id}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="secondary" data-key="id" />
+							</div>
+							<div class="flexrow grid-span-2">
+								<input class="entry-input" type="text" name="sdom.label" value="{{sdom.label}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="secondary" data-key="label" />
+							</div>
+							<div class="flexrow">
+								<input class="entry-input" type="number" name="sdom.conversionRate"
+									value="{{sdom.conversionRate}}" data-dtype="Number" data-index="{{index}}"
+									data-denom="{{key}}" data-target="secondary" data-key="conversionRate" />
+							</div>
+							<div class="flexrow">
+								<input class="entry-input" type="text" name="sdom.unit" value="{{sdom.unit}}"
+									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
+									data-target="secondary" data-key="unit" />
+							</div>
+							<div class="flexrow" style="margin-right:15px">
+								<a style="text-align:center;" data-action="toggle" data-index="{{index}}"
+									data-key="{{key}}" data-target="secondary"
+									title='{{localize (lookup @root.config.applications.currency.denomination.base "desc")}}'>
+									{{#if sdom.base}}
+										<i class='fa-solid fa-toggle-on fa-xl' name="sdom.base"></i>
+									{{else}}
+										<i class='fa-solid fa-toggle-off fa-xl' name="sdom.base"></i>
+									{{/if}}
+								</a>
+							</div>
+							<a data-action="remove" data-index="{{index}}" data-key="{{key}}" data-target="secondary"
+								title='{{localize (lookup @root.config.applications.currency "remove")}}'>
+								<i class='fas fa-trash'></i>
+							</a>
+						</li>
+					{{/each}}
+				</ul>
+			</li>
+		{{/each}}
+	</ol>
+</div>
