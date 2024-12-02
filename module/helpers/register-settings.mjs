@@ -1,5 +1,5 @@
-import { CustomSkillMenu } from './applications/custom-skills-menu.mjs';
-import { CustomCurrencyMenu } from './applications/custom-currency-menu.mjs';
+import { CustomSkillMenu } from '../applications/custom-skills-menu.mjs';
+import { CustomCurrencyMenu } from '../applications/custom-currency-menu.mjs';
 
 export async function registerSettings() {
 	game.settings.registerMenu('cosmere-rpg-workbench', 'customSkillsMenu', {
