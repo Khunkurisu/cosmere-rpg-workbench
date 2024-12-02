@@ -1,10 +1,9 @@
-import { CustomSkillMenu } from './applications/custom-skills-menu.mjs';
-import { CustomCurrencyMenu } from './applications/custom-currency-menu.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
 import { RegisterCurrency } from './helpers/currency-registry.mjs';
 import { RegisterSkills } from './helpers/skill-registry.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
+import { registerSettings } from './helpers/register-settings.mjs';
 
 let registeredSkills;
 let registeredCurrency;
@@ -64,37 +63,3 @@ Hooks.on('renderActorSheetV2', async (o, i, n) => {
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
 	return (arg1 == arg2) ? "selected" : "";
 });
-
-async function registerSettings() {
-	game.settings.registerMenu('cosmere-rpg-workbench', 'customSkillsMenu', {
-		name: 'COSMERE_WORKBENCH.applications.customSkills.pluralLabel',
-		label: 'COSMERE_WORKBENCH.applications.customSkills.menu',
-		hint: 'COSMERE_WORKBENCH.applications.customSkills.desc',
-		icon: 'fas fa-bars',
-		type: CustomSkillMenu,
-		restricted: true,
-	});
-
-	await game.settings.register('cosmere-rpg-workbench', 'customCurrency', {
-		scope: 'world',
-		config: false,
-		type: Array,
-		default: [],
-	});
-
-	game.settings.registerMenu('cosmere-rpg-workbench', 'customCurrencyMenu', {
-		name: 'COSMERE_WORKBENCH.applications.customCurrency.pluralLabel',
-		label: 'COSMERE_WORKBENCH.applications.customCurrency.menu',
-		hint: 'COSMERE_WORKBENCH.applications.customCurrency.desc',
-		icon: 'fas fa-bars',
-		type: CustomCurrencyMenu,
-		restricted: true,
-	});
-
-	await game.settings.register('cosmere-rpg-workbench', 'customSkills', {
-		scope: 'world',
-		config: false,
-		type: Array,
-		default: [],
-	});
-}
