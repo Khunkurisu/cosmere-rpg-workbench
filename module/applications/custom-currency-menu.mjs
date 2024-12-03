@@ -200,16 +200,11 @@ export class CustomCurrencyMenu extends HandlebarsApplicationMixin(ApplicationV2
 		const dataset = element.dataset;
 		const entries = this.entries;
 		const entry = entries[dataset.index];
-		console.log(entry);
 
 		if (dataset.target === 'currency') {
 			entry[dataset.key] = element.value;
 		} else {
 			const denom = entry.denominations[dataset.target];
-			console.log(denom);
-			console.log(denom[dataset.denom]);
-			console.log(dataset.key);
-			console.log(element.value);
 			denom[dataset.denom][dataset.key] = element.value;
 		}
 
