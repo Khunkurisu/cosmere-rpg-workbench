@@ -39,7 +39,7 @@ export async function registerSettings() {
 		hint: 'COSMERE_WORKBENCH.settings.autoInvest.desc',
 		scope: 'world',
 		config: true,
-		requiresReload: true,
+		requiresReload: false,
 		type: Boolean,
 		default: true,
 	});
@@ -49,7 +49,7 @@ export async function registerSettings() {
 		hint: 'COSMERE_WORKBENCH.settings.autoLevel.desc',
 		scope: 'world',
 		config: true,
-		requiresReload: true,
+		requiresReload: false,
 		type: Boolean,
 		default: false,
 	});
