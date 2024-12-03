@@ -1,5 +1,15 @@
 {
 	"COSMERE_WORKBENCH": {
+		"settings": {
+			"autoLevel": {
+				"label": "Auto Level",
+				"desc": "Toggle whether to automatically adjust actor level based on talent count.\nNote: This is not perfectly accurate as it just counts total talents - 1."
+			},
+			"autoInvest": {
+				"label": "Auto Investiture",
+				"desc": "Toggle whether to automatically calculate and set investiture when taking a Radiant Path."
+			}
+		},
 		"applications": {
 			"customSkills": {
 				"menu": "Custom Skills Menu",

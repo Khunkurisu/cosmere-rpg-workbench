@@ -11,7 +11,7 @@ export async function registerSettings() {
 		restricted: true,
 	});
 
-	await game.settings.register('cosmere-rpg-workbench', 'customCurrency', {
+	await game.settings.register('cosmere-rpg-workbench', 'customSkills', {
 		scope: 'world',
 		config: false,
 		type: Array,
@@ -27,21 +27,11 @@ export async function registerSettings() {
 		restricted: true,
 	});
 
-	await game.settings.register('cosmere-rpg-workbench', 'customSkills', {
+	await game.settings.register('cosmere-rpg-workbench', 'customCurrency', {
 		scope: 'world',
 		config: false,
 		type: Array,
 		default: [],
-	});
-
-	await game.settings.register('cosmere-rpg-workbench', 'autoLevel', {
-		name: 'COSMERE_WORKBENCH.settings.autoLevel.label',
-		hint: 'COSMERE_WORKBENCH.settings.autoLevel.desc',
-		scope: 'world',
-		config: true,
-		requiresReload: true,
-		type: Boolean,
-		default: true,
 	});
 
 	await game.settings.register('cosmere-rpg-workbench', 'autoInvest', {
@@ -52,5 +42,15 @@ export async function registerSettings() {
 		requiresReload: true,
 		type: Boolean,
 		default: true,
+	});
+
+	await game.settings.register('cosmere-rpg-workbench', 'autoLevel', {
+		name: 'COSMERE_WORKBENCH.settings.autoLevel.label',
+		hint: 'COSMERE_WORKBENCH.settings.autoLevel.desc',
+		scope: 'world',
+		config: true,
+		requiresReload: true,
+		type: Boolean,
+		default: false,
 	});
 }

@@ -1,4 +1,5 @@
 export function SetInvestiture(actor, forced = false) {
+	if (!game.settings.get('cosmere-rpg-workbench', 'autoInvest')) return;
 	const system = actor.system;
 	const attributes = system.attributes;
 
@@ -24,6 +25,7 @@ function IsRadiant(actor) {
 }
 
 export function SetLevel(actor, override = -1) {
+	if (!game.settings.get('cosmere-rpg-workbench', 'autoLevel')) return;
 	let level = 0;
 	if (override >= 0) {
 		level = override;

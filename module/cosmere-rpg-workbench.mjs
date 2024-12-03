@@ -52,7 +52,7 @@ Hooks.on('deleteItem', async (document, options, userId) => {
 	if (options.parent) {
 		switch (document.type) {
 			case 'path': {
-				SetInvestiture(options.parent, true);
+				SetInvestiture(options.parent);
 				break;
 			}
 			case 'talent': {
