@@ -19,4 +19,5 @@ A module that shall be updated to contain useful features for running the system
   * checks talent count and sets level (disabled by default)
 
 Manifest:
+
 `https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/master/module.json`
