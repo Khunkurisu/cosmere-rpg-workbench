@@ -38,6 +38,7 @@ export function SetLevel(actor, override = -1) {
 				level++;
 			}
 		});
+		level = Math.max(level, 1);
 	}
 	actor.update({ 'system.level.total.bonus': level });
 }
