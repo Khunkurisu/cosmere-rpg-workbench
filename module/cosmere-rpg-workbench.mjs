@@ -1,6 +1,6 @@
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
-import { RegisterCurrency } from './helpers/currency-registry.mjs';
-import { RegisterSkills } from './helpers/skill-registry.mjs';
+import { LocalizeCurrency, RegisterCurrency } from './helpers/currency-registry.mjs';
+import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
@@ -23,41 +23,19 @@ Hooks.once('init', async function () {
 });
 
 Hooks.once('ready', () => {
-	if (registeredSkills) {
-		registeredSkills.forEach((skill) => {
-			game.i18n.translations.COSMERE.Skill[skill.id] = skill.label;
-		});
-	}
-
-	if (registeredCurrency) {
-		registeredCurrency.forEach((currency) => {
-			const dict = game.i18n.translations.COSMERE_WORKBENCH.currency;
-			const config = CONFIG.COSMERE_WORKBENCH.currency;
-			dict[currency.id] = { label: currency.label };
-			config.labels[currency.id] = `COSMERE_WORKBENCH.currency.${currency.id}.label`;
-			currency.denominations.primary.forEach((denomination) => {
-				dict[currency.id][denomination.id] = {
-					label: denomination.label,
-					abbr: denomination.unit
-				};
-				config.labels[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.label`;
-				config.abbr[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.abbr`
-			});
-			currency.denominations.secondary.forEach((denomination) => {
-				dict[currency.id][denomination.id] = {
-					label: denomination.label,
-					abbr: denomination.unit
-				};
-				config.labels[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.label`;
-				config.abbr[denomination.id] = `COSMERE_WORKBENCH.currency.${currency.id}.${denomination.id}.abbr`
-			});
-		});
-	}
+	LocalizeSkills(registeredSkills);
+	LocalizeCurrency(registeredCurrency);
 });
 
 Hooks.on('renderActorSheetV2', async (o, i, n) => {
 	await InjectCurrencyCounter(o, i);
 	return true;
+});
+
+Hooks.on('createItem', async (document, options, userId) => {
+	console.log(document);
+	console.log(options);
+	console.log(userId);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {

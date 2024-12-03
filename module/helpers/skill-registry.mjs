@@ -16,3 +16,11 @@ export function RegisterSkills(registeredSkills) {
 		}
 	});
 }
+
+export function LocalizeSkills(registeredSkills) {
+	if (registeredSkills) {
+		registeredSkills.forEach((skill) => {
+			game.i18n.translations.COSMERE.Skill[skill.id] = skill.label;
+		});
+	}
+}
