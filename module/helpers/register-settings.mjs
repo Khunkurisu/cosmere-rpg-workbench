@@ -33,4 +33,24 @@ export async function registerSettings() {
 		type: Array,
 		default: [],
 	});
+
+	await game.settings.register('cosmere-rpg-workbench', 'autoLevel', {
+		name: 'COSMERE_WORKBENCH.settings.autoLevel.label',
+		hint: 'COSMERE_WORKBENCH.settings.autoLevel.desc',
+		scope: 'world',
+		config: true,
+		requiresReload: true,
+		type: Boolean,
+		default: true,
+	});
+
+	await game.settings.register('cosmere-rpg-workbench', 'autoInvest', {
+		name: 'COSMERE_WORKBENCH.settings.autoInvest.label',
+		hint: 'COSMERE_WORKBENCH.settings.autoInvest.desc',
+		scope: 'world',
+		config: true,
+		requiresReload: true,
+		type: Boolean,
+		default: true,
+	});
 }

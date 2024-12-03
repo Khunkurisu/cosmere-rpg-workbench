@@ -4,6 +4,7 @@ import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
+import { SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
 
 let registeredSkills;
 let registeredCurrency;
@@ -33,9 +34,38 @@ Hooks.on('renderActorSheetV2', async (o, i, n) => {
 });
 
 Hooks.on('createItem', async (document, options, userId) => {
-	console.log(document);
-	console.log(options);
-	console.log(userId);
+	if (options.parent) {
+		switch (document.type) {
+			case 'path': {
+				SetInvestiture(options.parent, true);
+				break;
+			}
+			case 'talent': {
+				SetLevel(options.parent);
+				break;
+			}
+		}
+	}
+});
+
+Hooks.on('deleteItem', async (document, options, userId) => {
+	if (options.parent) {
+		switch (document.type) {
+			case 'path': {
+				SetInvestiture(options.parent, true);
+				break;
+			}
+			case 'talent': {
+				SetLevel(options.parent);
+				break;
+			}
+		}
+	}
+});
+
+Hooks.on('updateActor', (document, changed, options, userId) => {
+	SetInvestiture(document);
+	SetLevel(document);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
