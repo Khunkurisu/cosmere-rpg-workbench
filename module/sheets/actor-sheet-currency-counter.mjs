@@ -8,6 +8,9 @@ export async function InjectCurrencyCounter(sheet, html) {
 	SetRowSize(data);
 
 	const search = $(html).find('#equipment-search');
+	if ($(html).find('#currency-counter').length > 0) {
+		return;
+	}
 	const currencyBar = await renderTemplate(templatePath, data);
 	$(search).after(currencyBar);
 }
