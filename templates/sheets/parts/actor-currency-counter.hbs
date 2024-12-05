@@ -2,8 +2,8 @@
 	{{#each currencies as |currency index|}}
 		<ul class="currency-list">
 			{{#each currency as |denomination key|}}
-				<li class="grid grid-4col flexrow currency-row">
-					<label class="currency-label">
+				<li class="grid grid-5col flexrow currency-row">
+					<label class="currency-label grid-span-2">
 						{{localize (lookup @root.config.currency.labels index)}}
 						{{localize (lookup @root.config.currency.labels key)}}
 					</label>

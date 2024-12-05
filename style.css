@@ -1,12 +1,16 @@
 .currency-bar {
-	min-width: 90%;
+	min-width: 95%;
 }
-/* .currency-header {
+.currency-row {
+	background: #0f0610;
+	color: #efe6d8;
+	padding: 40px 80px 40px 80px;
+	text-align: center;
+	font-size: larger;
 }
 .currency-label {
+	box-shadow: 1px 0 0 #efe6d8;
 }
-.currency-value {
-} */
 
 .grid,
 .grid-2col {
