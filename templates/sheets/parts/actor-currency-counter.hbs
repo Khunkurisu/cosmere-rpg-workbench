@@ -1,12 +1,10 @@
 <section id="currency-counter" class="currency-bar flex-group-center">
 	{{#each currencies as |currency index|}}
-		<label class="currency-header">
-			{{localize (lookup @root.config.currency.labels index)}}
-		</label>
-		<ul>
+		<ul class="currency-list">
 			{{#each currency as |denomination key|}}
-				<li class="grid grid-4col flexrow">
+				<li class="grid grid-4col flexrow currency-row">
 					<label class="currency-label">
+						{{localize (lookup @root.config.currency.labels index)}}
 						{{localize (lookup @root.config.currency.labels key)}}
 					</label>
 					<label class="currency-value">
