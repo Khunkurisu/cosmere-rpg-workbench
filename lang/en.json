@@ -3,11 +3,29 @@
 		"settings": {
 			"autoLevel": {
 				"label": "Auto Level",
-				"desc": "Toggle whether to automatically adjust actor level based on talent count.\nNote: This is not perfectly accurate as it just counts total talents - 1."
+				"desc": "Toggle whether to automatically adjust actor level based on talent count. Note: This is not perfectly accurate as it just counts total talents - 1."
 			},
 			"autoInvest": {
 				"label": "Auto Investiture",
 				"desc": "Toggle whether to automatically calculate and set investiture when taking a Radiant Path."
+			},
+			"currencyBar": {
+				"label": "Currency Tracker",
+				"desc": "Toggle whether to show the currency tracker in the equipment tab of the character sheet."
+			},
+			"encumbranceBar": {
+				"label": "Encumbrance Tracker",
+				"desc": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet."
+			},
+			"manualLevel": {
+				"value": {
+					"label": "Level Value",
+					"desc": "The level to set all player characters to."
+				},
+				"toggle": {
+					"label": "Override Level Globally",
+					"desc": "Toggle whether to override player character levels with the one specified below. Note: this will take precedent over the auto-level setting."
+				}
 			}
 		},
 		"applications": {

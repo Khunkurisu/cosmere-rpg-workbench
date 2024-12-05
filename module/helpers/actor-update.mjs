@@ -25,20 +25,29 @@ function IsRadiant(actor) {
 }
 
 export function SetLevel(actor, override = -1) {
-	if (!game.settings.get('cosmere-rpg-workbench', 'autoLevel')) return;
-	let level = 0;
-	if (override >= 0) {
-		level = override;
+	if (game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle')) {
+		const level = game.settings.get('cosmere-rpg-workbench', 'manualLevelValue');
+		actor.update({ 'system.level.total.override': level });
 	} else {
-		const items = Array.from(actor.items);
+		if (!game.settings.get('cosmere-rpg-workbench', 'autoLevel')) {
+			actor.update({ 'system.level.total.useOverride': false });
+			return;
+		}
+		let level = 0;
+		if (override >= 0) {
+			level = override;
+		} else {
+			const items = Array.from(actor.items);
 
-		items.forEach((item) => {
-			if (item.type === 'talent') {
-				console.log(item);
-				level++;
-			}
-		});
-		level = Math.max(level, 1);
+			items.forEach((item) => {
+				if (item.type === 'talent') {
+					console.log(item);
+					level++;
+				}
+			});
+			level = Math.max(level, 1);
+		}
+		actor.update({ 'system.level.total.override': level });
+		actor.update({ 'system.level.total.useOverride': true });
 	}
-	actor.update({ 'system.level.total.bonus': level });
 }
