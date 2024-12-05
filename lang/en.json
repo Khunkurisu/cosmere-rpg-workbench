@@ -63,6 +63,16 @@
 			"total": "Total",
 			"currency": "Currency",
 			"loot": "Loot"
+		},
+		"encumbrance": {
+			"label": "Encumbrance",
+			"unit": {
+				"label": "Pounds",
+				"abbr": "lbs"
+			},
+			"current": "Current",
+			"carry": "Carry",
+			"lift": "Lift"
 		}
 	}
 }

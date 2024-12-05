@@ -1,0 +1,22 @@
+<section id="encumbrance-counter" class="encumbrance-bar flex-group-center">
+	<div class="grid grid-5col flexrow encumbrance-row">
+		<label class="encumbrance-label grid-span-2">
+			{{localize (lookup @root.config.encumbrance "label")}}
+		</label>
+		<label class="encumbrance-value">
+			{{localize (lookup @root.config.encumbrance "current")}}:
+			{{encumbrance.current}}
+			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
+		</label>
+		<label class="encumbrance-value">
+			{{localize (lookup @root.config.encumbrance "carry")}}:
+			{{encumbrance.carry}}
+			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
+		</label>
+		<label class="encumbrance-value">
+			{{localize (lookup @root.config.encumbrance "lift")}}:
+			{{encumbrance.lift}}
+			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
+		</label>
+	</div>
+</section>

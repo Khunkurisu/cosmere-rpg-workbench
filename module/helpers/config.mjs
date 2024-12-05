@@ -57,4 +57,15 @@ COSMERE_WORKBENCH.currency = {
 	loot: 'COSMERE_WORKBENCH.currency.loot',
 };
 
+COSMERE_WORKBENCH.encumbrance = {
+	label: 'COSMERE_WORKBENCH.encumbrance.label',
+	unit: {
+		label: 'COSMERE_WORKBENCH.encumbrance.unit.label',
+		abbr: 'COSMERE_WORKBENCH.encumbrance.unit.abbr',
+	},
+	current: 'COSMERE_WORKBENCH.encumbrance.current',
+	carry: 'COSMERE_WORKBENCH.encumbrance.carry',
+	lift: 'COSMERE_WORKBENCH.encumbrance.lift',
+};
+
 COSMERE_WORKBENCH.attribute = 'COSMERE_WORKBENCH.attribute';
