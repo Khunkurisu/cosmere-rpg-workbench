@@ -1,6 +1,22 @@
+.entry-list {
+	border-top: 2px solid #efe6d8;
+	padding: 15px;
+	margin-bottom: 5px;
+	background: #0f061063;
+
+	:nth-child(2n) {
+		background: #0f061063;
+	}
+}
+
+.subentry-list:nth-child(2n) {
+	background: #0f061063;
+}
+
 .currency-bar {
 	min-width: 95%;
 }
+
 .currency-row {
 	background: #0f0610;
 	color: #efe6d8;
@@ -8,9 +24,11 @@
 	text-align: center;
 	font-size: larger;
 }
+
 .currency-label {
 	box-shadow: 1px 0 0 #efe6d8;
 }
+
 .encumbrance-bar {
 	min-width: 95%;
 }

@@ -1,5 +1,5 @@
 <div class="flexcol flex-group-center">
-	<div class='grid grid-5col' style="margin-left:5%">
+	<div class='grid grid-5col' style="margin-left:2%">
 		<span class="grid-span-4">
 			{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "pluralLabel")}}
 		</span>
@@ -8,7 +8,7 @@
 		</a>
 	</div>
 	<ol>
-		<li class="flexrow grid grid-6col">
+		<li class="flexrow grid grid-6col entry-list">
 			<label>{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.id "full")}}</label>
 			<label>{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "label")}}</label>
 			<label>{{localize (lookup @root.config "attribute")}}</label>
@@ -16,7 +16,7 @@
 			<label></label>
 		</li>
 		{{#each entries as |entry index|}}
-			<li class="flexrow grid grid-6col">
+			<li class="flexrow grid grid-6col entry-list subentry-list">
 				<div class="flexrow">
 					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
 						data-index="{{@index}}" data-key="id" />

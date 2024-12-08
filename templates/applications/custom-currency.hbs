@@ -1,5 +1,5 @@
 <div class="flexcol flex-group-center">
-	<div class='grid grid-5col' style="margin-left:5%">
+	<div class='grid grid-5col' style="margin-left:2%">
 		<span class="grid-span-4">
 			{{localize (lookup @root.config.applications.currency "pluralLabel")}}
 		</span>
@@ -9,13 +9,13 @@
 		</a>
 	</div>
 	<ol>
-		<li class="flexrow grid grid-3col">
+		<li class="flexrow grid grid-3col entry-list">
 			<label>{{localize (lookup @root.config.applications.id "full")}}</label>
 			<label>{{localize (lookup @root.config.applications.currency "label")}}</label>
 			<label></label>
 		</li>
 		{{#each entries as |entry index|}}
-			<li class="flexrow grid grid-3col">
+			<li class="flexrow grid grid-3col entry-list">
 				<div class="flexrow">
 					<input class="entry-input" type="text" name="entry.id" value="{{entry.id}}" data-dtype="String"
 						data-index="{{index}}" data-key="id" data-target="currency" />
@@ -29,8 +29,8 @@
 					<i class='fas fa-trash'></i>
 				</a>
 			</li>
-			<li class="flexcol">
-				<div class='grid grid-5col' style="margin-left:5%">
+			<li class="flexcol entry-list">
+				<div class='grid grid-5col' style="margin-left:2%">
 					<label class="denomination-header grid-span-4">
 						{{localize (lookup @root.config.applications.currency.denomination "primary")}}
 						{{localize (lookup @root.config.applications.currency.denomination "pluralLabel")}}
@@ -41,7 +41,7 @@
 					</a>
 				</div>
 				<ul>
-					<li class="flexrow grid grid-6col">
+					<li class="flexrow grid grid-6col entry-list subentry-list">
 						<label>{{localize (lookup @root.config.applications.id "full")}}</label>
 						<label>{{localize (lookup @root.config.applications.currency.denomination "label")}}</label>
 						<label>{{localize (lookup @root.config.applications.currency.denomination "conversion")}}</label>
@@ -50,7 +50,7 @@
 						<label></label>
 					</li>
 					{{#each entry.denominations.primary as |pdom key|}}
-						<li class="flexrow grid grid-6col">
+						<li class="flexrow grid grid-6col entry-list subentry-list">
 							<div class="flexrow">
 								<input class="entry-input" type="text" name="pdom.id" value="{{pdom.id}}"
 									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
@@ -90,8 +90,8 @@
 					{{/each}}
 				</ul>
 			</li>
-			<li class="flexcol">
-				<div class='grid grid-5col' style="margin-left:5%">
+			<li class="flexcol entry-list">
+				<div class='grid grid-5col' style="margin-left:2%">
 					<label class="denomination-header grid-span-4">
 						{{localize (lookup @root.config.applications.currency.denomination "secondary")}}
 						{{localize (lookup @root.config.applications.currency.denomination "pluralLabel")}}
@@ -102,7 +102,7 @@
 					</a>
 				</div>
 				<ul>
-					<li class="flexrow grid grid-6col">
+					<li class="flexrow grid grid-6col entry-list subentry-list">
 						<label>{{localize (lookup @root.config.applications.id "full")}}</label>
 						<label>{{localize (lookup @root.config.applications.currency.denomination "label")}}</label>
 						<label>{{localize (lookup @root.config.applications.currency.denomination "conversion")}}</label>
@@ -111,7 +111,7 @@
 						<label></label>
 					</li>
 					{{#each entry.denominations.secondary as |sdom key|}}
-						<li class="flexrow grid grid-6col">
+						<li class="flexrow grid grid-6col entry-list subentry-list">
 							<div class="flexrow">
 								<input class="entry-input" type="text" name="sdom.id" value="{{sdom.id}}"
 									data-dtype="String" data-index="{{index}}" data-denom="{{key}}"
