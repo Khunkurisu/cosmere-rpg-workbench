@@ -9,17 +9,17 @@
 					</label>
 					<label class="currency-value">
 						{{localize (lookup @root.config.currency "total")}}:
-						{{denomination.total}}
+						{{round denomination.total}}
 						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
 					<label class="currency-value">
 						{{localize (lookup @root.config.currency "currency")}}:
-						{{denomination.currency}}
+						{{round denomination.currency}}
 						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
 					<label class="currency-value">
 						{{localize (lookup @root.config.currency "loot")}}:
-						{{denomination.loot}}
+						{{round denomination.loot}}
 						{{localize (lookup @root.config.currency.abbr key)}}
 					</label>
 				</li>
