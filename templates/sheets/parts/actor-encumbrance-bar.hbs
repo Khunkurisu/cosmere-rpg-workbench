@@ -5,17 +5,17 @@
 		</label>
 		<label class="encumbrance-value">
 			{{localize (lookup @root.config.encumbrance "current")}}:
-			{{encumbrance.current}}
+			{{round encumbrance.current}}
 			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
 		</label>
 		<label class="encumbrance-value">
 			{{localize (lookup @root.config.encumbrance "carry")}}:
-			{{encumbrance.carry}}
+			{{round encumbrance.carry}}
 			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
 		</label>
 		<label class="encumbrance-value">
 			{{localize (lookup @root.config.encumbrance "lift")}}:
-			{{encumbrance.lift}}
+			{{round encumbrance.lift}}
 			{{localize (lookup @root.config.encumbrance.unit "abbr")}}
 		</label>
 	</div>
