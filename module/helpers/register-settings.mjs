@@ -4,7 +4,7 @@ import { CustomCurrencyMenu } from '../applications/custom-currency-menu.mjs';
 export async function registerSettings() {
 	await registerCustomSkills();
 	await registerCustomCurrency();
-	await registerAutoInvest();
+	await registerAutoResources();
 	await registerLeveling();
 	await registerTrackerBars();
 }
@@ -45,7 +45,7 @@ async function registerCustomCurrency() {
 	});
 }
 
-async function registerAutoInvest() {
+async function registerAutoResources() {
 	await game.settings.register('cosmere-rpg-workbench', 'autoInvest', {
 		name: 'COSMERE_WORKBENCH.settings.autoInvest.label',
 		hint: 'COSMERE_WORKBENCH.settings.autoInvest.desc',
@@ -53,6 +53,23 @@ async function registerAutoInvest() {
 		config: true,
 		requiresReload: false,
 		type: Boolean,
+		default: true,
+	});
+	await game.settings.register('cosmere-rpg-workbench', 'autoHealth', {
+		name: 'COSMERE_WORKBENCH.settings.autoHealth.label',
+		hint: 'COSMERE_WORKBENCH.settings.autoHealth.desc',
+		scope: 'world',
+		config: true,
+		requiresReload: false,
+		type: Boolean,
+		onChange: value => {
+			const actors = Array.from(game.actors);
+			actors.forEach((actor) => {
+				if (actor.type === 'character') {
+					actor.update({ 'system.resources.hea.max.useOverride': value });
+				}
+			});
+		},
 		default: true,
 	});
 }

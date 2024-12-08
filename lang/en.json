@@ -9,6 +9,10 @@
 				"label": "Auto Investiture",
 				"desc": "Toggle whether to automatically calculate and set investiture when taking a Radiant Path."
 			},
+			"autoHealth": {
+				"label": "Auto Health",
+				"desc": "Toggle whether to automatically calculate and set health based on level."
+			},
 			"currencyBar": {
 				"label": "Currency Tracker",
 				"desc": "Toggle whether to show the currency tracker in the equipment tab of the character sheet."

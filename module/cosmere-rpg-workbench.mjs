@@ -4,7 +4,7 @@ import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
-import { SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
+import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
 import { InjectEncumbranceCounter } from './sheets/actor-sheet-encumbrance-bar.mjs';
 
 let registeredSkills;
@@ -44,6 +44,7 @@ Hooks.on('createItem', async (document, options, userId) => {
 			}
 			case 'talent': {
 				SetLevel(options.parent);
+				SetHealth(document);
 				break;
 			}
 		}
@@ -55,6 +56,7 @@ Hooks.on('createActor', async (document, options, userId) => {
 		const useOverride = game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle');
 		document.update({ 'system.level.total.useOverride': useOverride });
 		SetLevel(document);
+		SetHealth(document);
 	}
 });
 
@@ -67,6 +69,7 @@ Hooks.on('deleteItem', async (document, options, userId) => {
 			}
 			case 'talent': {
 				SetLevel(options.parent);
+				SetHealth(document);
 				break;
 			}
 		}
@@ -76,6 +79,7 @@ Hooks.on('deleteItem', async (document, options, userId) => {
 Hooks.on('updateActor', (document, changed, options, userId) => {
 	SetInvestiture(document);
 	SetLevel(document);
+	SetHealth(document);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
