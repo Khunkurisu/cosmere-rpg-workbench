@@ -50,6 +50,14 @@ Hooks.on('createItem', async (document, options, userId) => {
 	}
 });
 
+Hooks.on('createActor', async (document, options, userId) => {
+	if (document.type === 'character') {
+		const useOverride = game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle');
+		document.update({ 'system.level.total.useOverride': useOverride });
+		SetLevel(document);
+	}
+});
+
 Hooks.on('deleteItem', async (document, options, userId) => {
 	if (options.parent) {
 		switch (document.type) {
