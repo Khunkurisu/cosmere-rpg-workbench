@@ -106,7 +106,7 @@ async function registerLeveling() {
 			});
 		},
 		type: Number,
-		default: 1,
+		default: 0,
 	});
 }
 
