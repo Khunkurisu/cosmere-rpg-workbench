@@ -97,6 +97,11 @@ async function registerLeveling() {
 			actors.forEach((actor) => {
 				if (actor.type === 'character') {
 					actor.update({ 'system.level.total.override': value });
+					if (actor.system.level.total.useOverride
+						!== game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle')
+					) {
+						actor.update({ 'system.level.total.useOverride': true });
+					}
 				}
 			});
 		},
