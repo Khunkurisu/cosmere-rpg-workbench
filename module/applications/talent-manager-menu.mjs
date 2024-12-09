@@ -74,8 +74,9 @@ export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2)
 			const item = game.items.get(tree.id);
 			if (item) {
 				let name = tree.name;
-				if (append) {
-					name += ' (Talent Tree)';
+				const appendString = ' (Talent Tree)';
+				if (append && !(name.includes(appendString))) {
+					name += appendString;
 				}
 				item.name = name;
 				item.img = tree.img;
