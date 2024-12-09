@@ -13,6 +13,19 @@
 	background: #0f061063;
 }
 
+.entry-button {
+	border: 1px white solid;
+	margin-left: 2%;
+	max-width: 25px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.talent-name {
+	max-width: 35%;
+}
+
 .currency-bar {
 	min-width: 95%;
 }

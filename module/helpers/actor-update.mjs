@@ -76,7 +76,6 @@ export function SetLevel(actor, override = -1) {
 
 			items.forEach((item) => {
 				if (item.type === 'talent') {
-					console.log(item);
 					level++;
 				}
 			});

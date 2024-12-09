@@ -1,43 +1,45 @@
 {
-	"id": "cosmere-rpg-workbench",
-	"title": "Cosmere RPG Workbench",
-	"authors": [
-		{
-			"name": "Khunkurisu"
-		}
-	],
-	"version": "0.4.3",
-	"download": "https://github.com/Khunkurisu/cosmere-rpg-workbench/releases/download/v0.4.3/cosmere-rpg-workbench-0.4.3.zip",
-	"url": "https://github.com/Khunkurisu/cosmere-rpg-workbench",
-	"manifest": "https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/master/module.json",
-	"compatibility": {
-		"minimum": "12",
-		"verified": "12"
-	},
-	"styles": [
-		"style.css"
-	],
-	"esmodules": [
-		"module/cosmere-rpg-workbench.mjs"
-	],
-	"languages": [
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "lang/en.json"
-		}
-	],
-	"relationships": {
-		"requires": [
-			{
-				"id": "cosmere-rpg",
-				"type": "system",
-				"manifest": "https://raw.githubusercontent.com/stanavdb/cosmere-rpg/main/src/system.json",
-				"compatibility": {
-					"verified": "0.2.1",
-					"minimum": "0.2.0"
-				}
-			}
-		]
-	}
+  "id": "cosmere-rpg-workbench",
+  "title": "Cosmere RPG Workbench",
+  "authors": [
+    {
+      "name": "Khunkurisu",
+      "flags": {}
+    }
+  ],
+  "version": "0.5.0",
+  "download": "https://github.com/Khunkurisu/cosmere-rpg-workbench/releases/download/v0.5.0/cosmere-rpg-workbench-0.5.0.zip",
+  "url": "https://github.com/Khunkurisu/cosmere-rpg-workbench",
+  "manifest": "https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/master/module.json",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "styles": [
+    "style.css"
+  ],
+  "esmodules": [
+    "module/cosmere-rpg-workbench.mjs"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    }
+  ],
+  "packs": [
+    {
+      "name": "macros",
+      "label": "Macros",
+      "path": "packs/macros",
+      "type": "Macro",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "cosmere-rpg"
+    }
+  ]
 }
