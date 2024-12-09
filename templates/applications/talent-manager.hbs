@@ -18,8 +18,8 @@
 	</div>
 	<ol>
 		<li class="flexrow grid grid-3col entry-list">
-			<label>{{localize (lookup @root.config.applications.name "label")}}</label>
-			<label>{{localize (lookup @root.config.applications.image "label")}}</label>
+			<label>{{localize (lookup @root.config.applications.talents "name")}}</label>
+			<label>{{localize (lookup @root.config.applications.talents.image "label")}}</label>
 			<label></label>
 		</li>
 		{{#each entries as |entry index|}}
@@ -31,7 +31,8 @@
 				<div class="flexrow grid-span-2">
 					<input class="entry-input" type="text" name="entry.img" value="{{entry.img}}" data-dtype="String"
 						data-index="{{index}}" data-key="img" />
-					<a data-action="setImage" title='{{localize (lookup @root.config.applications.image "set")}}'>
+					<a data-action="setImage"
+						title='{{localize (lookup @root.config.applications.talents.image "desc")}}'>
 						<i class='fa-solid fa-folder'></i>
 					</a>
 				</div>

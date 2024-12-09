@@ -68,6 +68,20 @@
 					}
 				}
 			},
+			"talents": {
+				"menu": "Talent Manager",
+				"label": "Talent",
+				"pluralLabel": "Talent",
+				"name": "Talent Name",
+				"image": {
+					"label": "Talent Image",
+					"desc": "Opens the file browser to set an image."
+				},
+				"append": {
+					"label": "Auto-Append",
+					"desc": "Toggles auto-appending the substring ' (Talent Tree)' to the name of talents that lack it."
+				}
+			},
 			"id": {
 				"full": "Identifier",
 				"abbr": "ID"

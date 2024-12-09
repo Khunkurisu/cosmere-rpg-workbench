@@ -42,6 +42,20 @@ COSMERE_WORKBENCH.applications = {
 		full: 'COSMERE_WORKBENCH.applications.id.full',
 		abbr: 'COSMERE_WORKBENCH.applications.id.abbr',
 	},
+	talents: {
+		menu: 'COSMERE_WORKBENCH.applications.talents.menu',
+		label: 'COSMERE_WORKBENCH.applications.talents.label',
+		pluralLabel: 'COSMERE_WORKBENCH.applications.talents.pluralLabel',
+		name: 'COSMERE_WORKBENCH.applications.talents.name',
+		image: {
+			label: 'COSMERE_WORKBENCH.applications.talents.image.label',
+			desc: 'COSMERE_WORKBENCH.applications.talents.image.desc'
+		},
+		append: {
+			label: 'COSMERE_WORKBENCH.applications.talents.append.label',
+			desc: 'COSMERE_WORKBENCH.applications.talents.append.desc'
+		},
+	}
 };
 
 COSMERE_WORKBENCH.currency = {
