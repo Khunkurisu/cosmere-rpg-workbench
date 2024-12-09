@@ -18,7 +18,7 @@ export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2)
 		},
 		tag: 'form',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.talentManager.menu',
+			title: 'COSMERE_WORKBENCH.applications.talents.menu',
 			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
 		},
 	}
