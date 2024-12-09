@@ -8,6 +8,7 @@ import { InjectEncumbranceCounter } from './sheets/actor-sheet-encumbrance-bar.m
 import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
 import { InjectRecoveryButton } from './sheets/actor-sheet-recovery-button.mjs';
+import { InjectPlotDieButton } from './sheets/actor-sheet-plot-die-button.mjs';
 
 let registeredSkills;
 let registeredCurrency;
@@ -39,6 +40,7 @@ Hooks.on('renderActorSheetV2', async (o, i, n) => {
 	await InjectCurrencyCounter(o, i);
 	await InjectEncumbranceCounter(o, i);
 	await InjectRecoveryButton(o, i);
+	await InjectPlotDieButton(o, i);
 	return true;
 });
 
