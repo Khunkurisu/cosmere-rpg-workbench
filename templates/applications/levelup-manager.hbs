@@ -1,3 +1,10 @@
-<div class="flexcol flex-group-center">
-
+<div class="flexrow flex-group-center grid grid-{{colCount}}col">
+	{{#each paths as |path index|}}
+		<div class="flexcol flex-group-center">
+			<h3 class="path-name">path.name</h3>
+			<div class="talent-trees">
+				{{{path.talentTrees}}}
+			</div>
+		</div>
+	{{/each}}
 </div>

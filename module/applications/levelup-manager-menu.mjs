@@ -7,9 +7,6 @@ export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2
 			width: 720,
 			height: 'auto',
 		},
-		actions: {
-			cancel: LevelupManagerMenu.onCancel,
-		},
 		tag: 'div',
 		window: {
 			title: 'COSMERE_WORKBENCH.applications.levelup.menu',
@@ -17,30 +14,46 @@ export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2
 		},
 	}
 
-	entries = [...this._talentTrees()];
-	append = false;
+	talentTrees = [...this._talentTrees()];
+	actor;
+
+	_enrichableLabel(uuid, label) {
+		return `@UUID[${uuid}]{${label}}`;
+	}
 
 	_talentTrees() {
 		const items = Array.from(game.items);
 		const talentTrees = [];
 		items.forEach((item) => {
 			if (item.type === 'talent_tree') {
-				talentTrees.push({
-					id: item._id,
-					name: item.name,
-					img: item.img
+				talentTrees.push(item.uuid);
+			}
+		});
+		const packs = Array.from(game.packs);
+
+		packs.forEach((pack) => {
+			if (pack.metadata.type === 'Item') {
+				pack.tree.children.forEach((folder) => {
+					folder.entries.forEach((item) => {
+						if (item.type === 'talent_tree') {
+							talentTrees.push(item.uuid);
+						}
+					});
+				});
+				pack.tree.entries.forEach((item) => {
+					if (item.type === 'talent_tree') {
+						talentTrees.push(item.uuid);
+					}
 				});
 			}
 		});
+
 		return talentTrees;
 	}
 
 	static PARTS = {
 		form: {
 			template: 'modules/cosmere-rpg-workbench/templates/applications/talent-manager.hbs'
-		},
-		footer: {
-			template: "templates/generic/form-footer.hbs",
 		},
 	}
 
@@ -49,84 +62,23 @@ export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2
 	}
 
 	_prepareContext(options) {
-		if (this.entries.length === 1) {
-			if (!this.entries[0].id) this.entries = [];
+		if (this.talentTrees.length === 1) {
+			if (!this.talentTrees[0].id) this.talentTrees = [];
 		}
 
+		const pathsList = this._getPaths(this.actor);
+
 		return {
-			entries: [...this.entries],
-			append: this.append,
-			buttons: [
-				{ type: "submit", icon: "fa-solid fa-save", label: "SETTINGS.Save" },
-				{ type: "button", icon: "fa-solid fa-ban", label: "Cancel", action: "cancel" },
-			],
-			config: CONFIG.COSMERE_WORKBENCH,
+			actor: this.actor,
+			paths: pathsList,
+			colCount: (pathsList.length >= 3 ? 3 : pathsList.length)
 		};
 	}
 
-	static #onSubmit(event, form, formData) {
-		this.entries.forEach((tree) => {
-			const item = game.items.get(tree.id);
-			if (item) {
-				let name = tree.name;
-				const appendString = ' (Talent Tree)';
-				if (this.append && !(name.includes(appendString))) {
-					name += appendString;
-				}
+	_getPaths(actor) {
+		if (!actor || !actor.items) return;
+		Array.from(actor.items).forEach((item) => {
 
-				item.update({ 'name': name, 'img': tree.img });
-			}
 		});
-		this.close();
-	}
-
-	static onCancel(event, target) {
-		this.close();
-	}
-
-	static toggleAppend(event, target) {
-		this.append = !this.append;
-
-		this.render({ force: false });
-	}
-
-	static async setImage(event, target) {
-		const dataset = target.dataset;
-		const entry = this.entries[dataset.index];
-		const img = entry.img;
-		const fp = new FilePicker({
-			img,
-			type: 'image',
-			redirectToRoot: img ? [img] : [],
-			callback: (path) => {
-				entry.img = path;
-				this.render({ force: false });
-			},
-			top: this.position.top + 40,
-			left: this.position.left + 10,
-		});
-		return fp.browse();
-	}
-
-	_onRender(context, options) {
-		const html = $(this.element);
-
-		html.on("change", ".entry-input", this.onEntryChange.bind(this));
-	}
-
-	/**
-	 * Handle changing entry text.
-	 * @param {Event} event   The originating change event
-	 * @private
-	 */
-	onEntryChange(event) {
-		event.preventDefault();
-		const element = event.currentTarget;
-		const dataset = element.dataset;
-		const entries = this.entries;
-
-		entries[dataset.index][dataset.key] = element.value;
-
-		this.render({ force: false });
 	}
 }
