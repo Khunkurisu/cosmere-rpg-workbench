@@ -2,7 +2,7 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 	static DEFAULT_OPTIONS = {
-		id: 'custom-skill-menu',
+		id: 'talent-manager-menu',
 		form: {
 			handler: TalentManagerMenu.#onSubmit,
 			closeOnSubmit: false,
