@@ -61,6 +61,7 @@ export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2)
 
 		return {
 			entries: [...this.entries],
+			append: this.append,
 			buttons: [
 				{ type: "submit", icon: "fa-solid fa-save", label: "SETTINGS.Save" },
 				{ type: "button", icon: "fa-solid fa-ban", label: "Cancel", action: "cancel" },
