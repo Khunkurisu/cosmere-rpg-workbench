@@ -71,16 +71,16 @@ export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2)
 	}
 
 	static #onSubmit(event, form, formData) {
-		entries.forEach((tree) => {
+		this.entries.forEach((tree) => {
 			const item = game.items.get(tree.id);
 			if (item) {
 				let name = tree.name;
 				const appendString = ' (Talent Tree)';
-				if (append && !(name.includes(appendString))) {
+				if (this.append && !(name.includes(appendString))) {
 					name += appendString;
 				}
-				item.name = name;
-				item.img = tree.img;
+
+				item.update({ 'name': name, 'img': tree.img });
 			}
 		});
 		this.close();
@@ -98,7 +98,7 @@ export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2)
 
 	static async setImage(event, target) {
 		const dataset = target.dataset;
-		const entry = entries[dataset.index];
+		const entry = this.entries[dataset.index];
 		const img = entry.img;
 		const fp = new FilePicker({
 			img,
