@@ -71,7 +71,7 @@
 			"talents": {
 				"menu": "Talent Manager",
 				"label": "Talent",
-				"pluralLabel": "Talent",
+				"pluralLabel": "Talents",
 				"name": "Talent Name",
 				"image": {
 					"label": "Talent Image",
