@@ -1,0 +1,41 @@
+<div class="flexcol flex-group-center">
+	<div class='grid grid-5col' style="margin-left:2%">
+		<span class="grid-span-4">
+			{{localize (lookup @root.config.applications.talents "pluralLabel")}}
+		</span>
+		<span>
+			<label>
+				{{localize (lookup @root.config.applications.talents.append "label")}}
+			</label>
+			<a data-action="toggle" title='{{localize (lookup @root.config.applications.talents.append "desc")}}'>
+				{{#if append}}
+					<i class='fa-solid fa-toggle-on fa-xl' name="append-toggle"></i>
+				{{else}}
+					<i class='fa-solid fa-toggle-off fa-xl' name="append-toggle"></i>
+				{{/if}}
+			</a>
+		</span>
+	</div>
+	<ol>
+		<li class="flexrow grid grid-3col entry-list">
+			<label>{{localize (lookup @root.config.applications.name "label")}}</label>
+			<label>{{localize (lookup @root.config.applications.image "label")}}</label>
+			<label></label>
+		</li>
+		{{#each entries as |entry index|}}
+			<li class="flexrow grid grid-3col entry-list">
+				<div class="flexrow">
+					<input class="entry-input" type="text" name="entry.name" value="{{entry.name}}" data-dtype="String"
+						data-index="{{index}}" data-key="name" />
+				</div>
+				<div class="flexrow grid-span-2">
+					<input class="entry-input" type="text" name="entry.img" value="{{entry.img}}" data-dtype="String"
+						data-index="{{index}}" data-key="img" />
+					<a data-action="setImage" title='{{localize (lookup @root.config.applications.image "set")}}'>
+						<i class='fa-solid fa-folder'></i>
+					</a>
+				</div>
+			</li>
+		{{/each}}
+	</ol>
+</div>
