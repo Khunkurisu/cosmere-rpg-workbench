@@ -1,7 +1,10 @@
 const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-encumbrance-bar.hbs';
 
 export async function InjectEncumbranceCounter(sheet, html) {
-	if (!game.settings.get('cosmere-rpg-workbench', 'encumbranceBar')) { return; }
+	if (!game.settings.get('cosmere-rpg-workbench', 'encumbranceBar') ||
+		!game.settings.get('cosmere-rpg-workbench', 'encumbranceBarGlobal')
+	) { return; }
+
 	const data = {
 		encumbrance: GetData(sheet),
 		config: CONFIG.COSMERE_WORKBENCH

@@ -137,11 +137,29 @@ async function registerTrackerBars() {
 		type: Boolean,
 		default: true,
 	});
+	await game.settings.register('cosmere-rpg-workbench', 'encumbranceBarGlobal', {
+		name: 'COSMERE_WORKBENCH.settings.encumbranceBar.global.label',
+		hint: 'COSMERE_WORKBENCH.settings.encumbranceBar.global.desc',
+		scope: 'world',
+		config: true,
+		requiresReload: true,
+		type: Boolean,
+		default: true,
+	});
 
 	await game.settings.register('cosmere-rpg-workbench', 'currencyBar', {
 		name: 'COSMERE_WORKBENCH.settings.currencyBar.label',
 		hint: 'COSMERE_WORKBENCH.settings.currencyBar.desc',
 		scope: 'client',
+		config: true,
+		requiresReload: true,
+		type: Boolean,
+		default: true,
+	});
+	await game.settings.register('cosmere-rpg-workbench', 'currencyBarGlobal', {
+		name: 'COSMERE_WORKBENCH.settings.currencyBar.global.label',
+		hint: 'COSMERE_WORKBENCH.settings.currencyBar.global.desc',
+		scope: 'world',
 		config: true,
 		requiresReload: true,
 		type: Boolean,

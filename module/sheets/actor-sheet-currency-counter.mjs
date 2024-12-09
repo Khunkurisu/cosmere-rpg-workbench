@@ -1,7 +1,10 @@
 const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-currency-counter.hbs';
 
 export async function InjectCurrencyCounter(sheet, html) {
-	if (!game.settings.get('cosmere-rpg-workbench', 'currencyBar')) { return; }
+	if (!game.settings.get('cosmere-rpg-workbench', 'currencyBar') ||
+		!game.settings.get('cosmere-rpg-workbench', 'currencyBarGlobal')
+	) { return; }
+
 	const data = {
 		currencies: GetData(sheet),
 		config: CONFIG.COSMERE_WORKBENCH

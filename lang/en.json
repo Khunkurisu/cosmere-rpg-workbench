@@ -14,10 +14,18 @@
 				"desc": "Toggle whether to automatically calculate and set health based on level."
 			},
 			"currencyBar": {
+				"global": {
+					"label": "Currency Tracker (Global Override)",
+					"desc": "Toggle whether to show the currency tracker in the equipment tab of the character sheet (Overrides client setting)."
+				},
 				"label": "Currency Tracker",
 				"desc": "Toggle whether to show the currency tracker in the equipment tab of the character sheet."
 			},
 			"encumbranceBar": {
+				"global": {
+					"label": "Encumbrance Tracker (Global Override)",
+					"desc": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet (Overrides client setting)."
+				},
 				"label": "Encumbrance Tracker",
 				"desc": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet."
 			},
