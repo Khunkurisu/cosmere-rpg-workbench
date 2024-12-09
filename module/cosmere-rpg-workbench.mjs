@@ -1,16 +1,21 @@
+import * as WorkbenchMacros from './workbench-macros.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
-import { LocalizeCurrency, RegisterCurrency } from './helpers/currency-registry.mjs';
-import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
-import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
+import { LocalizeCurrency, RegisterCurrency } from './helpers/currency-registry.mjs';
+import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { InjectEncumbranceCounter } from './sheets/actor-sheet-encumbrance-bar.mjs';
+import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
+import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
 
 let registeredSkills;
 let registeredCurrency;
 
 Hooks.once('init', async function () {
+	globalThis.cosmereWorkbench = Object.assign(
+		game.modules.get('cosmere-rpg-workbench'),
+		{ macros: WorkbenchMacros }
+	);
 	CONFIG.COSMERE_WORKBENCH = COSMERE_WORKBENCH;
 	await registerSettings();
 
