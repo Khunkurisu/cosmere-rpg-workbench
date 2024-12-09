@@ -1,5 +1,5 @@
 const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-plot-die-button.hbs';
-export async function InjectRecoveryButton(sheet, html) {
+export async function InjectPlotDieButton(sheet, html) {
 	if (!game.settings.get('cosmere-rpg-workbench', 'plotDieButtonClient') ||
 		!game.settings.get('cosmere-rpg-workbench', 'plotDieButtonGlobal')
 	) { return; }
