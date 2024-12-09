@@ -83,3 +83,12 @@ COSMERE_WORKBENCH.encumbrance = {
 };
 
 COSMERE_WORKBENCH.attribute = 'COSMERE_WORKBENCH.attribute';
+
+COSMERE_WORKBENCH.actor = {
+	button: {
+		plot: {
+			desc: 'COSMERE_WORKBENCH.actor.button.plot.desc',
+			label: 'COSMERE_WORKBENCH.actor.button.plot.label',
+		},
+	},
+};
