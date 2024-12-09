@@ -1,25 +1,19 @@
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
-export class TalentManagerMenu extends HandlebarsApplicationMixin(ApplicationV2) {
+export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 	static DEFAULT_OPTIONS = {
-		id: 'custom-skill-menu',
-		form: {
-			handler: TalentManagerMenu.#onSubmit,
-			closeOnSubmit: false,
-		},
+		id: 'levelup-manager-menu',
 		position: {
-			width: 640,
+			width: 720,
 			height: 'auto',
 		},
 		actions: {
-			setImage: TalentManagerMenu.setImage,
-			toggle: TalentManagerMenu.toggleAppend,
-			cancel: TalentManagerMenu.onCancel,
+			cancel: LevelupManagerMenu.onCancel,
 		},
-		tag: 'form',
+		tag: 'div',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.talents.menu',
-			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
+			title: 'COSMERE_WORKBENCH.applications.levelup.menu',
+			contentClasses: ['cosmere-rpg-workbench'],
 		},
 	}
 
