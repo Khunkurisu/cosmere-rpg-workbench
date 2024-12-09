@@ -7,7 +7,6 @@ export async function registerSettings() {
 	await registerAutoResources();
 	await registerLeveling();
 	await registerTrackerBars();
-	await registerPlotDice();
 }
 
 async function registerCustomSkills() {
@@ -43,27 +42,6 @@ async function registerCustomCurrency() {
 		config: false,
 		type: Array,
 		default: [],
-	});
-}
-
-async function registerPlotDice() {
-	await game.settings.register('cosmere-rpg-workbench', 'plotDieButtonClient', {
-		name: 'COSMERE_WORKBENCH.settings.plotDie.label',
-		hint: 'COSMERE_WORKBENCH.settings.plotDie.desc',
-		scope: 'client',
-		config: true,
-		requiresReload: false,
-		type: Boolean,
-		default: true,
-	});
-	await game.settings.register('cosmere-rpg-workbench', 'plotDieButtonGlobal', {
-		name: 'COSMERE_WORKBENCH.settings.plotDie.label',
-		hint: 'COSMERE_WORKBENCH.settings.plotDie.desc',
-		scope: 'client',
-		config: true,
-		requiresReload: false,
-		type: Boolean,
-		default: true,
 	});
 }
 

@@ -1,14 +1,5 @@
 {
 	"COSMERE_WORKBENCH": {
-		"actor": {
-			"button": {
-				"plot": {
-					"roll": "Raise the Stakes!",
-					"desc": "Rolls the plot dice manually.",
-					"label": "Plot Dice"
-				}
-			}
-		},
 		"settings": {
 			"autoLevel": {
 				"label": "Auto Level",
