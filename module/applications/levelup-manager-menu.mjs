@@ -17,40 +17,6 @@ export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2
 	talentTrees = [...this._talentTrees()];
 	actor;
 
-	_enrichableLabel(uuid, label) {
-		return `@UUID[${uuid}]{${label}}`;
-	}
-
-	_talentTrees() {
-		const items = Array.from(game.items);
-		const talentTrees = [];
-		items.forEach((item) => {
-			if (item.type === 'talent_tree') {
-				talentTrees.push(item.uuid);
-			}
-		});
-		const packs = Array.from(game.packs);
-
-		packs.forEach((pack) => {
-			if (pack.metadata.type === 'Item') {
-				pack.tree.children.forEach((folder) => {
-					folder.entries.forEach((item) => {
-						if (item.type === 'talent_tree') {
-							talentTrees.push(item.uuid);
-						}
-					});
-				});
-				pack.tree.entries.forEach((item) => {
-					if (item.type === 'talent_tree') {
-						talentTrees.push(item.uuid);
-					}
-				});
-			}
-		});
-
-		return talentTrees;
-	}
-
 	static PARTS = {
 		form: {
 			template: 'modules/cosmere-rpg-workbench/templates/applications/talent-manager.hbs'
@@ -77,8 +43,43 @@ export class LevelupManagerMenu extends HandlebarsApplicationMixin(ApplicationV2
 
 	_getPaths(actor) {
 		if (!actor || !actor.items) return;
+		let paths = [];
+		console.log(this.talentTrees);
 		Array.from(actor.items).forEach((item) => {
-
+			if (item.type === 'path') {
+				const path = {
+					name: item.name,
+					id: item._id,
+				};
+				paths.push(path);
+			}
 		});
+	}
+
+	_enrichableLabel(uuid, label) {
+		return `@UUID[${uuid}]{${label}}`;
+	}
+
+	_talentTrees() {
+		const items = Array.from(game.items);
+		const talentTrees = [];
+		items.forEach((item) => {
+			if (item.type === 'talent_tree') {
+				talentTrees.push(item.uuid);
+			}
+		});
+		const packs = Array.from(game.packs);
+
+		packs.forEach((pack) => {
+			if (pack.metadata.type === 'Item') {
+				Array.from(pack.index).forEach((item) => {
+					if (item.type === 'talent_tree') {
+						talentTrees.push(item.uuid);
+					}
+				});
+			}
+		});
+
+		return talentTrees;
 	}
 }
