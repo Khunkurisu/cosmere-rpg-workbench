@@ -1,11 +1,10 @@
 {
 	"name": "cosmere-rpg-workbench",
-	"version": "0.1.1",
+	"version": "0.6.0",
 	"private": true,
 	"type": "module",
 	"scripts": {
 		"build": "npx rollup -c",
-		"build:pack": "npm run build && npm run pack",
 		"build:watch": "npx rollup -c -w",
 		"prepare": "husky",
 		"lint": "eslint",
