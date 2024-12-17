@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"types": [
+			"@league-of-foundry-developers/foundry-vtt-types",
+			"@types/jquery",
+			"node"
+		],
+		"target": "ES2022",
+		"module": "ES2022",
+		"moduleResolution": "Node10",
+		"strictNullChecks": true,
+		"outDir": "./build",
+		"allowJs": true,
+		"noImplicitReturns": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"paths": {
+			"@src/*": [
+				"./src/*"
+			],
+			"@module/*": [
+				"./src/module/*"
+			]
+		}
+	},
+	"exclude": [
+		"module.bak/**"
+	]
+}
