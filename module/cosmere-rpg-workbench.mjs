@@ -32,8 +32,6 @@ Hooks.once('init', async function () {
 Hooks.once('ready', () => {
 	LocalizeSkills(registeredSkills);
 	LocalizeCurrency(registeredCurrency);
-
-	console.log(CONFIG);
 });
 
 Hooks.on('renderActorSheetV2', async (o, i, n) => {

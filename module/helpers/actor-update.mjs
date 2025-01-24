@@ -33,11 +33,11 @@ export function SetHealth(actor) {
 	const health = system.resources.hea;
 	// adjust health.max.override and health.max.useOverride
 	let maxHealth = 10 + strength;
-	for (let i = 0; i < level; i++) {
+	for (let i = 1; i <= level; i++) {
 		switch (i) {
-			case 0: {
+			case 1: {
 				break;
-			} case 5: case 10: case 15: {
+			} case 6: case 11: case 16: {
 				maxHealth += strength;
 			} default: {
 				if (i < 6) {
