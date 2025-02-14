@@ -27,6 +27,7 @@ function IsRadiant(actor) {
 export function SetHealth(actor) {
 	if (!game.settings.get('cosmere-rpg-workbench', 'autoHealth')) return;
 	const system = actor.system;
+	if (!system.attributes) return;
 	const strength = system.attributes.str.value;
 	let level = 0;
 	if (cosmereRPG.version === '0.2.0' || cosmereRPG.version === '0.2.1' || cosmereRPG.version === '0.2.2') {
