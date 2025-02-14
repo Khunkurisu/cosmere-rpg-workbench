@@ -49,7 +49,7 @@ Hooks.on('createItem', async (document, options, userId) => {
 			}
 			case 'talent': {
 				SetLevel(options.parent);
-				SetHealth(document);
+				SetHealth(options.parent);
 				break;
 			}
 		}
@@ -74,7 +74,7 @@ Hooks.on('deleteItem', async (document, options, userId) => {
 			}
 			case 'talent': {
 				SetLevel(options.parent);
-				SetHealth(document);
+				SetHealth(options.parent);
 				break;
 			}
 		}
