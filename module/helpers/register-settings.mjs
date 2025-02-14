@@ -92,12 +92,14 @@ async function registerLeveling() {
 		config: true,
 		requiresReload: false,
 		onChange: value => {
-			const actors = Array.from(game.actors);
-			actors.forEach((actor) => {
-				if (actor.type === 'character') {
-					actor.update({ 'system.level.total.useOverride': value });
-				}
-			});
+			if (cosmereRPG.version === '0.2.0' || cosmereRPG.version === '0.2.1' || cosmereRPG.version === '0.2.2') {
+				const actors = Array.from(game.actors);
+				actors.forEach((actor) => {
+					if (actor.type === 'character') {
+						actor.update({ 'system.level.total.useOverride': value });
+					}
+				});
+			}
 		},
 		type: Boolean,
 		default: true,

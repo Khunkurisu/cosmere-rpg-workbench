@@ -28,8 +28,13 @@ export function SetHealth(actor) {
 	if (!game.settings.get('cosmere-rpg-workbench', 'autoHealth')) return;
 	const system = actor.system;
 	const strength = system.attributes.str.value;
-	const level = system.level.total.useOverride ?
-		system.level.total.override : system.level.total.value;
+	let level = 0;
+	if (cosmereRPG.version === '0.2.0' || cosmereRPG.version === '0.2.1' || cosmereRPG.version === '0.2.2') {
+		level = system.level.total.useOverride ?
+			system.level.total.override : system.level.total.value;
+	} else {
+		level = system.level;
+	}
 	const health = system.resources.hea;
 	// adjust health.max.override and health.max.useOverride
 	let maxHealth = 10 + strength;
@@ -62,26 +67,10 @@ export function SetHealth(actor) {
 export function SetLevel(actor, override = -1) {
 	if (game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle')) {
 		const level = game.settings.get('cosmere-rpg-workbench', 'manualLevelValue');
-		actor.update({ 'system.level.total.override': level });
-	} else {
-		if (!game.settings.get('cosmere-rpg-workbench', 'autoLevel')) {
-			actor.update({ 'system.level.total.useOverride': false });
-			return;
-		}
-		let level = 0;
-		if (override >= 0) {
-			level = override;
+		if (cosmereRPG.version === '0.2.0' || cosmereRPG.version === '0.2.1' || cosmereRPG.version === '0.2.2') {
+			actor.update({ 'system.level.total.override': level });
 		} else {
-			const items = Array.from(actor.items);
-
-			items.forEach((item) => {
-				if (item.type === 'talent') {
-					level++;
-				}
-			});
-			level = Math.max(level, 1);
+			actor.update({ 'system.level': level });
 		}
-		actor.update({ 'system.level.total.override': level });
-		actor.update({ 'system.level.total.useOverride': true });
 	}
 }
