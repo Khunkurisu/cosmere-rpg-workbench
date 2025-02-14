@@ -72,5 +72,6 @@ export function SetLevel(actor, override = -1) {
 		} else {
 			actor.update({ 'system.level': level });
 		}
+		actor.update({ 'system.tier': Math.ceil(level / 5) });
 	}
 }
