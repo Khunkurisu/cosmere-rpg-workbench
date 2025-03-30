@@ -5,7 +5,6 @@
  */
 export const preloadHandlebarsTemplates = async function () {
 	return loadTemplates([
-		'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-currency-counter.hbs',
 		'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-encumbrance-bar.hbs',
 	]);
 };

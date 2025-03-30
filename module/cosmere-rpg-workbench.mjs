@@ -3,7 +3,6 @@ import { COSMERE_WORKBENCH } from './helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
 import { LocalizeCurrency, RegisterCurrency } from './helpers/currency-registry.mjs';
-import { InjectCurrencyCounter } from './sheets/actor-sheet-currency-counter.mjs';
 import { InjectEncumbranceCounter } from './sheets/actor-sheet-encumbrance-bar.mjs';
 import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
 import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
@@ -35,7 +34,6 @@ Hooks.once('ready', () => {
 });
 
 Hooks.on('renderActorSheetV2', async (o, i, n) => {
-	await InjectCurrencyCounter(o, i);
 	await InjectEncumbranceCounter(o, i);
 	return true;
 });
