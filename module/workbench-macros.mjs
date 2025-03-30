@@ -1,1 +1,1 @@
-export { default as TalentManager } from './macros/manage-talents.mjs';
+// export { default as TalentManager } from './macros/manage-talents.mjs';

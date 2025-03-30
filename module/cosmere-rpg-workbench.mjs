@@ -1,4 +1,4 @@
-import * as WorkbenchMacros from './workbench-macros.mjs';
+//import * as WorkbenchMacros from './workbench-macros.mjs';
 import { COSMERE_WORKBENCH } from './helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerSettings } from './helpers/register-settings.mjs';
@@ -13,7 +13,7 @@ let registeredCurrency;
 Hooks.once('init', async function () {
 	globalThis.cosmereWorkbench = Object.assign(
 		game.modules.get('cosmere-rpg-workbench'),
-		{ macros: WorkbenchMacros }
+		//{ macros: WorkbenchMacros }
 	);
 	CONFIG.COSMERE_WORKBENCH = COSMERE_WORKBENCH;
 	await registerSettings();
