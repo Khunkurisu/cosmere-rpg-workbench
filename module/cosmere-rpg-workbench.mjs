@@ -5,7 +5,6 @@ import { registerSettings } from './helpers/register-settings.mjs';
 import { LocalizeCurrency, RegisterCurrency } from './helpers/currency-registry.mjs';
 import { InjectEncumbranceCounter } from './sheets/actor-sheet-encumbrance-bar.mjs';
 import { LocalizeSkills, RegisterSkills } from './helpers/skill-registry.mjs';
-import { SetHealth, SetInvestiture, SetLevel } from './helpers/actor-update.mjs';
 
 let registeredSkills;
 let registeredCurrency;
@@ -36,53 +35,6 @@ Hooks.once('ready', () => {
 Hooks.on('renderActorSheetV2', async (o, i, n) => {
 	await InjectEncumbranceCounter(o, i);
 	return true;
-});
-
-Hooks.on('createItem', async (document, options, userId) => {
-	if (options.parent) {
-		switch (document.type) {
-			case 'path': {
-				SetInvestiture(options.parent, true);
-				break;
-			}
-			case 'talent': {
-				SetLevel(options.parent);
-				SetHealth(options.parent);
-				break;
-			}
-		}
-	}
-});
-
-Hooks.on('createActor', async (document, options, userId) => {
-	if (document.type === 'character') {
-		const useOverride = game.settings.get('cosmere-rpg-workbench', 'manualLevelToggle');
-		document.update({ 'system.level.total.useOverride': useOverride });
-		SetLevel(document);
-		SetHealth(document);
-	}
-});
-
-Hooks.on('deleteItem', async (document, options, userId) => {
-	if (options.parent) {
-		switch (document.type) {
-			case 'path': {
-				SetInvestiture(options.parent);
-				break;
-			}
-			case 'talent': {
-				SetLevel(options.parent);
-				SetHealth(options.parent);
-				break;
-			}
-		}
-	}
-});
-
-Hooks.on('updateActor', (document, changed, options, userId) => {
-	SetInvestiture(document);
-	SetLevel(document);
-	SetHealth(document);
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
