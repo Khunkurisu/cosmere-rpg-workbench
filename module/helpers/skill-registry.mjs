@@ -1,7 +1,5 @@
 export function RegisterSkills(registeredSkills) {
-	if (!Hooks.call('customSkillRegistry', registeredSkills)) {
-		return;
-	}
+	Hooks.callAll('customSkillRegistry', registeredSkills);
 
 	registeredSkills.forEach((skill) => {
 		let isValid = true;
