@@ -1,0 +1,64 @@
+<div class="flexcol">
+	<nav class="sheet-navigation sheet-tabs tabs" style="margin-top: 0.2rem; gap: 3rem;">
+		{{#each tabs as |tab|}}
+			<a class="{{tab.cssClass}}" data-tab="{{tab.id}}" data-group="primary" data-action="set-tab">
+				{{localize tab.label}}
+			</a>
+		{{/each}}
+	</nav>
+	<section class="sheet-content flexrow" style="border-top: 2px solid grey; padding-top: 0.5rem;">
+		<section class="col-left">
+			<div class="scroll-container">
+				<div class="scroll-body">
+					<p>this is where</p>
+					<p>I shall put a search bar</p>
+					<p>and a bunch of options for filtering items and actors, while inside the main category set by the tab</p>
+				</div>
+			</div>
+		</section>
+		<section class="col-main">
+			<div class="scroll-container">
+				<div class="tab-body">
+					<ul class="item-list">
+						<li class="item header">
+							<section class="details">
+								<span class="title">{{localize tabTitle}}</span>
+							</section>
+						</li>
+						{{#each items}}
+							<li class="item" data-item-id="{{this.id}}" data-pack-id="{{this.pack}}" data-drag="true">
+								<section class="details">
+									{{!-- Image --}}
+									<div class="img">
+										<img src="{{this.img}}">
+									</div>
+
+									{{!-- Name --}}
+									<span class="name">
+										{{this.name}}
+									</span>
+
+									{{!-- Source --}}
+									<span class="detail">
+										{{this.compendium.metadata.label}}
+									</span>
+
+									{{!-- Type --}}
+									<span class="detail">
+										{{this.type}}
+									</span>
+
+									<a role="button" data-action="show-item-sheet"
+										data-tooltip="COSMERE_WORKBENCH.generic.viewSheet" data-item-id="{{this.id}}"
+										data-pack-id="{{this.pack}}">
+										<i class="fa-solid fa-magnifying-glass"></i>
+									</a>
+								</section>
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		</section>
+	</section>
+</div>
