@@ -1,0 +1,101 @@
+import { CustomCurrencyMenu } from "./applications/custom-currency-menu.mjs";
+import { CustomSkillMenu } from "./applications/custom-skills-menu.mjs";
+import { MODULE_ID } from "./constants";
+
+export function getModuleSetting<
+	T extends string | boolean | number = string | boolean | number,
+>(settingKey: string) {
+	return game.settings!.get(MODULE_ID, settingKey) as T;
+}
+
+export function setModuleSetting<T = unknown>(settingKey: string, value: T) {
+	return game.settings!.set(MODULE_ID, settingKey, value);
+}
+
+export const SETTINGS = {
+	REGISTER_CUSTOM_SKILLS: 'customSkills',
+	REGISTER_CUSTOM_CURRENCIES: 'customCurrencies',
+	MENU_CUSTOM_CURRENCY: 'customCurrencyMenu',
+	MENU_CUSTOM_SKILL: 'customSkillMenu',
+	SHEET_ENCUMBRANCE_BAR_CLIENT: 'encumbranceBarClient',
+	SHEET_ENCUMBRANCE_BAR_WORLD: 'encumbranceBarWorld',
+} as const;
+
+export function registerModuleSettings() {
+	// SETTINGS MENUS
+	const menuButtons = [
+		{
+			name: SETTINGS.MENU_CUSTOM_SKILL,
+			type: CustomSkillMenu,
+		},
+		{
+			name: SETTINGS.MENU_CUSTOM_CURRENCY,
+			type: CustomCurrencyMenu,
+		},
+	];
+
+	menuButtons.forEach(menu => {
+		game.settings!.registerMenu(MODULE_ID, menu.name, {
+			name: game.i18n!.localize(`workbench.settings.${menu.name}.name`),
+			label: game.i18n!.localize(`workbench.settings.${menu.name}.label`),
+			hint: game.i18n!.localize(`workbench.settings.${menu.name}.hint`),
+			icon: 'fas fa-bars',
+			// @ts-ignore
+			type: menu.type,
+			restricted: true,
+		});
+	});
+
+	// CONFIG REGISTRATION
+	const configOptions = [
+		{
+			name: SETTINGS.REGISTER_CUSTOM_SKILLS,
+			scope: 'world',
+		},
+		{
+			name: SETTINGS.REGISTER_CUSTOM_CURRENCIES,
+			scope: 'world',
+		},
+	];
+
+	configOptions.forEach(option => {
+		game.settings!.register(MODULE_ID, option.name, {
+			scope: option.scope as "world" | "client" | undefined,
+			default: [],
+			type: Array,
+			config: false,
+		});
+	});
+
+	// SHEET SETTINGS
+	const sheetOptions = [
+		{
+			name: SETTINGS.SHEET_ENCUMBRANCE_BAR_CLIENT,
+			default: true,
+			scope: 'client',
+			config: true,
+			type: Boolean,
+			requiresReload: true,
+		},
+		{
+			name: SETTINGS.SHEET_ENCUMBRANCE_BAR_WORLD,
+			default: false,
+			scope: 'world',
+			config: true,
+			type: Boolean,
+			requiresReload: true,
+		}
+	];
+
+	sheetOptions.forEach(option => {
+		game.settings!.register(MODULE_ID, option.name, {
+			name: game.i18n!.localize(`workbench.settings.${option.name}.name`),
+			hint: game.i18n!.localize(`workbench.settings.${option.name}.hint`),
+			scope: option.scope as "world" | "client" | undefined,
+			default: option.default,
+			type: option.type,
+			config: option.config,
+			requiresReload: option.requiresReload,
+		});
+	});
+}
