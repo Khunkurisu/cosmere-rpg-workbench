@@ -33,3 +33,27 @@ Hooks.once('init', async function () {
 	// Preload Handlebars templates.
 	return preloadHandlebarsTemplates();
 });
+
+
+Hooks.once('ready', async () => {
+	if (game.modules!.get('dice-calculator')?.active) {
+		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as Array<any>;
+		if (diceTrayDiceRows) {
+			let hasPlotDie = false;
+			diceTrayDiceRows.forEach(row => {
+				hasPlotDie = row["1dp"] != undefined;
+			});
+			if (!hasPlotDie) {
+				diceTrayDiceRows.push({
+					"1dp": {
+						"img": "systems/cosmere-rpg/assets/icons/svg/dice/dp_op.svg",
+						"label": "Plot Die",
+						"tooltip": "Raise the Stakes!",
+						"color": "#ffffff"
+					}
+				});
+				await game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
+			}
+		}
+	}
+});
