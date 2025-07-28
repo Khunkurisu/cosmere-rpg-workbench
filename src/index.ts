@@ -4,6 +4,7 @@ import { register } from './module/register';
 import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
+import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
 
 declare global {
 	interface LenientGlobalVariableTypes {
@@ -56,4 +57,27 @@ Hooks.once('ready', async () => {
 			}
 		}
 	}
+});
+
+Hooks.on('preCreateItem', async (document: any, _data, _options, _userId) => {
+	if (document.type === 'talent') {
+		const parentActor = document.parent;
+		if (parentActor && parentActor.type === 'adversary') {
+			const actionData = {
+				img: document.img,
+				name: document.name,
+				type: 'action',
+				system: {
+					activation: document.system.activation,
+					damage: document.system.damage,
+					description: document.system.description,
+					id: document.id,
+				}
+			}
+			const docCls = getDocumentClass('Item');
+			await docCls.create(actionData, { parent: parentActor });
+			return false;
+		}
+	}
+	return true;
 });
