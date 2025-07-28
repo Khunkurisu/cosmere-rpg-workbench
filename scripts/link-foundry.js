@@ -29,7 +29,7 @@ const { dataPath } = await prompts({
     validate: (value) => {
         if (!FOUNDRY_DATA_PATH_VALIDATION_REGEX.test(value)) {
             return `"${value}" does not look like a valid Foundry data path. Make sure the path ends in "${isWin32 ? '\\' : '/'}Data".`
-        } 
+        }
 
         // Resolve the path
         const absolutePath = path.resolve(value);
@@ -41,7 +41,7 @@ const { dataPath } = await prompts({
 
         // Path is valid, but is it Foundry? (check if expected subfolders exist)
         const allSubfoldersExist = FOUNDRY_EXPECTED_SUBFOLDERS.every(
-            subfolder => folderExistsAtPath(path.join(absolutePath, subfolder)) 
+            subfolder => folderExistsAtPath(path.join(absolutePath, subfolder))
         );
         if (!allSubfoldersExist) {
             return `"${absolutePath}" does not look like a valid Foundry data path.`;
@@ -51,8 +51,8 @@ const { dataPath } = await prompts({
     }
 });
 
-// Construct path to symlink 
-const symlinkPath = path.resolve(dataPath, 'modules', 'cosmere-rpg-stormlight-handbook');
+// Construct path to symlink
+const symlinkPath = path.resolve(dataPath, 'modules', 'cosmere-rpg-workbench');
 
 const stats = fs.statSync(symlinkPath, { throwIfNoEntry: false });
 if (stats) {
