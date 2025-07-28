@@ -7,32 +7,32 @@ import scss from 'rollup-plugin-scss';
 
 export default {
 	input: './src/index.ts',
-    output: {
-        dir: 'build',
-        format: 'es',
+	output: {
+		dir: 'build',
+		format: 'es',
 
-        // Removes the hash from the asset filename
-        assetFileNames: '[name][extname]',
-    },
-    plugins: [
-        // CSS
-        scss(),
+		// Removes the hash from the asset filename
+		assetFileNames: '[name][extname]',
+	},
+	plugins: [
+		// CSS
+		scss(),
 
-        // Typescript
-        nodeResolve({ preferBuiltins: true }),
-        typescript(),
-        commonjs(),
+		// Typescript
+		nodeResolve({ preferBuiltins: true }),
+		typescript(),
+		commonjs(),
 
-        // Copy module.json & templates
-        copy({
+		// Copy module.json & templates
+		copy({
             targets: [
                 { src: 'src/module.json', dest: 'build' },
-				{ src: 'src/templates/**/*.hbs', dest: 'build/' },
+				{ src: 'src/templates/**/*', dest: 'build/' },
 				{ src: 'src/lang/*.json', dest: 'build/' },
 				{ src: 'src/packs/**/*', dest: 'build/' },
                 { src: 'src/assets/**/*', dest: 'build/' },
             ],
-            flatten: false,
-        }),
-    ],
+			flatten: false,
+		}),
+	],
 };
