@@ -4,5 +4,9 @@ export const SKILLS: CosmereAPI.SkillConfigData[] = [
 ];
 
 export function register() {
-    SKILLS.forEach((config) => cosmereRPG.api.registerSkill({...config, source: MODULE_ID }));
+	SKILLS.forEach((skillConfig) => {
+		cosmereRPG.api.registerSkill({ ...skillConfig, source: MODULE_ID });
+		// @ts-ignore
+		game.i18n!.translations.COSMERE.Skill[skillConfig.id] = skillConfig.label;
+	});
 }
