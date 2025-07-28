@@ -1,6 +1,10 @@
+import { MODULE_ID } from "./constants";
+
 import { CustomCurrencyMenu } from "./applications/custom-currency-menu.mjs";
 import { CustomSkillMenu } from "./applications/custom-skills-menu.mjs";
-import { MODULE_ID } from "./constants";
+import { TrackedCompendiumsMenu } from "./applications/tracked-compendiums-menu.mjs";
+
+import { CompendiumManager } from "./helpers/compendium-manager.mjs";
 
 export function getModuleSetting<
 	T extends string | boolean | number = string | boolean | number,
@@ -17,8 +21,10 @@ export const SETTINGS = {
 	REGISTER_CUSTOM_CURRENCIES: 'customCurrencies',
 	MENU_CUSTOM_CURRENCY: 'customCurrencyMenu',
 	MENU_CUSTOM_SKILL: 'customSkillMenu',
+	MENU_TRACKED_COMPENDIUMS: 'trackedCompendiumsMenu',
 	SHEET_ENCUMBRANCE_BAR_CLIENT: 'encumbranceBarClient',
 	SHEET_ENCUMBRANCE_BAR_WORLD: 'encumbranceBarWorld',
+	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
 } as const;
 
 export function registerModuleSettings() {
@@ -31,6 +37,10 @@ export function registerModuleSettings() {
 		{
 			name: SETTINGS.MENU_CUSTOM_CURRENCY,
 			type: CustomCurrencyMenu,
+		},
+		{
+			name: SETTINGS.MENU_TRACKED_COMPENDIUMS,
+			type: TrackedCompendiumsMenu,
 		},
 	];
 
@@ -88,6 +98,30 @@ export function registerModuleSettings() {
 	];
 
 	sheetOptions.forEach(option => {
+		game.settings!.register(MODULE_ID, option.name, {
+			name: game.i18n!.localize(`workbench.settings.${option.name}.name`),
+			hint: game.i18n!.localize(`workbench.settings.${option.name}.hint`),
+			scope: option.scope as "world" | "client" | undefined,
+			default: option.default,
+			type: option.type,
+			config: option.config,
+			requiresReload: option.requiresReload,
+		});
+	});
+
+	// GENERAL SETTINGS
+	const generalOptions = [
+		{
+			name: SETTINGS.GENERAL_COMPENDIUM_MANAGER,
+			scope: 'world',
+			config: false,
+			type: CompendiumManager,
+			default: new CompendiumManager,
+			requiresReload: false,
+		}
+	];
+
+	generalOptions.forEach(option => {
 		game.settings!.register(MODULE_ID, option.name, {
 			name: game.i18n!.localize(`workbench.settings.${option.name}.name`),
 			hint: game.i18n!.localize(`workbench.settings.${option.name}.hint`),

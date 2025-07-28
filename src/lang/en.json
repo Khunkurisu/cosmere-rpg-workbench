@@ -60,6 +60,17 @@
 					"desc": "Toggles auto-appending the substring ' (Talent Tree)' to the name of talents that lack it."
 				}
 			},
+			"compendiumBrowser": {
+				"title": "Compendium Browser",
+				"tabs": {
+					"action": "Action",
+					"background": "Background",
+					"equipment": "Equipment",
+					"power": "Power",
+					"meta": "Meta",
+					"actor": "Actor"
+				}
+			},
 			"id": {
 				"full": "Identifier",
 				"abbr": "ID"
