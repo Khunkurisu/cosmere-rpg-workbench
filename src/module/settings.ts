@@ -17,8 +17,8 @@ export function setModuleSetting<T = unknown>(settingKey: string, value: T) {
 }
 
 export const SETTINGS = {
-	REGISTER_CUSTOM_SKILLS: 'customSkills',
-	REGISTER_CUSTOM_CURRENCIES: 'customCurrencies',
+	CUSTOM_SKILLS: 'customSkills',
+	CUSTOM_CURRENCIES: 'customCurrency',
 	MENU_CUSTOM_CURRENCY: 'customCurrencyMenu',
 	MENU_CUSTOM_SKILL: 'customSkillMenu',
 	MENU_TRACKED_COMPENDIUMS: 'trackedCompendiumsMenu',
@@ -59,11 +59,11 @@ export function registerModuleSettings() {
 	// CONFIG REGISTRATION
 	const configOptions = [
 		{
-			name: SETTINGS.REGISTER_CUSTOM_SKILLS,
+			name: SETTINGS.CUSTOM_SKILLS,
 			scope: 'world',
 		},
 		{
-			name: SETTINGS.REGISTER_CUSTOM_CURRENCIES,
+			name: SETTINGS.CUSTOM_CURRENCIES,
 			scope: 'world',
 		},
 	];

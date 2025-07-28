@@ -1,3 +1,6 @@
+import { MODULE_ID } from "../constants";
+import { SETTINGS } from "../settings";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -24,7 +27,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		},
 	}
 
-	entries = [...game.settings.get('cosmere-rpg-workbench', 'customSkills')];
+	entries = [...game.settings.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS)];
 
 	static PARTS = {
 		form: {
@@ -70,7 +73,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		}));
 
 		if (isValid) {
-			game.settings.set('cosmere-rpg-workbench', 'customSkills', data);
+			game.settings.set(MODULE_ID, SETTINGS.CUSTOM_SKILLS, data);
 			this.close();
 		} else {
 			ui.notifications.error("Identifiers must be unique.");

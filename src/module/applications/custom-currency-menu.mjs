@@ -1,3 +1,6 @@
+import { MODULE_ID } from "../constants";
+import { SETTINGS } from "../settings";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class CustomCurrencyMenu extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -24,7 +27,7 @@ export class CustomCurrencyMenu extends HandlebarsApplicationMixin(ApplicationV2
 		},
 	}
 
-	entries = [...game.settings.get('cosmere-rpg-workbench', 'customCurrency')];
+	entries = [...game.settings.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES)];
 
 	static PARTS = {
 		form: {
@@ -94,7 +97,7 @@ export class CustomCurrencyMenu extends HandlebarsApplicationMixin(ApplicationV2
 		});
 
 		if (isValid) {
-			game.settings.set('cosmere-rpg-workbench', 'customCurrency', data);
+			game.settings.set(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES, data);
 			this.close();
 		} else {
 			ui.notifications.error("Identifiers must be unique.");
