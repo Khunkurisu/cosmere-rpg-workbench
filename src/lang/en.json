@@ -8,28 +8,39 @@
 			"encumbranceBarWorld": {
 				"name": "Encumbrance Tracker (Global Override)",
 				"hint": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet (Overrides client setting)."
+			},
+			"customSkillMenu": {
+				"name": "Manage Custom Skills",
+				"label": "Custom Skills",
+				"hint": "Allows you to add custom skills to the Cosmere RPG system."
+			},
+			"customCurrencyMenu": {
+				"name": "Manage Custom Currencies",
+				"label": "Custom Currency",
+				"hint": "Allows you to add custom currencys to the Cosmere RPG system."
+			},
+			"trackedCompendiumsMenu": {
+				"name": "Manage Tracked Compendiums",
+				"label": "Tracked Compendiums",
+				"hint": "Allows you to manage which compendiums are tracked by the compendium browser."
 			}
 		},
 		"applications": {
 			"customSkills": {
-				"menu": "Custom Skills Menu",
 				"label": "Custom Skill",
 				"pluralLabel": "Custom Skills",
 				"new": "New Custom Skill",
 				"remove": "Remove Custom Skill",
-				"desc": "Allows you to add custom skills to the Cosmere RPG system.",
 				"core": {
 					"label": "Display Core",
 					"desc": "Toggles appearance in core skills."
 				}
 			},
 			"customCurrency": {
-				"menu": "Custom Currency Menu",
 				"label": "Custom Currency",
 				"pluralLabel": "Custom Currencies",
 				"new": "New Custom Currency",
 				"remove": "Remove Custom Currency",
-				"desc": "Allows you to add custom currency to the Cosmere RPG system.",
 				"denomination": {
 					"label": "Denomination",
 					"pluralLabel": "Denominations",
@@ -44,20 +55,6 @@
 						"label": "Base Unit",
 						"desc": "Indicates this is used as the base unit for conversion rate."
 					}
-				}
-			},
-			"talents": {
-				"menu": "Talent Manager",
-				"label": "Talent",
-				"pluralLabel": "Talents",
-				"name": "Talent Name",
-				"image": {
-					"label": "Talent Image",
-					"desc": "Opens the file browser to set an image."
-				},
-				"append": {
-					"label": "Auto-Append",
-					"desc": "Toggles auto-appending the substring ' (Talent Tree)' to the name of talents that lack it."
 				}
 			},
 			"compendiumBrowser": {
