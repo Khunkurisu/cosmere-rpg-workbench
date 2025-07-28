@@ -59,6 +59,11 @@ Hooks.once('ready', async () => {
 	}
 });
 
+Hooks.on('renderActorSheetV2', async (o: any, i: any, _n: any) => {
+	await InjectEncumbranceCounter(o, i);
+	return true;
+});
+
 Hooks.on('preCreateItem', async (document: any, _data, _options, _userId) => {
 	if (document.type === 'talent') {
 		const parentActor = document.parent;
