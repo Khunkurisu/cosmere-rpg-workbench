@@ -10,6 +10,7 @@ const MANIFEST_SRC = path.join('build', 'module.json');
 const MANIFEST_DEST = path.join('src', 'module.json');
 
 async function extractPacks() {
+	if (!fs.existsSync(PACK_SRC)) { fs.mkdirSync(PACK_SRC); }
 	if (!fs.existsSync(PACK_DEST)) { fs.mkdirSync(PACK_DEST); }
     const dirs = fs.readdirSync(PACK_SRC, { withFileTypes: true })
         .filter(file => file.isDirectory());
