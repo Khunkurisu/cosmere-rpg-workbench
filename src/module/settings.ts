@@ -1,6 +1,6 @@
 import { MODULE_ID } from "./constants";
 
-import { CustomCurrencyMenu } from "./applications/custom-currency-menu.mjs";
+import { CustomCurrencyMenuV2 as CustomCurrencyMenu } from "./applications/custom-currency-menu";
 import { CustomSkillMenuV2 as CustomSkillMenu } from "./applications/custom-skills-menu";
 import { TrackedCompendiumsMenu } from "./applications/tracked-compendiums-menu.mjs";
 
