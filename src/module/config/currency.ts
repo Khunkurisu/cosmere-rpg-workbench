@@ -8,6 +8,11 @@ export function register() {
 	CURRENCIES.forEach(currencyConfig => {
 		// @ts-ignore
 		cosmereRPG.api.registerCurrency({ ...currencyConfig, source: MODULE_ID });
+	});
+}
+
+export function localize() {
+	CURRENCIES.forEach(currencyConfig => {
 		// @ts-ignore
 		const dict = game.i18n!.translations.workbench.currency;
 		const config = CONFIG.COSMERE_WORKBENCH.currency;

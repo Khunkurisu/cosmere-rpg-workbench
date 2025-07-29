@@ -1,6 +1,6 @@
 import './style.scss';
 import './module/cosmere-rpg-api';
-import { register } from './module/register';
+import { localize, register } from './module/setup';
 import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
@@ -35,8 +35,8 @@ Hooks.once('init', async function () {
 	return preloadHandlebarsTemplates();
 });
 
-
-Hooks.once('ready', async () => {
+Hooks.once('ready', () => {
+	localize();
 	if (game.modules!.get('dice-calculator')?.active) {
 		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as Array<any>;
 		if (diceTrayDiceRows) {
@@ -53,7 +53,7 @@ Hooks.once('ready', async () => {
 						"color": "#ffffff"
 					}
 				});
-				await game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
+				game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
 			}
 		}
 	}
