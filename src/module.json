@@ -10,7 +10,7 @@
 	"version": "0.6.0",
 	"download": "https://github.com/Khunkurisu/cosmere-rpg-workbench/releases/download/v0.6.0/cosmere-rpg-workbench-v0.6.0.zip",
 	"url": "https://github.com/Khunkurisu/cosmere-rpg-workbench",
-	"manifest": "https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/main/src/module.json",
+	"manifest": "https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/refs/heads/main/src/module.json",
 	"compatibility": {
 		"minimum": "12",
 		"verified": "12"
