@@ -1,3 +1,6 @@
+import { MODULE_ID } from "../constants";
+import { SETTINGS } from "../settings";
+
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 
 export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(ApplicationV2) {
@@ -24,7 +27,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 		},
 	}
 
-	trackedCompendiums = [...game.settings.get('cosmere-rpg-workbench', 'browserTrackedCompendiums')];
+	trackedCompendiums = [...game.settings.get(MODULE_ID, SETTINGS.GENERAL_TRACKED_COMPENDIUMS)];
 
 	static PARTS = {
 		form: {
@@ -70,7 +73,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 		}));
 
 		if (isValid) {
-			game.settings.set('cosmere-rpg-workbench', 'browserTrackedCompendiums', data);
+			game.settings.set(MODULE_ID, SETTINGS.GENERAL_TRACKED_COMPENDIUMS, data);
 			this.close();
 		} else {
 			ui.notifications.error("Identifiers must be unique.");

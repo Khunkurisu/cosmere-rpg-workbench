@@ -22,7 +22,7 @@ export class CustomSkillMenu extends HandlebarsApplicationMixin(ApplicationV2) {
 		},
 		tag: 'form',
 		window: {
-			title: 'workbench.applications.customSkills.menu',
+			title: 'workbench.settings.customSkillMenu.name',
 			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
 		},
 	}

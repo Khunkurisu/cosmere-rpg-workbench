@@ -25,6 +25,7 @@ export const SETTINGS = {
 	SHEET_ENCUMBRANCE_BAR_CLIENT: 'encumbranceBarClient',
 	SHEET_ENCUMBRANCE_BAR_WORLD: 'encumbranceBarWorld',
 	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
+	GENERAL_TRACKED_COMPENDIUMS: 'trackedCompendiums',
 } as const;
 
 export function registerModuleSettings() {
@@ -118,7 +119,15 @@ export function registerModuleSettings() {
 			type: CompendiumManager,
 			default: new CompendiumManager,
 			requiresReload: false,
-		}
+		},
+		{
+			name: SETTINGS.GENERAL_TRACKED_COMPENDIUMS,
+			scope: 'world',
+			config: false,
+			type: Array<any>,
+			default: new Array<any>,
+			requiresReload: false,
+		},
 	];
 
 	generalOptions.forEach(option => {
