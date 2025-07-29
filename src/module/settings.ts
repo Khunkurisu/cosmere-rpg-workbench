@@ -39,10 +39,10 @@ export function registerModuleSettings() {
 			name: SETTINGS.MENU_CUSTOM_CURRENCY,
 			type: CustomCurrencyMenu,
 		},
-		{
+		/* {
 			name: SETTINGS.MENU_TRACKED_COMPENDIUMS,
 			type: TrackedCompendiumsMenu,
-		},
+		}, */
 	];
 
 	menuButtons.forEach(menu => {
