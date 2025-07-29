@@ -1,18 +1,18 @@
 <div class="flexcol flex-group-center">
 	<div class='grid grid-5col' style="margin-left:2%">
 		<span class="grid-span-4">
-			{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "pluralLabel")}}
+			{{localize (lookup @root.config.workbench.applications.skills "pluralLabel")}}
 		</span>
-		<a data-action="create" title='{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "new")}}'>
+		<a data-action="create" title='{{localize (lookup @root.config.workbench.applications.skills "new")}}'>
 			<i class='fas fa-plus'></i>
 		</a>
 	</div>
 	<ol>
 		<li class="flexrow grid grid-6col entry-list">
-			<label>{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.id "full")}}</label>
-			<label>{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "label")}}</label>
+			<label>{{localize (lookup @root.config.workbench.applications.id "full")}}</label>
+			<label>{{localize (lookup @root.config.workbench.applications.skills "label")}}</label>
 			<label>{{localize (lookup @root.config "attribute")}}</label>
-			<label>{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills.core "label")}}</label>
+			<label>{{localize (lookup @root.config.workbench.applications.skills.core "label")}}</label>
 			<label></label>
 		</li>
 		{{#each entries as |entry index|}}
@@ -36,7 +36,7 @@
 				</div>
 				<div class="flexrow" style="margin-right:15px">
 					<a style="text-align:center;" data-action="toggle" data-index="{{@index}}"
-						title='{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills.core "desc")}}'>
+						title='{{localize (lookup @root.config.workbench.applications.skills.core "desc")}}'>
 						{{#if entry.core}}
 							<i class='fa-solid fa-toggle-on fa-xl' name="entry.core"></i>
 						{{else}}
@@ -45,7 +45,7 @@
 					</a>
 				</div>
 				<a data-action="remove" data-index="{{@index}}"
-					title='{{localize (lookup @root.config.COSMERE_WORKBENCH.applications.skills "remove")}}'>
+					title='{{localize (lookup @root.config.workbench.applications.skills "remove")}}'>
 					<i class='fas fa-trash'></i>
 				</a>
 			</li>
