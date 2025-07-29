@@ -8,7 +8,6 @@ declare global {
 			conversionRate: number; // Value relative to base denomination
 			base?: boolean; // Present if this denomination is considered the base
 			unit?: string;
-			priority?: number;
 		}
 
 		interface CurrencyConfigData {
@@ -21,7 +20,6 @@ declare global {
 				primary: CurrencyDenominationConfig[];
 				secondary?: CurrencyDenominationConfig[];
 			};
-			priority?: number;
 		}
 
 		interface SkillConfigData {
@@ -30,7 +28,6 @@ declare global {
 			label: string;
 			attribute: string;
 			core?: boolean;
-			priority?: number;
 		}
 
 		interface PowerTypeConfigData {
@@ -38,14 +35,12 @@ declare global {
 			id: string;
 			label: string;
 			plural: string;
-			priority?: number;
 		}
 
 		interface PathTypeConfigData {
 			[key: string]: string | number | undefined,
 			id: string;
 			label: string;
-			priority?: number;
 		}
 
 		interface RegistrationConfig {

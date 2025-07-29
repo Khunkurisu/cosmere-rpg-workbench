@@ -1,6 +1,5 @@
 import { AnyObject } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
-import { MODULE_ID } from "../constants";
-import { SETTINGS } from "../settings";
+import { MODULE_ID, SETTINGS } from "../constants";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 

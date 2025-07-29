@@ -1,9 +1,5 @@
-import { MODULE_ID } from "./constants";
-
-import { CustomCurrencyMenuV2 as CustomCurrencyMenu } from "./applications/custom-currency-menu";
-import { CustomSkillMenuV2 as CustomSkillMenu } from "./applications/custom-skills-menu";
-import { TrackedCompendiumsMenu } from "./applications/tracked-compendiums-menu.mjs";
-
+import { MODULE_ID, SETTINGS } from "./constants";
+import { CustomCurrencyMenu, CustomSkillMenu, TrackedCompendiumsMenu } from "./applications";
 import { CompendiumManager } from "./helpers/compendium-manager.mjs";
 
 export function getModuleSetting<
@@ -15,18 +11,6 @@ export function getModuleSetting<
 export function setModuleSetting<T = unknown>(settingKey: string, value: T) {
 	return game.settings!.set(MODULE_ID, settingKey, value);
 }
-
-export const SETTINGS = {
-	CUSTOM_SKILLS: 'customSkills',
-	CUSTOM_CURRENCIES: 'customCurrency',
-	MENU_CUSTOM_CURRENCY: 'customCurrencyMenu',
-	MENU_CUSTOM_SKILL: 'customSkillMenu',
-	MENU_TRACKED_COMPENDIUMS: 'trackedCompendiumsMenu',
-	SHEET_ENCUMBRANCE_BAR_CLIENT: 'encumbranceBarClient',
-	SHEET_ENCUMBRANCE_BAR_WORLD: 'encumbranceBarWorld',
-	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
-	GENERAL_TRACKED_COMPENDIUMS: 'trackedCompendiums',
-} as const;
 
 export function registerModuleSettings() {
 	// SETTINGS MENUS

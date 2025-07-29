@@ -6,6 +6,7 @@ export const CURRENCIES: CosmereAPI.CurrencyConfigData[] = [
 
 export function register() {
 	CURRENCIES.forEach(currencyConfig => {
+		// @ts-ignore
 		cosmereRPG.api.registerCurrency({ ...currencyConfig, source: MODULE_ID });
 		// @ts-ignore
 		const dict = game.i18n!.translations.workbench.currency;

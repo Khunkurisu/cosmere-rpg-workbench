@@ -1,8 +1,7 @@
 import { register as registerCurrencies, CURRENCIES } from './config/currency';
 import { register as registerSkills, SKILLS } from './config/skills';
 import { register as registerPowers, POWER_TYPES } from './config/powers';
-import { MODULE_ID } from './constants';
-import { SETTINGS } from './settings';
+import { MODULE_ID, SETTINGS } from './constants';
 
 export function register() {
 	CURRENCIES.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as Array<CosmereAPI.CurrencyConfigData>);
