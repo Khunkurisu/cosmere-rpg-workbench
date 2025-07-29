@@ -1,0 +1,100 @@
+{
+	"workbench": {
+		"settings": {
+			"encumbranceBarClient": {
+				"name": "Encumbrance Tracker",
+				"hint": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet."
+			},
+			"encumbranceBarWorld": {
+				"name": "Encumbrance Tracker (Global Override)",
+				"hint": "Toggle whether to show the encumbrance tracker in the equipment tab of the character sheet (Overrides client setting)."
+			},
+			"customSkillMenu": {
+				"name": "Manage Custom Skills",
+				"label": "Custom Skills",
+				"hint": "Allows you to add custom skills to the Cosmere RPG system."
+			},
+			"customCurrencyMenu": {
+				"name": "Manage Custom Currencies",
+				"label": "Custom Currency",
+				"hint": "Allows you to add custom currencys to the Cosmere RPG system."
+			},
+			"trackedCompendiumsMenu": {
+				"name": "Manage Tracked Compendiums",
+				"label": "Tracked Compendiums",
+				"hint": "Allows you to manage which compendiums are tracked by the compendium browser."
+			}
+		},
+		"applications": {
+			"customSkills": {
+				"label": "Custom Skill",
+				"pluralLabel": "Custom Skills",
+				"new": "New Custom Skill",
+				"remove": "Remove Custom Skill",
+				"core": {
+					"label": "Display Core",
+					"desc": "Toggles appearance in core skills."
+				}
+			},
+			"customCurrency": {
+				"label": "Custom Currency",
+				"pluralLabel": "Custom Currencies",
+				"new": "New Custom Currency",
+				"remove": "Remove Custom Currency",
+				"denomination": {
+					"label": "Denomination",
+					"pluralLabel": "Denominations",
+					"type": "Type",
+					"primary": "Primary",
+					"secondary": "Secondary",
+					"unit": "Unit",
+					"conversion": "Conversion Rate",
+					"new": "New Denomination",
+					"remove": "Remove Denomination",
+					"base": {
+						"label": "Base Unit",
+						"desc": "Indicates this is used as the base unit for conversion rate."
+					}
+				}
+			},
+			"compendiumBrowser": {
+				"title": "Compendium Browser",
+				"tabs": {
+					"action": "Action",
+					"background": "Background",
+					"equipment": "Equipment",
+					"power": "Power",
+					"meta": "Meta",
+					"actor": "Actor"
+				}
+			},
+			"id": {
+				"full": "Identifier",
+				"abbr": "ID"
+			}
+		},
+		"attribute": "Attribute",
+		"currency": {
+			"spheres": {
+				"label": "Sphere",
+				"mark": {
+					"label": "Marks",
+					"abbr": "mk"
+				}
+			},
+			"total": "Total",
+			"currency": "Currency",
+			"loot": "Loot"
+		},
+		"encumbrance": {
+			"label": "Encumbrance",
+			"unit": {
+				"label": "Pounds",
+				"abbr": "lbs"
+			},
+			"current": "Current",
+			"carry": "Carry",
+			"lift": "Lift"
+		}
+	}
+}

@@ -1,0 +1,27 @@
+.entry-list {
+	border-top: 2px solid #efe6d8;
+	padding: 15px;
+	margin-bottom: 5px;
+	background: #0f061063;
+
+	:nth-child(2n) {
+		background: #0f061063;
+	}
+}
+
+.subentry-list:nth-child(2n) {
+	background: #0f061063;
+}
+
+.entry-button {
+	border: 1px white solid;
+	margin-left: 2%;
+	max-width: 25px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.talent-name {
+	max-width: 35%;
+}
