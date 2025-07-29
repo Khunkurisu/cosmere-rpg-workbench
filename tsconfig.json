@@ -16,7 +16,7 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
-		"skipLibCheck": false,
+		"skipLibCheck": true,
 		"paths": {
 			"@src/*": [
 				"./src/*"
