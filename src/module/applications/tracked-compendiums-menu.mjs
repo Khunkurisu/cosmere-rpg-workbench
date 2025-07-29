@@ -19,7 +19,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 		},
 		tag: 'form',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.trackedCompendiums.menu',
+			title: 'workbench.applications.trackedCompendiums.menu',
 			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
 		},
 	}

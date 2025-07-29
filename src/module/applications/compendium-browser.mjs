@@ -24,7 +24,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(ApplicationV2)
 		}],
 		tag: 'form',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.compendiumBrowser.title',
+			title: 'workbench.applications.compendiumBrowser.title',
 			resizable: true,
 		},
 	}
@@ -53,7 +53,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(ApplicationV2)
 		return {
 			tabs: this.getTabs(),
 			items: this.itemsList,
-			tabTitle: `COSMERE_WORKBENCH.applications.compendiumBrowser.tabs.${this.activeTab}`,
+			tabTitle: `workbench.applications.compendiumBrowser.tabs.${this.activeTab}`,
 			config: CONFIG.COSMERE_WORKBENCH,
 		};
 	}
@@ -63,7 +63,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(ApplicationV2)
 		this.tabsList.forEach(tab => {
 			tabs[tab] = {
 				id: tab,
-				label: `COSMERE_WORKBENCH.applications.compendiumBrowser.tabs.${tab}`,
+				label: `workbench.applications.compendiumBrowser.tabs.${tab}`,
 				cssClass: this.activeTab === tab ? 'active' : '',
 			};
 		});

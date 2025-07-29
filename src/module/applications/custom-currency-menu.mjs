@@ -22,7 +22,7 @@ export class CustomCurrencyMenu extends HandlebarsApplicationMixin(ApplicationV2
 		},
 		tag: 'form',
 		window: {
-			title: 'COSMERE_WORKBENCH.applications.customCurrency.menu',
+			title: 'workbench.applications.customCurrency.menu',
 			contentClasses: ["standard-form", 'cosmere-rpg-workbench'],
 		},
 	}
