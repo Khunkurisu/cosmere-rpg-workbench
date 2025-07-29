@@ -7,6 +7,7 @@ const PACK_SRC = path.join('src', 'packs');
 const PACK_DEST = path.join('build', 'packs');
 
 async function compilePacks() {
+	if (!fs.existsSync(PACK_DEST)) { fs.mkdirSync(PACK_DEST); }
     const folders = fs.readdirSync(PACK_SRC, { withFileTypes: true })
         .filter(file => file.isDirectory());
 
