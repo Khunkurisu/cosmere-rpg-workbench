@@ -11,7 +11,7 @@ const tag = child_process.execSync('git describe --tags --abbrev=0').toString().
 
 // Create a file to stream archive data to
 const output = fs.createWriteStream(
-    `cosmere-rpg-stormlight-handbook-${tag}.zip`
+    `cosmere-rpg-workbench-${tag}.zip`
 );
 
 // Create a new archive
