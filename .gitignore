@@ -2,6 +2,7 @@
 .idea/
 .vs/
 .vsc/
+.vscode/
 *.code-workspace
 
 # Node Modules
