@@ -14,7 +14,7 @@ A module that shall be updated to contain useful features for running the system
 
 Manifest:
 
-`https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/master/module.json`
+`https://raw.githubusercontent.com/Khunkurisu/cosmere-rpg-workbench/refs/heads/main/src/module.json`
 
 ### Images
 
