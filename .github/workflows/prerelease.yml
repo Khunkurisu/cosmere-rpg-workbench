@@ -50,7 +50,7 @@ jobs:
       - name: Update manifest
         uses: TomaszKandula/variable-substitution@v1.0.2
         with:
-          files: "./src/system.json"
+          files: "./src/module.json"
         env:
           version: "prerelease-${{ env.RELEASE_VERSION }}"
           manifest: ${{ env.MANIFEST_URL }}
@@ -80,7 +80,7 @@ jobs:
         with:
           name: "Pre-release ${{ env.RELEASE_VERSION }}"
           tag: prerelease-${{ env.RELEASE_VERSION }}
-          artifacts: "./src/system.json, ./${{ env.ZIP_NAME }}"
+          artifacts: "./src/module.json, ./${{ env.ZIP_NAME }}"
           draft: false
           prerelease: true
           allowUpdates: true
