@@ -119,13 +119,13 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		const entries = this.entries;
 		const dataset = target.dataset;
 		const index = dataset.index;
-		if (!index) return;
 
 		if (dataset.target === 'currency') {
 			entries.push({
 				id: 'ncr',
 				label: 'New Currency',
-				icon: 'icons/svg/item-bag.svg',
+				icon: 'icons/commodities/currency/coin-engraved-oval-steel.webp',
+				priority: 1,
 				denominations: {
 					primary: [{
 						id: 'npd',
@@ -144,6 +144,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 				},
 			});
 		} else if (dataset.target === 'primary') {
+			if (!index) return;
 			entries[parseInt(index)].denominations.primary.push({
 				id: 'npd',
 				label: "New Primary",
@@ -152,6 +153,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 				unit: 'pd',
 			});
 		} else if (dataset.target === 'secondary') {
+			if (!index) return;
 			entries[parseInt(index)].denominations.secondary?.push({
 				id: 'nsd',
 				label: "New Secondary",
@@ -170,13 +172,14 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		const index = dataset.index;
 		if (!index) return;
 		const key = dataset.key;
-		if (!key) return;
 
 		if (dataset.target === 'currency') {
 			entries.splice(parseInt(index), 1);
 		} else if (dataset.target === 'primary') {
+			if (!key) return;
 			entries[parseInt(index)].denominations.primary.splice(parseInt(key), 1);
 		} else if (dataset.target === 'secondary') {
+			if (!key) return;
 			entries[parseInt(index)].denominations.secondary?.splice(parseInt(key), 1);
 		}
 
