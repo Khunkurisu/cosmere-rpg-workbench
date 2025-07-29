@@ -5,81 +5,81 @@ COSMERE_WORKBENCH.skills = {
 
 COSMERE_WORKBENCH.applications = {
 	skills: {
-		menu: 'COSMERE_WORKBENCH.applications.customSkills.menu',
-		label: 'COSMERE_WORKBENCH.applications.customSkills.label',
-		pluralLabel: 'COSMERE_WORKBENCH.applications.customSkills.pluralLabel',
-		new: 'COSMERE_WORKBENCH.applications.customSkills.new',
-		remove: 'COSMERE_WORKBENCH.applications.customSkills.remove',
-		desc: 'COSMERE_WORKBENCH.applications.customSkills.desc',
+		menu: 'workbench.applications.customSkills.menu',
+		label: 'workbench.applications.customSkills.label',
+		pluralLabel: 'workbench.applications.customSkills.pluralLabel',
+		new: 'workbench.applications.customSkills.new',
+		remove: 'workbench.applications.customSkills.remove',
+		desc: 'workbench.applications.customSkills.desc',
 		core: {
-			label: 'COSMERE_WORKBENCH.applications.customSkills.core.label',
-			desc: 'COSMERE_WORKBENCH.applications.customSkills.core.desc'
+			label: 'workbench.applications.customSkills.core.label',
+			desc: 'workbench.applications.customSkills.core.desc'
 		},
 	},
 	currency: {
-		menu: 'COSMERE_WORKBENCH.applications.customCurrency.menu',
-		label: 'COSMERE_WORKBENCH.applications.customCurrency.label',
-		pluralLabel: 'COSMERE_WORKBENCH.applications.customCurrency.pluralLabel',
-		new: 'COSMERE_WORKBENCH.applications.customCurrency.new',
-		remove: 'COSMERE_WORKBENCH.applications.customCurrency.remove',
-		desc: 'COSMERE_WORKBENCH.applications.customCurrency.desc',
+		menu: 'workbench.applications.customCurrency.menu',
+		label: 'workbench.applications.customCurrency.label',
+		pluralLabel: 'workbench.applications.customCurrency.pluralLabel',
+		new: 'workbench.applications.customCurrency.new',
+		remove: 'workbench.applications.customCurrency.remove',
+		desc: 'workbench.applications.customCurrency.desc',
 		denomination: {
-			label: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.label',
-			type: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.type',
-			primary: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.primary',
-			secondary: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.secondary',
-			unit: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.unit',
-			conversion: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.conversion',
-			new: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.new',
-			remove: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.remove',
+			label: 'workbench.applications.customCurrency.denomination.label',
+			type: 'workbench.applications.customCurrency.denomination.type',
+			primary: 'workbench.applications.customCurrency.denomination.primary',
+			secondary: 'workbench.applications.customCurrency.denomination.secondary',
+			unit: 'workbench.applications.customCurrency.denomination.unit',
+			conversion: 'workbench.applications.customCurrency.denomination.conversion',
+			new: 'workbench.applications.customCurrency.denomination.new',
+			remove: 'workbench.applications.customCurrency.denomination.remove',
 			base: {
-				label: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.base.label',
-				desc: 'COSMERE_WORKBENCH.applications.customCurrency.denomination.base.desc'
+				label: 'workbench.applications.customCurrency.denomination.base.label',
+				desc: 'workbench.applications.customCurrency.denomination.base.desc'
 			},
 		}
 	},
 	id: {
-		full: 'COSMERE_WORKBENCH.applications.id.full',
-		abbr: 'COSMERE_WORKBENCH.applications.id.abbr',
+		full: 'workbench.applications.id.full',
+		abbr: 'workbench.applications.id.abbr',
 	},
 	talents: {
-		menu: 'COSMERE_WORKBENCH.applications.talents.menu',
-		label: 'COSMERE_WORKBENCH.applications.talents.label',
-		pluralLabel: 'COSMERE_WORKBENCH.applications.talents.pluralLabel',
-		name: 'COSMERE_WORKBENCH.applications.talents.name',
+		menu: 'workbench.applications.talents.menu',
+		label: 'workbench.applications.talents.label',
+		pluralLabel: 'workbench.applications.talents.pluralLabel',
+		name: 'workbench.applications.talents.name',
 		image: {
-			label: 'COSMERE_WORKBENCH.applications.talents.image.label',
-			desc: 'COSMERE_WORKBENCH.applications.talents.image.desc'
+			label: 'workbench.applications.talents.image.label',
+			desc: 'workbench.applications.talents.image.desc'
 		},
 		append: {
-			label: 'COSMERE_WORKBENCH.applications.talents.append.label',
-			desc: 'COSMERE_WORKBENCH.applications.talents.append.desc'
+			label: 'workbench.applications.talents.append.label',
+			desc: 'workbench.applications.talents.append.desc'
 		},
 	}
 };
 
 COSMERE_WORKBENCH.currency = {
 	labels: {
-		mark: 'COSMERE_WORKBENCH.currency.spheres.mark.label',
-		spheres: 'COSMERE_WORKBENCH.currency.spheres.label',
+		mark: 'workbench.currency.spheres.mark.label',
+		spheres: 'workbench.currency.spheres.label',
 	},
 	abbr: {
-		mark: 'COSMERE_WORKBENCH.currency.spheres.mark.abbr',
+		mark: 'workbench.currency.spheres.mark.abbr',
 	},
-	total: 'COSMERE_WORKBENCH.currency.total',
-	currency: 'COSMERE_WORKBENCH.currency.currency',
-	loot: 'COSMERE_WORKBENCH.currency.loot',
+	total: 'workbench.currency.total',
+	currency: 'workbench.currency.currency',
+	loot: 'workbench.currency.loot',
 };
 
 COSMERE_WORKBENCH.encumbrance = {
-	label: 'COSMERE_WORKBENCH.encumbrance.label',
+	label: 'workbench.encumbrance.label',
 	unit: {
-		label: 'COSMERE_WORKBENCH.encumbrance.unit.label',
-		abbr: 'COSMERE_WORKBENCH.encumbrance.unit.abbr',
+		label: 'workbench.encumbrance.unit.label',
+		abbr: 'workbench.encumbrance.unit.abbr',
 	},
-	current: 'COSMERE_WORKBENCH.encumbrance.current',
-	carry: 'COSMERE_WORKBENCH.encumbrance.carry',
-	lift: 'COSMERE_WORKBENCH.encumbrance.lift',
+	current: 'workbench.encumbrance.current',
+	carry: 'workbench.encumbrance.carry',
+	lift: 'workbench.encumbrance.lift',
 };
 
-COSMERE_WORKBENCH.attribute = 'COSMERE_WORKBENCH.attribute';
+COSMERE_WORKBENCH.attribute = 'workbench.attribute';
