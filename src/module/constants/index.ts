@@ -14,6 +14,12 @@ export const MODULE_NAME = 'Cosmere RPG Workbench';
 export const SYSTEM_ID = 'cosmere-rpg';
 
 /**
+ * String identifiers for official modules used throughout other scripts.
+ */
+export const STORMLIGHT_HANDBOOK = 'cosmere-rpg-stormlight-handbook';
+export const STORMLIGHT_WORLDGUIDE = 'cosmere-rpg-stormlight-world-guide';
+
+/**
  * Author name of the module.
  */
 export const AUTHOR_NAME = 'Khunkurisu';
@@ -28,4 +34,33 @@ export const SETTINGS = {
 	SHEET_ENCUMBRANCE_BAR_WORLD: 'encumbranceBarWorld',
 	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
 	GENERAL_TRACKED_COMPENDIUMS: 'trackedCompendiums',
+	GENERAL_HIDE_SYSTEM_COMPENDIUMS: 'hideSystemCompendiums',
+	CLIENT_COMPENDIUM_FILTERS: 'clientCompendiumFilters',
 } as const;
+
+export enum ItemTypes {
+	Weapon = 'weapon',
+	Armor = 'armor',
+	Equipment = 'equipment',
+	Loot = 'loot',
+	Ancestry = 'ancestry',
+	Culture = 'culture',
+	Path = 'path',
+	Talent = 'talent',
+	Ability = 'trait',
+	Action = 'action',
+	Connection = 'connection',
+	Goal = 'goal',
+	Power = 'power',
+};
+
+export enum ActorTypes {
+	Character = 'character',
+	Adversary = 'adversary',
+};
+
+export enum DocumentTypes {
+	Item = 'item',
+	Actor = 'actor',
+	Journal = 'journal',
+}
