@@ -1,5 +1,7 @@
 # Cosmere RPG Workbench
 
+![Foundry v12](https://img.shields.io/badge/foundry-v12-green) ![Cosmere RPG](https://img.shields.io/badge/cosmere%E2%80%93rpg-v1.0.0-green)
+
 A module that shall be updated to contain useful features for running the system that are not a priority to implement officially.
 
 ## Current Features
