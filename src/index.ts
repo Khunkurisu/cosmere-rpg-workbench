@@ -5,16 +5,20 @@ import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
 import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
+import { CompendiumManager } from './module/helpers/compendium-manager';
+import { CompendiumBrowser } from './module/applications';
 
 declare global {
 	interface LenientGlobalVariableTypes {
 		game: never;
 	}
 
-	/* // eslint-disable-next-line no-var
+	// eslint-disable-next-line no-var
 	var cosmereWorkbench: {
-		macros: typeof WorkbenchMacros;
-	}; */
+		//macros: typeof WorkbenchMacros;
+		compendiumManager: typeof CompendiumManager;
+		compendiumBrowser: typeof CompendiumBrowser;
+	};
 
 	interface CONFIG {
 		COSMERE: any;
@@ -23,9 +27,11 @@ declare global {
 };
 
 Hooks.once('init', async function () {
-	/* globalThis.cosmereWorkbench = Object.assign(
-		{ macros: WorkbenchMacros }
-	); */
+	globalThis.cosmereWorkbench = Object.assign(
+		//{ macros: WorkbenchMacros }
+		{ compendiumManager: CompendiumManager },
+		{ compendiumBrowser: CompendiumBrowser },
+	);
 	CONFIG.COSMERE_WORKBENCH = COSMERE_WORKBENCH;
 	registerModuleSettings();
 

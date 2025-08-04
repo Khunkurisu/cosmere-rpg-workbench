@@ -23,6 +23,10 @@
 				"name": "Manage Tracked Compendiums",
 				"label": "Tracked Compendiums",
 				"hint": "Allows you to manage which compendiums are tracked by the compendium browser."
+			},
+			"hideSystemCompendiums": {
+				"name": "Hide System Compendiums",
+				"hint": "Hides duplicate system compendiums from the compendium browser if Stormlight Handbook module is detected."
 			}
 		},
 		"applications": {
