@@ -42,7 +42,7 @@ Hooks.once('ready', () => {
 		if (diceTrayDiceRows) {
 			let hasPlotDie = false;
 			diceTrayDiceRows.forEach(row => {
-				hasPlotDie = row["1dp"] != undefined;
+				hasPlotDie = row["1dp"] != undefined || row["dp"] != undefined;
 			});
 			if (!hasPlotDie) {
 				diceTrayDiceRows.push({
