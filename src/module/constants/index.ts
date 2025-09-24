@@ -29,3 +29,32 @@ export const SETTINGS = {
 	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
 	GENERAL_TRACKED_COMPENDIUMS: 'trackedCompendiums',
 } as const;
+
+export const enum ActorType {
+    Character = 'character',
+    Adversary = 'adversary',
+}
+
+export const enum ItemType {
+    Weapon = 'weapon',
+    Armor = 'armor',
+    Equipment = 'equipment',
+    Loot = 'loot',
+
+    Ancestry = 'ancestry',
+    Culture = 'culture',
+    Path = 'path',
+    Specialty = 'specialty',
+    Talent = 'talent',
+    Trait = 'trait',
+
+    Action = 'action',
+
+    Injury = 'injury',
+    Connection = 'connection',
+    Goal = 'goal',
+
+    Power = 'power',
+
+    TalentTree = 'talent_tree',
+}
