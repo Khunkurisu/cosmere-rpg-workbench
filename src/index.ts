@@ -5,6 +5,7 @@ import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
 import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
+import { ActorType, ItemType } from './module/constants';
 
 declare global {
 	interface LenientGlobalVariableTypes {
@@ -65,9 +66,9 @@ Hooks.on('renderActorSheetV2', async (o: any, i: any, _n: any) => {
 });
 
 Hooks.on('preCreateItem', async (document: any, _data, _options, _userId) => {
-	if (document.type === 'talent') {
+	if (document.type === ItemType.Talent) {
 		const parentActor = document.parent;
-		if (parentActor && parentActor.type === 'adversary') {
+		if (parentActor && parentActor.type === ActorType.Adversary) {
 			const actionData = {
 				img: document.img,
 				name: document.name,

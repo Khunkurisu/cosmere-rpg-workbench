@@ -1,4 +1,4 @@
-import { MODULE_ID, SETTINGS } from "../constants";
+import { ItemType, MODULE_ID, SETTINGS } from "../constants";
 
 const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-encumbrance-bar.hbs';
 
@@ -32,7 +32,7 @@ function GetData(sheet) {
 	};
 
 	items.forEach((item) => {
-		if (item.type === 'weapon' || item.type === 'armor' || item.type === 'equipment') {
+		if (item.type === ItemType.Weapon || item.type === ItemType.Armor || item.type === ItemType.Equipment) {
 			data.current += item.system.weight.value * item.system.quantity;
 		}
 	});
