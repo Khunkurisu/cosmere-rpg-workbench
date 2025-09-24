@@ -1,6 +1,7 @@
 import { register as registerCurrencies, localize as localizeCurrencies, CURRENCIES } from './config/currency';
 import { register as registerSkills, localize as localizeSkills, SKILLS } from './config/skills';
 import { register as registerPowers, localize as localizePowers, POWER_TYPES } from './config/powers';
+import { register as registerRollData } from './config/roll-data';
 import { MODULE_ID, SETTINGS } from './constants';
 
 export function register() {
@@ -11,6 +12,7 @@ export function register() {
 	registerSkills();
 	registerPowers();
 	registerCurrencies();
+	registerRollData();
 }
 
 export function localize() {

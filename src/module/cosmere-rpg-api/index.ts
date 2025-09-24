@@ -1,3 +1,5 @@
+import { ActorType } from "../constants";
+
 export { };
 declare global {
 	namespace CosmereAPI {
@@ -43,6 +45,13 @@ declare global {
 			label: string;
 		}
 
+		interface RollDataConfigData {
+			id: string;
+			types: ActorType[];
+			data: (string | number)[];
+			override?: boolean;
+		}
+
 		interface RegistrationConfig {
 			[key: string]: string | number | boolean | undefined,
 			source: string;
@@ -56,6 +65,7 @@ declare global {
 		registerPowerType(data: CosmereAPI.PowerTypeConfigData & CosmereAPI.RegistrationConfig): boolean;
 		registerPathType(data: CosmereAPI.PathTypeConfigData & CosmereAPI.RegistrationConfig): boolean;
 		registerCurrency(data: CosmereAPI.CurrencyConfigData & CosmereAPI.RegistrationConfig): boolean;
+		registerRollData(data: CosmereAPI.RollDataConfigData & CosmereAPI.RegistrationConfig): boolean;
 	}
 
 	let cosmereRPG: {
