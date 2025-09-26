@@ -74,7 +74,7 @@ Hooks.on('renderActorSheetV2', async (o: any, i: any, _n: any) => {
 
 Hooks.on('preCreateItem', async (document: CosmereItem & BaseItem, _data, _options, _userId) => {
 	if (document.type === 'talent') {
-		const parentActor = document.parent;
+		const parentActor = document.parent as CosmereActor;
 		if (parentActor && parentActor.type === ActorTypes.Adversary) {
 			const actionData = {
 				img: document.img,
