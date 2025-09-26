@@ -5,9 +5,8 @@ import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
 import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
-import { CompendiumManager } from './module/helpers/compendium-manager';
+import { CompendiumManager } from './module/applications/compendium-browser/compendium-manager';
 import { CompendiumBrowser } from './module/applications';
-import Document from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/document.mjs';
 import BaseItem from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents/item.mjs';
 import { ActorTypes } from './module/constants';
 

@@ -1,8 +1,8 @@
 import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
-import { CompendiumManager } from "../helpers/compendium-manager";
-import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../constants";
-import { COSMERE_WORKBENCH } from "../helpers/config.mjs";
+import { CompendiumManager } from "./compendium-manager";
+import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../../constants";
 import Tagify, { TagData } from '@yaireo/tagify';
+import { Tabs, TabFilters, TabTypes, CachedPacks, CachedPack, Context } from "./definitions";
 
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
@@ -330,33 +330,4 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		const data = TextEditor.getDragEventData(event);
 	}
 
-}
-
-interface Tabs {
-	[key: string]: any
-}
-
-export enum TabTypes {
-	Action = 'action',
-	Background = 'background',
-	Equipment = 'equipment',
-	Meta = 'meta',
-	Actor = 'actor',
-}
-
-interface Context extends AnyObject {
-	tabs: Tabs,
-	items: StoredDocument<Actor | Item>[],
-	tabTitle: string,
-	tabPlural: string,
-	config: typeof COSMERE_WORKBENCH,
-	search: string,
-}
-
-export interface TabFilters {
-	[key: string]: SubtypeFilter,
-}
-
-export interface SubtypeFilter {
-	[key: string]: boolean,
 }

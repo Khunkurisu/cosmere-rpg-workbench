@@ -1,7 +1,7 @@
 import { StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
-import { ActorTypes, ItemTypes, MODULE_ID, SETTINGS, STORMLIGHT_HANDBOOK, STORMLIGHT_WORLDGUIDE, SYSTEM_ID } from "../constants";
+import { ActorTypes, ItemTypes, MODULE_ID, SETTINGS, STORMLIGHT_HANDBOOK, STORMLIGHT_WORLDGUIDE, SYSTEM_ID } from "../../constants";
 import Fuse from "fuse.js";
-import { TabFilters, TabTypes } from "../applications/compendium-browser";
+import { TabFilters, TabTypes, CachedPacks, CachedPack } from "./definitions";
 
 export class CompendiumManager {
 	constructor();
@@ -179,14 +179,4 @@ export class CompendiumManager {
 
 		return Promise.resolve(documents);
 	}
-}
-
-interface CachedPacks {
-	[key: string]: CachedPack
-}
-
-interface CachedPack {
-	[key: string]: (StoredDocument<Actor | Item>)[] | number,
-	lastUpdated: number,
-	documents: (StoredDocument<Actor | Item>)[],
 }

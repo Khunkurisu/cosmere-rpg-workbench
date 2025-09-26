@@ -1,6 +1,6 @@
 import { MODULE_ID, SETTINGS } from "./constants";
 import { CustomCurrencyMenu, CustomSkillMenu } from "./applications";
-import { CompendiumManager } from "./helpers/compendium-manager";
+import { CompendiumManager } from "./applications/compendium-browser/compendium-manager";
 
 export function getModuleSetting<
 	T extends string | boolean | number = string | boolean | number,
