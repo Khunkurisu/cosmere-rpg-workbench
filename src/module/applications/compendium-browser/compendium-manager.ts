@@ -19,7 +19,7 @@ export class CompendiumManager {
 	}
 
 	get validSubtypes(): string[] {
-		let types = this.validItemTypes;
+		const types = this.validItemTypes;
 		types.push(...this.validActorTypes);
 		return types;
 	};
@@ -29,7 +29,7 @@ export class CompendiumManager {
 	};
 
 	get validActorTypes(): string[] {
-		let types = Object.values(ActorTypes);
+		const types = Object.values(ActorTypes);
 		return types.filter((type) => type !== ActorTypes.Character);
 	}
 
@@ -47,7 +47,7 @@ export class CompendiumManager {
 	private removeTrackedPacks(id: string, removeAll: boolean): void;
 	private removeTrackedPacks(id: string | string[], removeAll?: boolean): void {
 		if (id.constructor === Array) {
-			const ids = id as string[];
+			const ids = id;
 			this.trackedPacks = this.trackedPacks.filter(packId => !ids.includes(packId));
 		} else {
 			if (removeAll) {
@@ -62,14 +62,16 @@ export class CompendiumManager {
 	}
 
 	get filteredPacks(): CompendiumCollection<CompendiumCollection.Metadata>[] {
-		let packs: CompendiumCollection<CompendiumCollection.Metadata>[] = Array.from(game.packs as Iterable<any>);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const packs: CompendiumCollection<CompendiumCollection.Metadata>[] = Array.from(game.packs as Iterable<any>);
 		return packs.filter((pack: CompendiumCollection<CompendiumCollection.Metadata>) => {
 			return !this.isTrackedPack(pack);
 		});
 	}
 
 	get includedPacks(): CompendiumCollection<CompendiumCollection.Metadata>[] {
-		let packs: CompendiumCollection<CompendiumCollection.Metadata>[] = Array.from(game.packs as Iterable<any>);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const packs: CompendiumCollection<CompendiumCollection.Metadata>[] = Array.from(game.packs as Iterable<any>);
 		return packs.filter((pack: CompendiumCollection<CompendiumCollection.Metadata>) => {
 			return this.isTrackedPack(pack);
 		});
@@ -106,26 +108,26 @@ export class CompendiumManager {
 	public async getFilteredContents(subtypes: ItemTypes | ActorTypes, searchString?: string)
 		: Promise<(StoredDocument<Actor | Item>)[]>;
 	public async getFilteredContents(
-		subtype: ItemTypes | ActorTypes | (ItemTypes | ActorTypes)[], searchString: string = ''
+		subtype: ItemTypes | ActorTypes | (ItemTypes | ActorTypes)[], searchString = ''
 	): Promise<(StoredDocument<Actor | Item>)[]> {
-		var subtypes: (ItemTypes | ActorTypes)[] = [];
+		let subtypes: (ItemTypes | ActorTypes)[] = [];
 		if (subtype.constructor === Array) {
-			subtypes = subtype as (ItemTypes | ActorTypes)[];
+			subtypes = subtype;
 		} else {
 			subtypes.push(subtype as ItemTypes | ActorTypes);
 		}
 
 		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
 		subtypes = subtypes.filter(subtype => {
-			for (let tabType of Object.values(TabTypes)) {
+			for (const tabType of Object.values(TabTypes)) {
 				if (Object.keys(filters).includes(tabType) && filters[tabType][subtype]) return false;
 			}
 			return true;
 		});
 
-		let allDocuments: (StoredDocument<Actor | Item>)[] = [];
-		for (let type of subtypes) {
-			if (!(this.isValidSubtype(type as ItemTypes | ActorTypes))) {
+		const allDocuments: (StoredDocument<Actor | Item>)[] = [];
+		for (const type of subtypes) {
+			if (!(this.isValidSubtype(type))) {
 				continue;
 			}
 			let cachedPack: CachedPack;
@@ -142,8 +144,8 @@ export class CompendiumManager {
 				};
 			}
 
-			let packs = this.includedPacks;
-			for (let pack of packs) {
+			const packs = this.includedPacks;
+			for (const pack of packs) {
 				const document = (await pack.getDocuments({ type: type }) as (StoredDocument<Actor | Item>)[]);
 				cachedPack.documents.push(...document);
 				allDocuments.push(...document);
@@ -156,7 +158,7 @@ export class CompendiumManager {
 		return Promise.resolve(searchResults);
 	}
 
-	private async fuzzySearchContents(contents: (StoredDocument<Actor | Item>)[], searchText: string = '')
+	private async fuzzySearchContents(contents: (StoredDocument<Actor | Item>)[], searchText = '')
 		: Promise<(StoredDocument<Actor | Item>)[]> {
 		if (searchText === '') {
 			return Promise.resolve(contents);
@@ -173,7 +175,7 @@ export class CompendiumManager {
 		const results = fuse.search(searchText);
 
 		const documents: (StoredDocument<Actor | Item>)[] = [];
-		for (let result of results) {
+		for (const result of results) {
 			documents.push(result.item);
 		}
 

@@ -1,9 +1,7 @@
 import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs"
 import { COSMERE_WORKBENCH } from "@src/module/helpers/config.mjs"
 
-export interface CachedPacks {
-	[key: string]: CachedPack
-}
+export type CachedPacks = Record<string, CachedPack>;
 
 export interface CachedPack {
 	[key: string]: (StoredDocument<Actor | Item>)[] | number,
@@ -11,9 +9,7 @@ export interface CachedPack {
 	documents: (StoredDocument<Actor | Item>)[],
 }
 
-export interface Tabs {
-	[key: string]: any
-}
+export type Tabs = Record<string, any>;
 
 export enum TabTypes {
 	Action = 'action',
@@ -32,10 +28,6 @@ export interface Context extends AnyObject {
 	search: string,
 }
 
-export interface TabFilters {
-	[key: string]: SubtypeFilter,
-}
+export type TabFilters = Record<string, SubtypeFilter>;
 
-export interface SubtypeFilter {
-	[key: string]: boolean,
-}
+export type SubtypeFilter = Record<string, boolean>;

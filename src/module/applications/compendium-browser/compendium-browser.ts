@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { CompendiumManager } from "./compendium-manager";
 import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../../constants";
@@ -17,7 +20,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		},
 		position: {
 			width: 800,
-			height: "auto" as "auto",
+			height: "auto" as const,
 		},
 		classes: [SYSTEM_ID, 'sheet', 'item'],
 		actions: {
@@ -49,11 +52,11 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 	}
 
 	get title() {
-		return `Cosmere RPG Workbench: ${game.i18n?.localize(this.options.window?.title as string)}`;
+		return `Cosmere RPG Workbench: ${game.i18n?.localize(this.options.window!.title!)}`;
 	}
 
 	protected async _prepareContext(): Promise<Context> {
-		let contents = await this.getContents();
+		const contents = await this.getContents();
 		return Promise.resolve({
 			tabs: this.tabs,
 			currentTab: this.activeTab,
@@ -86,7 +89,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 	}
 
 	get tabSubtypes(): (ItemTypes | ActorTypes)[] {
-		let subtypes: (ItemTypes | ActorTypes)[] = [];
+		const subtypes: (ItemTypes | ActorTypes)[] = [];
 		switch (this.activeTab) {
 			case TabTypes.Actor: {
 				subtypes.push(ActorTypes.Adversary);
@@ -114,7 +117,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 	get tabTags(): TagData[] {
 		const tags: TagData[] = [];
-		for (let type of this.tabSubtypes) {
+		for (const type of this.tabSubtypes) {
 			tags.push({ value: type, class: "color-green", editable: false });
 		}
 		return tags;
@@ -129,25 +132,25 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 	}
 
-	static onCancel(this: CompendiumBrowser) {
-		this.close();
+	static async onCancel(this: CompendiumBrowser) {
+		await this.close();
 	}
 
-	static setTab(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
+	static async setTab(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
 		if (this.activeTab === target.dataset.tab as TabTypes) {
 			return;
 		}
 		this.lastActiveTab = this.activeTab;
 		this.activeTab = target.dataset.tab as TabTypes;
 		this.searchText = '';
-		this.render(true);
+		await this.render(true);
 	}
 
 	static showItemSheet(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
 		const listElement = $(target).parent().parent();
 		const dataset = listElement[0].dataset;
-		const itemId = dataset.itemId as string;
-		const packId = dataset.packId as string;
+		const itemId = dataset.itemId!;
+		const packId = dataset.packId!;
 		const uuid = `Compendium.${packId}.Item.${itemId}`;
 
 		const item = game.packs?.get(packId)?.get(itemId);
@@ -156,7 +159,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		ui.notifications.info(`Loading item ${uuid}`);
 	}
 
-	protected async _onRender(this: CompendiumBrowser, context: AnyObject, options: AnyObject) {
+	protected _onRender(this: CompendiumBrowser, context: AnyObject, options: AnyObject) {
 		this.#dragDrop.forEach((d: any) => d.bind(this.element));
 
 		this.element
@@ -184,7 +187,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 			e.preventDefault();
 			e.stopPropagation();
 
-			if (e.detail.data && e.detail.data.__isValid) {
+			if (e.detail.data?.__isValid) {
 				this.excludedTagsList = e.detail.tagify.value;
 				await this.setFilter(this.activeTab, e.detail.data.value as ItemTypes | ActorTypes, true);
 			}
@@ -229,7 +232,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		await this.render(true);
 	}
 
-	private async setFilters(tab: TabTypes, subtypes: TagData[], filter: boolean, replace: boolean = false) {
+	private async setFilters(tab: TabTypes, subtypes: TagData[], filter: boolean, replace = false) {
 		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
 		let tabFilters;
 		if (replace || !(tab in filters)) {
@@ -238,7 +241,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		} else {
 			tabFilters = filters[tab];
 		}
-		for (let subtype of subtypes) {
+		for (const subtype of subtypes) {
 			tabFilters[subtype.value] = filter;
 		}
 		await game.settings?.set(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS, filters);
@@ -257,7 +260,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		return {};
 	}
 
-	searchText: string = '';
+	searchText = '';
 
 	private async onSearchInput(event: Event) {
 		if (event.type !== 'input') return;
@@ -268,7 +271,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 		await this.render(true);
 
-		const search = $(this.element!).find('input')[0];
+		const search = $(this.element).find('input')[0];
 		search.selectionStart = search.selectionEnd = this.searchText.length;
 	}
 
@@ -276,11 +279,12 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 	constructor(options = {}) {
 		super(options);
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 		this.#dragDrop = this.#createDragDropHandlers();
 	}
 
 	#createDragDropHandlers() {
-		// @ts-ignore
+		// @ts-expect-error setting up a dragdrop interface would be painful
 		return this.options.dragDrop.map((d) => {
 			d.permissions = {
 				dragstart: this._canDragStart.bind(this),
@@ -317,7 +321,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		const itemId = dataset.itemId;
 		const packId = dataset.packId;
 
-		let dragData = { type: this.activeTab === 'actor' ? 'Actor' : 'Item', uuid: `Compendium.${packId}.Item.${itemId}` };
+		const dragData = { type: this.activeTab === TabTypes.Actor ? 'Actor' : 'Item', uuid: `Compendium.${packId}.Item.${itemId}` };
 
 		if (!dragData) return;
 
@@ -326,7 +330,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 	_onDragOver(event: DragEvent) { };
 
-	async _onDrop(event: DragEvent) {
+	_onDrop(event: DragEvent) {
 		const data = TextEditor.getDragEventData(event);
 	}
 
