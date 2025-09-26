@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { AnyObject } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { MODULE_ID, SETTINGS } from "../constants";
 
@@ -14,7 +17,7 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 		},
 		position: {
 			width: 640,
-			height: "auto" as "auto",
+			height: "auto" as const,
 		},
 		actions: {
 			create: CustomSkillMenuV2.createEntry,
@@ -29,7 +32,7 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 		},
 	}
 
-	private entries = game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as Array<CosmereAPI.SkillConfigData>;
+	private entries = game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as CosmereAPI.SkillConfigData[];
 
 	static PARTS = {
 		form: {
@@ -60,13 +63,13 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 		});
 	}
 
-	private static onFormEvent(
+	private static async onFormEvent(
 		this: CustomSkillMenuV2,
 		event: Event,
 		form: HTMLFormElement,
 		formData: FormDataExtended,
 	) {
-		const data: Array<CosmereAPI.SkillConfigData> = this.entries;
+		const data: CosmereAPI.SkillConfigData[] = this.entries;
 		let lastChecked: CosmereAPI.SkillConfigData;
 		let isValid = true;
 		data.every(((skill: CosmereAPI.SkillConfigData) => {
@@ -80,18 +83,19 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 		}));
 
 		if (isValid) {
-			game.settings!.set(MODULE_ID, SETTINGS.CUSTOM_SKILLS, data);
-			this.close();
+			await game.settings!.set(MODULE_ID, SETTINGS.CUSTOM_SKILLS, data);
+			await this.close();
 		} else {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			ui.notifications.error("Identifiers must be unique.");
 		}
 	}
 
-	private static onCancel(this: CustomSkillMenuV2) {
-		void this.close();
+	private static async onCancel(this: CustomSkillMenuV2) {
+		await this.close();
 	}
 
-	private static createEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement) {
+	private static async createEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement) {
 		const entries = this.entries;
 
 		entries.push({
@@ -102,10 +106,10 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 			priority: 1
 		});
 
-		this.render(false);
+		await this.render(false);
 	}
 
-	private static removeEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement): void {
+	private static async removeEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement): Promise<void> {
 		const dataset = target.dataset;
 		const entries = this.entries;
 		const index = dataset.index;
@@ -113,10 +117,10 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 
 		entries.splice(parseInt(index), 1);
 
-		this.render(false);
+		await this.render(false);
 	}
 
-	private static toggleEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement) {
+	private static async toggleEntry(this: CustomSkillMenuV2, event: PointerEvent, target: HTMLElement) {
 		const dataset = target.dataset;
 		const entries = this.entries;
 		const index = dataset.index;
@@ -124,7 +128,7 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 
 		entries[parseInt(index)].core = !(entries[parseInt(index)].core);
 
-		this.render(false);
+		await this.render(false);
 	}
 
 	protected _onRender(this: CustomSkillMenuV2) {
@@ -134,7 +138,7 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 		html.on("change", ".entry-attribute", this.onAttributeChange.bind(this));
 	}
 
-	private onEntryChange(event: Event) {
+	private async onEntryChange(event: Event) {
 		event.preventDefault();
 		const element = event.currentTarget as HTMLFormElement;
 		if (!element) return;
@@ -147,10 +151,10 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 
 		entries[parseInt(index)][key] = element.value;
 
-		this.render(false);
+		await this.render(false);
 	}
 
-	private onAttributeChange(event: Event) {
+	private async onAttributeChange(event: Event) {
 		event.preventDefault();
 		const element = event.currentTarget as HTMLFormElement;
 		if (!element) return;
@@ -161,6 +165,6 @@ export class CustomSkillMenuV2 extends HandlebarsApplicationMixin(
 
 		entries[parseInt(index)].attribute = element.value;
 
-		this.render(false);
+		await this.render(false);
 	}
 }

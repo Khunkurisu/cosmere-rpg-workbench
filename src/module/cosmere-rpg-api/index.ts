@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 export { };
 declare global {
 	namespace CosmereAPI {

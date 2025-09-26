@@ -4,8 +4,8 @@ import { register as registerPowers, localize as localizePowers, POWER_TYPES } f
 import { MODULE_ID, SETTINGS } from './constants';
 
 export function register() {
-	CURRENCIES.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as Array<CosmereAPI.CurrencyConfigData>);
-	SKILLS.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as Array<CosmereAPI.SkillConfigData>);
+	CURRENCIES.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as CosmereAPI.CurrencyConfigData[]);
+	SKILLS.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as CosmereAPI.SkillConfigData[]);
 	/* POWER_TYPES.push(...game.settings!.get(MODULE_ID, 'customPowers') as Array<CosmereAPI.PowerTypeConfigData>); */
 
 	registerSkills();
@@ -14,8 +14,8 @@ export function register() {
 }
 
 export function localize() {
-	CURRENCIES.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as Array<CosmereAPI.CurrencyConfigData>);
-	SKILLS.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as Array<CosmereAPI.SkillConfigData>);
+	CURRENCIES.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as CosmereAPI.CurrencyConfigData[]);
+	SKILLS.push(...game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_SKILLS) as CosmereAPI.SkillConfigData[]);
 	/* POWER_TYPES.push(...game.settings!.get(MODULE_ID, 'customPowers') as Array<CosmereAPI.PowerTypeConfigData>); */
 
 	localizeSkills();

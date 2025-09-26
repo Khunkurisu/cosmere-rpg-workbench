@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { MODULE_ID, SETTINGS } from "../constants";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
@@ -57,7 +62,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 		};
 	}
 
-	static #onSubmit(event, form, formData) {
+	static async #onSubmit(event, form, formData) {
 		const data = [...this.entries];
 		let lastChecked;
 		let isValid = true;
@@ -72,18 +77,18 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 		}));
 
 		if (isValid) {
-			game.settings.set(MODULE_ID, SETTINGS.GENERAL_TRACKED_COMPENDIUMS, data);
-			this.close();
+			await game.settings.set(MODULE_ID, SETTINGS.GENERAL_TRACKED_COMPENDIUMS, data);
+			await this.close();
 		} else {
 			ui.notifications.error("Identifiers must be unique.");
 		}
 	}
 
-	static onCancel(event, target) {
-		this.close();
+	static async onCancel(event, target) {
+		await this.close();
 	}
 
-	static createEntry(event, target) {
+	static async createEntry(event, target) {
 		const entries = this.entries;
 
 		entries.push({
@@ -93,25 +98,25 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 			core: false
 		});
 
-		this.render({ force: false });
+		await this.render({ force: false });
 	}
 
-	static removeEntry(event, target) {
+	static async removeEntry(event, target) {
 		const dataset = target.dataset;
 		const entries = this.entries;
 
 		entries.splice(dataset.index, 1);
 
-		this.render({ force: false });
+		await this.render({ force: false });
 	}
 
-	static toggleEntry(event, target) {
+	static async toggleEntry(event, target) {
 		const dataset = target.dataset;
 		const entries = this.entries;
 
 		entries[dataset.index].core = !(entries[dataset.index].core);
 
-		this.render({ force: false });
+		await this.render({ force: false });
 	}
 
 	_onRender(context, options) {
@@ -126,7 +131,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 	 * @param {Event} event   The originating change event
 	 * @private
 	 */
-	onEntryChange(event) {
+	async onEntryChange(event) {
 		event.preventDefault();
 		const element = event.currentTarget;
 		const dataset = element.dataset;
@@ -134,7 +139,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 
 		entries[dataset.index][dataset.key] = element.value;
 
-		this.render({ force: false });
+		await this.render({ force: false });
 	}
 
 	/**
@@ -142,7 +147,7 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 	 * @param {Event} event   The originating change event
 	 * @private
 	 */
-	onAttributeChange(event) {
+	async onAttributeChange(event) {
 		event.preventDefault();
 		const element = event.currentTarget;
 		const dataset = element.dataset;
@@ -150,6 +155,6 @@ export class TrackedCompendiumsMenu extends HandlebarsApplicationMixin(Applicati
 
 		entries[dataset.index].attribute = element.value;
 
-		this.render({ force: false });
+		await this.render({ force: false });
 	}
 }

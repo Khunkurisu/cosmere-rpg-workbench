@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/unbound-method */
 import { AnyObject } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { MODULE_ID, SETTINGS } from "../constants";
 
@@ -14,7 +17,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		},
 		position: {
 			width: 640,
-			height: 'auto' as 'auto',
+			height: 'auto' as const,
 		},
 		actions: {
 			create: CustomCurrencyMenuV2.createEntry,
@@ -29,7 +32,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		},
 	}
 
-	entries = game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as Array<CosmereAPI.CurrencyConfigData>;
+	entries = game.settings!.get(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES) as CosmereAPI.CurrencyConfigData[];
 
 	static PARTS = {
 		form: {
@@ -60,13 +63,13 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		});
 	}
 
-	private static onFormEvent(
+	private static async onFormEvent(
 		this: CustomCurrencyMenuV2,
 		event: Event,
 		form: HTMLFormElement,
 		formData: FormDataExtended,
 	) {
-		const data: Array<CosmereAPI.CurrencyConfigData> = this.entries;
+		const data: CosmereAPI.CurrencyConfigData[] = this.entries;
 		let lastCurrency: CosmereAPI.CurrencyConfigData;
 		let isValid = true;
 		data.every((currency) => {
@@ -104,18 +107,19 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		});
 
 		if (isValid) {
-			game.settings!.set(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES, data);
-			this.close();
+			await game.settings!.set(MODULE_ID, SETTINGS.CUSTOM_CURRENCIES, data);
+			await this.close();
 		} else {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 			ui.notifications.error("Identifiers must be unique.");
 		}
 	}
 
-	static onCancel(this: CustomCurrencyMenuV2) {
-		this.close();
+	static async onCancel(this: CustomCurrencyMenuV2) {
+		await this.close();
 	}
 
-	static createEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
+	static async createEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
 		const entries = this.entries;
 		const dataset = target.dataset;
 		const index = dataset.index;
@@ -163,10 +167,10 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 			});
 		}
 
-		this.render(false);
+		await this.render(false);
 	}
 
-	static removeEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
+	static async removeEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
 		const dataset = target.dataset;
 		const entries = this.entries;
 		const index = dataset.index;
@@ -183,10 +187,10 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 			entries[parseInt(index)].denominations.secondary?.splice(parseInt(key), 1);
 		}
 
-		this.render(false);
+		await this.render(false);
 	}
 
-	static toggleEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
+	static async toggleEntry(this: CustomCurrencyMenuV2, event: PointerEvent, target: HTMLElement) {
 		const dataset = target.dataset;
 		const entries = this.entries;
 		const index = dataset.index;
@@ -196,7 +200,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		const dataTarget = dataset.target;
 		if (!dataTarget) return;
 
-		const denoms = entries[parseInt(index)].denominations[dataTarget] as CosmereAPI.CurrencyDenominationConfig[];
+		const denoms = entries[parseInt(index)].denominations[dataTarget]!;
 
 		denoms[parseInt(key)].base = !(denoms[parseInt(key)].base);
 
@@ -207,7 +211,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 			denoms[parseInt(key)].base = true;
 		}
 
-		this.render(false);
+		await this.render(false);
 	}
 
 	_onRender(this: CustomCurrencyMenuV2) {
@@ -216,7 +220,7 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		html.on("change", ".entry-input", this.onEntryChange.bind(this));
 	}
 
-	onEntryChange(event: Event) {
+	async onEntryChange(event: Event) {
 		event.preventDefault();
 		const element = event.currentTarget as HTMLFormElement;
 		const dataset = element.dataset;
@@ -235,10 +239,10 @@ export class CustomCurrencyMenuV2 extends HandlebarsApplicationMixin(
 		} else {
 			const denom = dataset.denom;
 			if (!denom) return;
-			const denominations = entry.denominations[target] as CosmereAPI.CurrencyDenominationConfig[];
+			const denominations = entry.denominations[target]!;
 			denominations[parseInt(denom)][key] = element.value;
 		}
 
-		this.render(false);
+		await this.render(false);
 	}
 }

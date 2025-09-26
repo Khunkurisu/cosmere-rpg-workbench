@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { MODULE_ID } from "../constants";
 
 export const SKILLS: CosmereAPI.SkillConfigData[] = [
@@ -11,7 +12,7 @@ export function register() {
 
 export function localize() {
 	SKILLS.forEach((skillConfig) => {
-		// @ts-ignore
+		// @ts-expect-error valid type erroneously claimed as valid
 		game.i18n!.translations.COSMERE.Skill[skillConfig.id] = skillConfig.label;
 	});
 }

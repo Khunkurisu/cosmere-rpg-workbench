@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable no-undef */
 import { MODULE_ID, SETTINGS } from "../constants";
 
 const templatePath = 'modules/cosmere-rpg-workbench/templates/sheets/parts/actor-encumbrance-bar.hbs';

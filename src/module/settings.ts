@@ -35,7 +35,7 @@ export function registerModuleSettings() {
 			label: game.i18n!.localize(`workbench.settings.${menu.name}.label`),
 			hint: game.i18n!.localize(`workbench.settings.${menu.name}.hint`),
 			icon: 'fas fa-bars',
-			// @ts-ignore
+			// @ts-expect-error menu.type is valid
 			type: menu.type,
 			restricted: true,
 		});
@@ -135,9 +135,7 @@ export function registerModuleSettings() {
 			name: game.i18n!.localize(`workbench.settings.${option.name}.name`),
 			hint: game.i18n!.localize(`workbench.settings.${option.name}.hint`),
 			scope: option.scope as "world" | "client" | undefined,
-			// @ts-ignore
 			default: option.default,
-			// @ts-ignore
 			type: option.type,
 			config: option.config,
 			requiresReload: option.requiresReload,
