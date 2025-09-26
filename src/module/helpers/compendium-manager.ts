@@ -13,7 +13,7 @@ export class CompendiumManager {
 
 	get hideSystem(): boolean {
 		if (game.settings?.get(MODULE_ID, SETTINGS.GENERAL_HIDE_SYSTEM_COMPENDIUMS)) {
-			return game.modules?.get(STORMLIGHT_HANDBOOK).active;
+			return game.modules?.get(STORMLIGHT_HANDBOOK)?.active;
 		}
 		return false;
 	}
