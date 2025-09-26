@@ -56,15 +56,20 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		let contents = await this.getContents();
 		return Promise.resolve({
 			tabs: this.tabs,
+			currentTab: this.activeTab,
 			items: contents,
-			tabTitle: `workbench.applications.compendiumBrowser.tabs.${this.activeTab}`,
+			tabTitle: `workbench.applications.compendiumBrowser.tabs.${this.activeTab}.label`,
+			tabPlural: `workbench.applications.compendiumBrowser.tabs.${this.activeTab}.plural`,
+			includeLabel: `workbench.applications.compendiumBrowser.filterLabel`,
+			excludedTypes: this.excludedTagsString,
 			config: CONFIG.COSMERE_WORKBENCH,
+			search: this.searchText,
 		});
 	}
 
 	async getContents(): Promise<StoredDocument<Actor | Item>[]> {
 		return this.lastActiveTab === this.activeTab
-			? await this.contentsList : await this.compendiumManager.getFilteredContents(this.tabSubtypes);
+			? await this.contentsList : await this.compendiumManager.getFilteredContents(this.tabSubtypes, this.searchText);
 	}
 
 	get tabs(): Tabs {
@@ -73,35 +78,16 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		this.tabsList.forEach(tab => {
 			tabs[tab] = {
 				id: tab,
-				label: `workbench.applications.compendiumBrowser.tabs.${tab}`,
+				label: `workbench.applications.compendiumBrowser.tabs.${tab}.label`,
 				cssClass: this.activeTab === tab ? 'active' : '',
 			};
 		});
 		return tabs;
 	}
 
-	private setFilter(tab: TabTypes, subtype: ItemTypes | ActorTypes, filter: boolean) {
-		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
-		let tabFilters;
-		if (tab in filters) {
-			tabFilters = filters[tab];
-			tabFilters[subtype] = filter;
-		} else {
-			tabFilters = {
-				[subtype]: filter,
-			};
-			filters[tab] = tabFilters;
-		}
-		game.settings?.set(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS, filters);
-	}
-
 	get tabSubtypes(): (ItemTypes | ActorTypes)[] {
 		let subtypes: (ItemTypes | ActorTypes)[] = [];
 		switch (this.activeTab) {
-			case TabTypes.Action: {
-				subtypes.push(ItemTypes.Action, ItemTypes.Ability, ItemTypes.Talent, ItemTypes.Power);
-				break;
-			}
 			case TabTypes.Actor: {
 				subtypes.push(ActorTypes.Adversary);
 				break;
@@ -118,8 +104,20 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 				subtypes.push(ItemTypes.Connection, ItemTypes.Goal);
 				break;
 			}
+			default: {
+				subtypes.push(ItemTypes.Action, ItemTypes.Ability, ItemTypes.Talent, ItemTypes.Power);
+				break;
+			}
 		}
 		return subtypes;
+	}
+
+	get tabTags(): TagData[] {
+		const tags: TagData[] = [];
+		for (let type of this.tabSubtypes) {
+			tags.push({ value: type, class: "color-green", editable: false });
+		}
+		return tags;
 	}
 
 	static onFormEvent(
@@ -136,8 +134,12 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 	}
 
 	static setTab(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
+		if (this.activeTab === target.dataset.tab as TabTypes) {
+			return;
+		}
 		this.lastActiveTab = this.activeTab;
 		this.activeTab = target.dataset.tab as TabTypes;
+		this.searchText = '';
 		this.render(true);
 	}
 
@@ -154,8 +156,120 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		ui.notifications.info(`Loading item ${uuid}`);
 	}
 
-	_onRender(this: CompendiumBrowser) {
+	protected async _onRender(this: CompendiumBrowser, context: AnyObject, options: AnyObject) {
 		this.#dragDrop.forEach((d: any) => d.bind(this.element));
+
+		this.element
+			.querySelector(`#compendium-search-${this.activeTab}`)!
+			.addEventListener(
+				'input',
+				this.onSearchInput.bind(this) as EventListener,
+			);
+
+		const tagifyElement = this.element.querySelector(`#type-exclusion-${this.activeTab}`);
+		const tagify = new Tagify(tagifyElement as HTMLInputElement, {
+			maxTags: 10,
+			keepInvalidTags: false,
+			whitelist: this.tabTags,
+			enforceWhitelist: true,
+			id: `compendiumBrowser-${game.userId}-${this.activeTab}`,
+			dropdown: {
+				enabled: 1,            // show suggestion after 1 typed character
+				fuzzySearch: false,    // match only suggestions that starts with the typed characters
+				position: 'text',      // position suggestions list next to typed text
+				caseSensitive: true,   // allow adding duplicate items if their case is different
+			},
+		});
+		tagify.on('add', async (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+
+			if (e.detail.data && e.detail.data.__isValid) {
+				this.excludedTagsList = e.detail.tagify.value;
+				await this.setFilter(this.activeTab, e.detail.data.value as ItemTypes | ActorTypes, true);
+			}
+		});
+		tagify.on('remove', async (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+
+			const oldList = this.excludedTagsString;
+			this.excludedTagsList = e.detail.tagify.value;
+			if (this.excludedTagsString !== oldList) {
+				console.log(this.excludedTagsList);
+				await this.setFilters(this.activeTab, this.excludedTagsList, true, true);
+			}
+		});
+	}
+
+	// Implement Search Functionality
+
+	excludedTagsList: TagData[] = [];
+	get excludedTagsString(): string {
+		return JSON.stringify(this.excludedTagsList);
+	}
+
+	private async setFilter(tab: TabTypes, subtype: ItemTypes | ActorTypes, filter: boolean) {
+		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
+		let tabFilters;
+		if (tab in filters) {
+			tabFilters = filters[tab];
+			tabFilters[subtype] = filter;
+		} else {
+			tabFilters = {
+				[subtype]: filter,
+			};
+			filters[tab] = tabFilters;
+		}
+		await game.settings?.set(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS, filters);
+
+		this.lastActiveTab = this.activeTab;
+		this.activeTab = tab;
+		this.contentsList = this.compendiumManager.getFilteredContents(this.tabSubtypes);
+		await this.render(true);
+	}
+
+	private async setFilters(tab: TabTypes, subtypes: TagData[], filter: boolean, replace: boolean = false) {
+		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
+		let tabFilters;
+		if (replace || !(tab in filters)) {
+			tabFilters = {};
+			filters[tab] = tabFilters;
+		} else {
+			tabFilters = filters[tab];
+		}
+		for (let subtype of subtypes) {
+			tabFilters[subtype.value] = filter;
+		}
+		await game.settings?.set(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS, filters);
+
+		this.lastActiveTab = this.activeTab;
+		this.activeTab = tab;
+		this.contentsList = this.compendiumManager.getFilteredContents(this.tabSubtypes);
+		await this.render(true);
+	}
+
+	get tabFilters() {
+		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
+		if (this.activeTab in filters) {
+			return filters[this.activeTab];
+		}
+		return {};
+	}
+
+	searchText: string = '';
+
+	private async onSearchInput(event: Event) {
+		if (event.type !== 'input') return;
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.searchText = (event.target as HTMLInputElement).value;
+
+		await this.render(true);
+
+		const search = $(this.element!).find('input')[0];
+		search.selectionStart = search.selectionEnd = this.searchText.length;
 	}
 
 	// Implement Drag Drop Functionality
@@ -222,7 +336,7 @@ interface Tabs {
 	[key: string]: any
 }
 
-enum TabTypes {
+export enum TabTypes {
 	Action = 'action',
 	Background = 'background',
 	Equipment = 'equipment',
@@ -234,13 +348,15 @@ interface Context extends AnyObject {
 	tabs: Tabs,
 	items: StoredDocument<Actor | Item>[],
 	tabTitle: string,
+	tabPlural: string,
 	config: typeof COSMERE_WORKBENCH,
+	search: string,
 }
 
-interface TabFilters {
+export interface TabFilters {
 	[key: string]: SubtypeFilter,
 }
 
-interface SubtypeFilter {
+export interface SubtypeFilter {
 	[key: string]: boolean,
 }
