@@ -51,8 +51,7 @@ Hooks.once('ready', () => {
 		if (diceTrayDiceRows) {
 			let hasPlotDie = false;
 			diceTrayDiceRows.forEach(row => {
-				// @ts-ignore
-				hasPlotDie |= row["1dp"] != undefined || row.dp != undefined;
+				hasPlotDie ||= row["1dp"] != undefined || row.dp != undefined;
 			});
 			if (!hasPlotDie) {
 				diceTrayDiceRows.push({
