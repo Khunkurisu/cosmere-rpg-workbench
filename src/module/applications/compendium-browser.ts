@@ -2,6 +2,8 @@ import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry
 import { CompendiumManager } from "../helpers/compendium-manager";
 import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../constants";
 import { COSMERE_WORKBENCH } from "../helpers/config.mjs";
+import Tagify, { TagData } from '@yaireo/tagify';
+
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
 

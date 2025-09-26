@@ -1,5 +1,7 @@
 import { StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { ActorTypes, ItemTypes, MODULE_ID, SETTINGS, STORMLIGHT_HANDBOOK, STORMLIGHT_WORLDGUIDE, SYSTEM_ID } from "../constants";
+import Fuse from "fuse.js";
+import { TabFilters, TabTypes } from "../applications/compendium-browser";
 
 export class CompendiumManager {
 	constructor();
