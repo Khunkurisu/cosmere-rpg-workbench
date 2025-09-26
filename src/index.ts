@@ -7,6 +7,9 @@ import { registerModuleSettings } from './module/settings';
 import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
 import { CompendiumManager } from './module/helpers/compendium-manager';
 import { CompendiumBrowser } from './module/applications';
+import Document from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/document.mjs';
+import BaseItem from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents/item.mjs';
+import { ActorTypes } from './module/constants';
 
 declare global {
 	interface LenientGlobalVariableTypes {
@@ -49,7 +52,7 @@ Hooks.once('ready', () => {
 			let hasPlotDie = false;
 			diceTrayDiceRows.forEach(row => {
 				// @ts-ignore
-				hasPlotDie |= row["1dp"] != undefined || row["dp"] != undefined;
+				hasPlotDie |= row["1dp"] != undefined || row.dp != undefined;
 			});
 			if (!hasPlotDie) {
 				diceTrayDiceRows.push({
@@ -71,10 +74,10 @@ Hooks.on('renderActorSheetV2', async (o: any, i: any, _n: any) => {
 	return true;
 });
 
-Hooks.on('preCreateItem', async (document: any, _data, _options, _userId) => {
+Hooks.on('preCreateItem', async (document: CosmereItem & BaseItem, _data, _options, _userId) => {
 	if (document.type === 'talent') {
 		const parentActor = document.parent;
-		if (parentActor && parentActor.type === 'adversary') {
+		if (parentActor && parentActor.type === ActorTypes.Adversary) {
 			const actionData = {
 				img: document.img,
 				name: document.name,
@@ -98,6 +101,6 @@ Handlebars.registerHelper('isSelected', function (arg1, arg2) {
 	return (arg1 == arg2) ? "selected" : "";
 });
 
-Handlebars.registerHelper('round', function (arg1) {
+Handlebars.registerHelper('round', function (arg1: Number) {
 	return arg1 ? Number((arg1).toFixed(2)) : 0;
 });
