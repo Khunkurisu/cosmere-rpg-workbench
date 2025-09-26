@@ -29,7 +29,7 @@ declare global {
 	}
 };
 
-Hooks.once('init', async function () {
+Hooks.once('init', async () => {
 	globalThis.cosmereWorkbench = Object.assign(
 		//{ macros: WorkbenchMacros }
 		{ compendiumManager: CompendiumManager },
@@ -44,13 +44,13 @@ Hooks.once('init', async function () {
 	return preloadHandlebarsTemplates();
 });
 
-Hooks.once('ready', () => {
+Hooks.once('ready', async () => {
 	localize();
 	if (game.modules!.get('dice-calculator')?.active) {
-		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as any[];
+		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as DiceRow[];
 		if (diceTrayDiceRows) {
 			let hasPlotDie = false;
-			diceTrayDiceRows.forEach(row => {
+			diceTrayDiceRows.forEach((row: DiceRow) => {
 				hasPlotDie ||= row["1dp"] != undefined || row.dp != undefined;
 			});
 			if (!hasPlotDie) {
@@ -62,7 +62,7 @@ Hooks.once('ready', () => {
 						"color": "#ffffff"
 					}
 				});
-				game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
+				await game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
 			}
 		}
 	}
@@ -100,6 +100,6 @@ Handlebars.registerHelper('isSelected', function (arg1, arg2) {
 	return (arg1 == arg2) ? "selected" : "";
 });
 
-Handlebars.registerHelper('round', function (arg1: Number) {
+Handlebars.registerHelper('round', function (arg1: number) {
 	return arg1 ? Number((arg1).toFixed(2)) : 0;
 });
