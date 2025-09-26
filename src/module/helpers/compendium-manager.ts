@@ -101,10 +101,12 @@ export class CompendiumManager {
 	public cachedPacks: CachedPacks = {
 	};
 
-	public async getFilteredContents(subtypes: (ItemTypes | ActorTypes)[]): Promise<(StoredDocument<Actor | Item>)[]>;
-	public async getFilteredContents(subtypes: ItemTypes | ActorTypes): Promise<(StoredDocument<Actor | Item>)[]>;
+	public async getFilteredContents(subtypes: (ItemTypes | ActorTypes)[], searchString?: string)
+		: Promise<(StoredDocument<Actor | Item>)[]>;
+	public async getFilteredContents(subtypes: ItemTypes | ActorTypes, searchString?: string)
+		: Promise<(StoredDocument<Actor | Item>)[]>;
 	public async getFilteredContents(
-		subtype: ItemTypes | ActorTypes | (ItemTypes | ActorTypes)[]
+		subtype: ItemTypes | ActorTypes | (ItemTypes | ActorTypes)[], searchString: string = ''
 	): Promise<(StoredDocument<Actor | Item>)[]> {
 		var subtypes: (ItemTypes | ActorTypes)[] = [];
 		if (subtype.constructor === Array) {
@@ -149,7 +151,33 @@ export class CompendiumManager {
 			this.cachedPacks[type] = cachedPack;
 		}
 
-		return Promise.resolve(allDocuments);
+		const searchResults = await this.fuzzySearchContents(allDocuments, searchString);
+
+		return Promise.resolve(searchResults);
+	}
+
+	private async fuzzySearchContents(contents: (StoredDocument<Actor | Item>)[], searchText: string = '')
+		: Promise<(StoredDocument<Actor | Item>)[]> {
+		if (searchText === '') {
+			return Promise.resolve(contents);
+		}
+
+		const fuseOptions = {
+			threshold: 0.3,
+			shouldSort: false,
+			keys: [
+				"name",
+			],
+		};
+		const fuse = new Fuse(contents, fuseOptions);
+		const results = fuse.search(searchText);
+
+		const documents: (StoredDocument<Actor | Item>)[] = [];
+		for (let result of results) {
+			documents.push(result.item);
+		}
+
+		return Promise.resolve(documents);
 	}
 }
 
