@@ -46,7 +46,7 @@
 		"typescript-eslint": "^8.2.0"
 	},
 	"engines": {
-		"node": "^20"
+		"node": ">=20.19.5"
 	},
 	"dependencies": {
 		"@yaireo/tagify": "^4.35.4",
