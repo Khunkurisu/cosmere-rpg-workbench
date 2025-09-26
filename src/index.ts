@@ -47,7 +47,7 @@ Hooks.once('init', async function () {
 Hooks.once('ready', () => {
 	localize();
 	if (game.modules!.get('dice-calculator')?.active) {
-		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as Array<any>;
+		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as any[];
 		if (diceTrayDiceRows) {
 			let hasPlotDie = false;
 			diceTrayDiceRows.forEach(row => {
