@@ -1,4 +1,5 @@
 import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs"
+import { COSMERE_WORKBENCH } from "@src/module/helpers/config.mjs"
 
 export interface CachedPacks {
 	[key: string]: CachedPack

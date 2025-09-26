@@ -2,7 +2,7 @@ import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry
 import { CompendiumManager } from "./compendium-manager";
 import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../../constants";
 import Tagify, { TagData } from '@yaireo/tagify';
-import { Tabs, TabFilters, TabTypes, CachedPacks, CachedPack, Context } from "./definitions";
+import { Tabs, TabFilters, TabTypes, Context } from "./definitions";
 
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
