@@ -113,8 +113,15 @@ export class CompendiumManager {
 			subtypes.push(subtype as ItemTypes | ActorTypes);
 		}
 
+		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
+		subtypes = subtypes.filter(subtype => {
+			for (let tabType of Object.values(TabTypes)) {
+				if (Object.keys(filters).includes(tabType) && filters[tabType][subtype]) return false;
+			}
+			return true;
+		});
+
 		let allDocuments: (StoredDocument<Actor | Item>)[] = [];
-		console.log(this.cachedPacks);
 		for (let type of subtypes) {
 			if (!(this.isValidSubtype(type as ItemTypes | ActorTypes))) {
 				continue;
@@ -122,9 +129,7 @@ export class CompendiumManager {
 			let cachedPack: CachedPack;
 			if (type in this.cachedPacks) {
 				cachedPack = this.cachedPacks[type];
-				console.log(cachedPack);
 				if (Date.now() - cachedPack.lastUpdated < this.cacheTimer) {
-					console.log('THE CACHE IS NOT OLD YET');
 					allDocuments.push(...cachedPack.documents);
 					continue;
 				}
