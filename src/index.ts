@@ -15,7 +15,6 @@ declare global {
 		game: never;
 	}
 
-	// eslint-disable-next-line no-var
 	var cosmereWorkbench: {
 		//macros: typeof WorkbenchMacros;
 		compendiumManager: typeof CompendiumManager;

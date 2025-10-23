@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable  */
 import { MODULE_ID } from "../constants";
 
@@ -13,7 +12,7 @@ export function register() {
 
 export function localize() {
 	CURRENCIES.forEach(currencyConfig => {
-		// @ts-expect-error valid type erroneously claimed as valid
+		// @ts-expect-error valid type erroneously claimed as invalid
 		const dict = game.i18n!.translations.workbench.currency;
 		const config = CONFIG.COSMERE_WORKBENCH.currency;
 		dict[currencyConfig.id] = { label: currencyConfig.label };

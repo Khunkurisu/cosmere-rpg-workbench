@@ -12,7 +12,7 @@ export function register() {
 
 export function localize() {
 	SKILLS.forEach((skillConfig) => {
-		// @ts-expect-error valid type erroneously claimed as valid
+		// @ts-expect-error valid type erroneously claimed as invalid
 		game.i18n!.translations.COSMERE.Skill[skillConfig.id] = skillConfig.label;
 	});
 }
