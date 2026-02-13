@@ -1,5 +1,6 @@
 import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs"
 import { COSMERE_WORKBENCH } from "@src/module/helpers/config.mjs"
+import { TagData } from "@yaireo/tagify";
 
 export type CachedPacks = Record<string, CachedPack>;
 
@@ -18,6 +19,8 @@ export enum TabTypes {
 	Meta = 'meta',
 	Actor = 'actor',
 }
+
+export type TagsList = Record<TabTypes, TagData[]>;
 
 export interface Context extends AnyObject {
 	tabs: Tabs,
