@@ -146,15 +146,15 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		await this.render(true);
 	}
 
-	static showItemSheet(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
-		const listElement = $(target).parent().parent();
+	static async showItemSheet(this: CompendiumBrowser, event: PointerEvent, target: HTMLElement) {
+		const listElement = $(target);
 		const dataset = listElement[0].dataset;
 		const itemId = dataset.itemId!;
 		const packId = dataset.packId!;
 		const uuid = `Compendium.${packId}.Item.${itemId}`;
 
-		const item = game.packs?.get(packId)?.get(itemId);
-		item!.sheet!.render(true);
+		const item = await fromUuid(uuid) as CosmereItem | null;
+		item!.sheet?.render(true);
 
 		ui.notifications.info(`Loading item ${uuid}`);
 	}
