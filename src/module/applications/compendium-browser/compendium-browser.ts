@@ -5,7 +5,7 @@ import { AnyObject, StoredDocument } from "@league-of-foundry-developers/foundry
 import { CompendiumManager } from "./compendium-manager";
 import { ItemTypes, ActorTypes, SYSTEM_ID, MODULE_ID, SETTINGS } from "../../constants";
 import Tagify, { TagData } from '@yaireo/tagify';
-import { Tabs, TabFilters, TabTypes, Context } from "./definitions";
+import { Tabs, TabFilters, TabTypes, Context, TagsList } from "./definitions";
 
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api
@@ -40,7 +40,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 	}
 
 	compendiumManager = new CompendiumManager();
-	tabsList = Object.values(TabTypes);
+	static tabsList = Object.values(TabTypes);
 	contentsList = this.compendiumManager.getFilteredContents(this.tabSubtypes);
 	activeTab: TabTypes = TabTypes.Action;
 	lastActiveTab: TabTypes = TabTypes.Action;
@@ -78,7 +78,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 	get tabs(): Tabs {
 		const tabs: Tabs = {
 		};
-		this.tabsList.forEach(tab => {
+		CompendiumBrowser.tabsList.forEach(tab => {
 			tabs[tab] = {
 				id: tab,
 				label: `workbench.applications.compendiumBrowser.tabs.${tab}.label`,
@@ -188,7 +188,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 			e.stopPropagation();
 
 			if (e.detail.data?.__isValid) {
-				this.excludedTagsList = e.detail.tagify.value;
+				this.excludedTagsList[this.activeTab] = e.detail.tagify.value;
 				await this.setFilter(this.activeTab, e.detail.data.value as ItemTypes | ActorTypes, true);
 			}
 		});
@@ -197,9 +197,8 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 			e.stopPropagation();
 
 			const oldList = this.excludedTagsString;
-			this.excludedTagsList = e.detail.tagify.value;
+			this.excludedTagsList[this.activeTab] = e.detail.tagify.value;
 			if (this.excludedTagsString !== oldList) {
-				console.log(this.excludedTagsList);
 				await this.setFilters(this.activeTab, this.excludedTagsList, true, true);
 			}
 		});
@@ -207,9 +206,34 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 
 	// Implement Search Functionality
 
-	excludedTagsList: TagData[] = [];
+	excludedTagsList: TagsList = CompendiumBrowser.initialTagsList();
+
+	private static initialTagsList() {
+		const list: TagsList = {
+			[TabTypes.Action]: [] as TagData[],
+			[TabTypes.Actor]: [] as TagData[],
+			[TabTypes.Background]: [] as TagData[],
+			[TabTypes.Equipment]: [] as TagData[],
+			[TabTypes.Meta]: [] as TagData[],
+		};
+		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
+
+		for (const tab of this.tabsList) {
+			if (tab in filters) {
+				const tabFilter = filters[tab];
+				if (tabFilter) {
+					for (const key of Object.keys(tabFilter)) {
+						if (tabFilter[key]) list[tab].push({ 'value': key });
+					}
+				}
+			}
+		}
+
+		return list;
+	}
+
 	get excludedTagsString(): string {
-		return JSON.stringify(this.excludedTagsList);
+		return JSON.stringify(this.excludedTagsList[this.activeTab]);
 	}
 
 	private async setFilter(tab: TabTypes, subtype: ItemTypes | ActorTypes, filter: boolean) {
@@ -232,7 +256,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		await this.render(true);
 	}
 
-	private async setFilters(tab: TabTypes, subtypes: TagData[], filter: boolean, replace = false) {
+	private async setFilters(tab: TabTypes, subtypes: TagsList, filter: boolean, replace = false) {
 		const filters = game.settings?.get(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS) as TabFilters;
 		let tabFilters;
 		if (replace || !(tab in filters)) {
@@ -241,7 +265,7 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		} else {
 			tabFilters = filters[tab];
 		}
-		for (const subtype of subtypes) {
+		for (const subtype of subtypes[tab]) {
 			tabFilters[subtype.value] = filter;
 		}
 		await game.settings?.set(MODULE_ID, SETTINGS.CLIENT_COMPENDIUM_FILTERS, filters);
