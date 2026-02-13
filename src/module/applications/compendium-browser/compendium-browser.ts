@@ -334,4 +334,39 @@ export class CompendiumBrowser extends HandlebarsApplicationMixin(
 		const data = TextEditor.getDragEventData(event);
 	}
 
+	static async openCompendiumBrowser(_activeTab = TabTypes.Action, _lastActiveTab = TabTypes.Action) {
+		// Polls every 50 milliseconds for a given condition
+		const waitFor = async (condition: () => Promise<boolean>, pollInterval = 50, timeoutAfter: number) => {
+			// Track the start time for timeout purposes
+			const startTime = Date.now();
+
+			while (true) {
+				// Check for timeout, bail if too much time passed
+				if (typeof (timeoutAfter) === 'number' && Date.now() > startTime + timeoutAfter) {
+					break;
+				}
+
+				// Check for conditon immediately
+				const result = await condition();
+
+				// If the condition is met...
+				if (result) {
+					// Return the result....
+					return result;
+				}
+
+				// Otherwise wait and check after pollInterval
+				await new Promise(r => setTimeout(r, pollInterval));
+			}
+			return;
+		};
+
+		const browser = new cosmereWorkbench.compendiumBrowser;
+		browser.activeTab = _activeTab;
+		browser.lastActiveTab = _lastActiveTab;
+
+		await waitFor(async () => (await browser.getContents()).length >= 1, 50, 5000);
+		await browser.render(true);
+	}
+
 }
