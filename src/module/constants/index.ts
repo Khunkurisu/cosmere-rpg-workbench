@@ -57,11 +57,30 @@ export enum DocumentTypes {
 	Journal = 'journal',
 }
 
-export enum ApplicationTypes {
-	BaseActor = 'BaseActorSheet',
-	AdversarySheet = 'AdversarySheet',
-	CharacterSheet = 'CharacterSheet',
-	BaseItem = 'BaseItemSheet',
+export const ApplicationTypes = {
+	Actor: {
+		Base: 'BaseActorSheet',
+		Adversary: 'AdversarySheet',
+		Character: 'CharacterSheet',
+	},
+	Item: {
+		Base: 'BaseItemSheet',
+		Action: 'ActionItemSheet',
+		Ancestry: 'AncestrySheet',
+		Armor: 'ArmorItemSheet',
+		Connection: 'ConnectionItemSheet',
+		Culture: 'CultureItemSheet',
+		Equipment: 'EquipmentItemSheet',
+		Feature: 'FeatureItemSheet',
+		Goal: 'GoalItemSheet',
+		Injury: 'InjuryItemSheet',
+		Loot: 'LootItemSheet',
+		Path: 'PathItemSheet',
+		Power: 'PowerItemSheet',
+		Talent: 'TalentItemSheet',
+		TalentTree: 'TalentTreeItemSheet',
+		Weapon: 'WeaponItemSheet',
+	}
 }
 
 export { HOOKS } from './hooks';
