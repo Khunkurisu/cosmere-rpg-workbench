@@ -4,7 +4,8 @@ import { localize, register } from './module/setup';
 import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
 import { registerModuleSettings } from './module/settings';
-import { InjectEncumbranceCounter } from './module/sheets/actor-sheet-encumbrance-bar.mjs';
+import { HOOKS } from './module/constants';
+import { SetupDiceTray } from './module/hooks/modules/dice-tray';
 
 declare global {
 	interface LenientGlobalVariableTypes {
@@ -17,12 +18,12 @@ declare global {
 	}; */
 
 	interface CONFIG {
-		COSMERE: any;
+		COSMERE: never;
 		COSMERE_WORKBENCH: typeof COSMERE_WORKBENCH;
 	}
 };
 
-Hooks.once('init', async function () {
+Hooks.once(HOOKS.INIT, async () => {
 	/* globalThis.cosmereWorkbench = Object.assign(
 		{ macros: WorkbenchMacros }
 	); */
@@ -35,56 +36,9 @@ Hooks.once('init', async function () {
 	return preloadHandlebarsTemplates();
 });
 
-Hooks.once('ready', () => {
+Hooks.once(HOOKS.READY, async () => {
 	localize();
-	if (game.modules!.get('dice-calculator')?.active) {
-		const diceTrayDiceRows = game.settings!.get("dice-calculator", "diceRows") as Array<any>;
-		if (diceTrayDiceRows) {
-			let hasPlotDie = false;
-			diceTrayDiceRows.forEach(row => {
-				hasPlotDie |= row["1dp"] != undefined || row["dp"] != undefined;
-			});
-			if (!hasPlotDie) {
-				diceTrayDiceRows.push({
-					"1dp": {
-						"img": "systems/cosmere-rpg/assets/icons/svg/dice/dp_op.svg",
-						"label": "Plot Die",
-						"tooltip": "Raise the Stakes!",
-						"color": "#ffffff"
-					}
-				});
-				game.settings!.set("dice-calculator", "diceRows", diceTrayDiceRows);
-			}
-		}
-	}
-});
-
-Hooks.on('renderActorSheetV2', async (o: any, i: any, _n: any) => {
-	await InjectEncumbranceCounter(o, i);
-	return true;
-});
-
-Hooks.on('preCreateItem', async (document: any, _data, _options, _userId) => {
-	if (document.type === 'talent') {
-		const parentActor = document.parent;
-		if (parentActor && parentActor.type === 'adversary') {
-			const actionData = {
-				img: document.img,
-				name: document.name,
-				type: 'action',
-				system: {
-					activation: document.system.activation,
-					damage: document.system.damage,
-					description: document.system.description,
-					id: document.id,
-				}
-			}
-			const docCls = getDocumentClass('Item');
-			await docCls.create(actionData, { parent: parentActor });
-			return false;
-		}
-	}
-	return true;
+	await SetupDiceTray();
 });
 
 Handlebars.registerHelper('isSelected', function (arg1, arg2) {
