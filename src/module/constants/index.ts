@@ -59,6 +59,8 @@ export enum DocumentTypes {
 
 export enum ApplicationTypes {
 	BaseActor = 'BaseActorSheet',
+	AdversarySheet = 'AdversarySheet',
+	CharacterSheet = 'CharacterSheet',
 	BaseItem = 'BaseItemSheet',
 }
 
