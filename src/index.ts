@@ -48,6 +48,6 @@ Handlebars.registerHelper('isSelected', function (arg1, arg2) {
 	return (arg1 == arg2) ? "selected" : "";
 });
 
-Handlebars.registerHelper('round', function (arg1) {
+Handlebars.registerHelper('round', function (arg1?: number) {
 	return arg1 ? Number((arg1).toFixed(2)) : 0;
 });
