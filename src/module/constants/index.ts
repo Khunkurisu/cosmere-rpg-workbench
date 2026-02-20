@@ -29,3 +29,37 @@ export const SETTINGS = {
 	GENERAL_COMPENDIUM_MANAGER: 'compendiumManager',
 	GENERAL_TRACKED_COMPENDIUMS: 'trackedCompendiums',
 } as const;
+
+export enum ItemTypes {
+	Weapon = 'weapon',
+	Armor = 'armor',
+	Equipment = 'equipment',
+	Loot = 'loot',
+	Ancestry = 'ancestry',
+	Culture = 'culture',
+	Path = 'path',
+	Talent = 'talent',
+	Ability = 'trait',
+	Action = 'action',
+	Connection = 'connection',
+	Goal = 'goal',
+	Power = 'power',
+};
+
+export enum ActorTypes {
+	Character = 'character',
+	Adversary = 'adversary',
+};
+
+export enum DocumentTypes {
+	Item = 'item',
+	Actor = 'actor',
+	Journal = 'journal',
+}
+
+export enum ApplicationTypes {
+	BaseActor = 'BaseActorSheet',
+	BaseItem = 'BaseItemSheet',
+}
+
+export { HOOKS } from './hooks';
