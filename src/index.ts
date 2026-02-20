@@ -1,5 +1,6 @@
 import './style.scss';
 import './module/cosmere-rpg-api';
+import { Logger } from './module/helpers/console';
 import { localize, register } from './module/setup';
 import { COSMERE_WORKBENCH } from './module/helpers/config.mjs';
 import { preloadHandlebarsTemplates } from './module/helpers/templates.mjs';
@@ -8,6 +9,8 @@ import { HOOKS } from './module/constants';
 import { SetupDiceTray } from './module/hooks/modules/dice-tray';
 
 declare global {
+	var debug: typeof Logger
+
 	interface LenientGlobalVariableTypes {
 		game: never;
 	}
