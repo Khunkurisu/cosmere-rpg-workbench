@@ -33,4 +33,4 @@ interface TalentTreeItemData {
         };
     };
 }
-export declare class TalentTreeItemDataModel implements TalentTreeItemData, foundry.abstract.TypeDataModel<TalentTreeItemData> {}
+declare class TalentTreeItemDataModel implements TalentTreeItemData, foundry.abstract.TypeDataModel<TalentTreeItemData> {}

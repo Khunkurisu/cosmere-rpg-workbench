@@ -12,9 +12,10 @@ interface ShowConsumeDialogOptions {
      */
     consumeType?: ItemConsumeType;
 }
+
 declare class CosmereItem<
     SystemType = {}
-> extends Item {
+> extends ClientDocumentMixin(Item) {
     name: string;
     type: ItemType;
     system: SystemType;
@@ -99,8 +100,8 @@ declare class CosmereItem<
      * Only used for:
      * - Talents
      */
-    set source(value: T extends TalentItemDataModel ? Talent.Source | null : never);
-    
+	set source(value: T extends TalentItemDataModel ? Talent.Source | null : never);
+
     protected handleGoalComplete(): void;
     /**
      * Roll utility for activable items.
@@ -255,3 +256,51 @@ type WeaponItem = CosmereItem<WeaponItemData>;
 type GoalItem = CosmereItem<GoalItemData>;
 type PowerItem = CosmereItem<PowerItemData>;
 type TalentTreeItem = CosmereItem<TalentTreeItemData>;
+
+declare module "@league-of-foundry-developers/foundry-vtt-types/configuration" {
+    interface ConfiguredItem<SubType extends Item.SubType> {
+        document: CosmereItem<SubType>;
+    }
+
+    interface FlagConfig {
+        Item: {
+            [SYSTEM_ID]: {
+                sheet: {
+                    mode: 'edit' | 'view';
+                };
+                'sheet.mode': 'edit' | 'view';
+                meta: {
+                    origin: ItemOrigin;
+                };
+                'meta.origin': ItemOrigin;
+                previousLevel?: number;
+                isStartingPath?: boolean;
+            };
+        };
+	}
+
+    interface DataModelConfig {
+        Item: {
+            [ItemType.Weapon]: typeof WeaponItemDataModel,
+            [ItemType.Armor]: typeof ArmorItemDataModel
+            [ItemType.Equipment]: typeof EquipmentItemDataModel
+            [ItemType.Loot]: typeof LootItemDataModel
+
+            [ItemType.Ancestry]: typeof AncestryItemDataModel
+            [ItemType.Culture]: typeof CultureItemDataModel
+            [ItemType.Path]: typeof PathItemDataModel
+            [ItemType.Talent]: typeof TalentItemDataModel
+            [ItemType.Trait]: typeof TraitItemDataModel
+
+            [ItemType.Action]: typeof ActionItemDataModel
+
+            [ItemType.Injury]: typeof InjuryItemDataModel
+            [ItemType.Connection]: typeof ConnectionItemDataModel
+            [ItemType.Goal]: typeof GoalItemDataModel
+
+            [ItemType.Power]: typeof PowerItemDataModel
+
+            [ItemType.TalentTree]: typeof TalentTreeItemDataModel
+        }
+    }
+}

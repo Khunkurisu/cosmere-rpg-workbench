@@ -71,7 +71,10 @@ type CosmereActorRollData<T extends CommonActorData = CommonActorData> = {
         name: string;
     };
 };
-declare class CosmereActor<T extends CommonActorDataModel = CommonActorDataModel, SystemType extends CommonActorData = T extends CommonActorDataModel<infer S> ? S : never> extends Actor {
+declare class CosmereActor<
+	T extends CommonActorDataModel = CommonActorDataModel,
+	SystemType extends CommonActorData = T extends CommonActorDataModel<infer S> ? S : never
+> extends Actor {
     name: string;
     system: SystemType;
     type: ActorType;

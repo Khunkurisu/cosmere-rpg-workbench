@@ -1,6 +1,4 @@
-interface DiceRow {
-	[key: string]: Row
-}
+interface DiceRow extends Record<string, Row> { };
 
 interface Row {
 	color?: string,

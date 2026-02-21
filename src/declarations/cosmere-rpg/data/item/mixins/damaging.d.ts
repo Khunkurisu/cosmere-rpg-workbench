@@ -1,4 +1,4 @@
-export interface DamagingItemData {
+interface DamagingItemData {
     damage: {
         formula?: string;
         type?: DamageType;
