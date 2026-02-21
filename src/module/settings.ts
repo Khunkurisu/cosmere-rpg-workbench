@@ -1,6 +1,6 @@
 import { MODULE_ID, SETTINGS } from "./constants";
-import { CustomCurrencyMenu, CustomSkillMenu, TrackedCompendiumsMenu } from "./applications";
-import { CompendiumManager } from "./helpers/compendium-manager.mjs";
+import { CustomCurrencyMenu, CustomSkillMenu } from "./applications";
+import { CompendiumManager } from "./applications/compendium-browser/compendium-manager";
 
 export function getModuleSetting<
 	T extends string | boolean | number = string | boolean | number,
@@ -35,7 +35,7 @@ export function registerModuleSettings() {
 			label: game.i18n!.localize(`workbench.settings.${menu.name}.label`),
 			hint: game.i18n!.localize(`workbench.settings.${menu.name}.hint`),
 			icon: 'fas fa-bars',
-			// @ts-ignore
+			// @ts-expect-error menu.type is valid
 			type: menu.type,
 			restricted: true,
 		});
@@ -110,6 +110,22 @@ export function registerModuleSettings() {
 			config: false,
 			type: Array<any>,
 			default: new Array<any>,
+			requiresReload: false,
+		},
+		{
+			name: SETTINGS.GENERAL_HIDE_SYSTEM_COMPENDIUMS,
+			scope: 'world',
+			config: true,
+			type: Boolean,
+			default: true,
+			requiresReload: true,
+		},
+		{
+			name: SETTINGS.CLIENT_COMPENDIUM_FILTERS,
+			scope: 'client',
+			config: false,
+			type: Object,
+			default: {},
 			requiresReload: false,
 		},
 	];

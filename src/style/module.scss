@@ -9,6 +9,45 @@
 	}
 }
 
+.search-bar {
+	height: 40px;
+	background-color: var(--cosmere-color-base-3);
+	border-radius: 6px;
+	padding: 0 2%;
+	width: 85%;
+
+	font-size: var(--font-size-13);
+	font-family: var(--cosmere-font-normal);
+
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: auto;
+	margin-bottom: 15px;
+
+	input {
+		color: var(--cosmere-color-text-sub);
+		text-align: left;
+		flex: 1;
+
+		&::placeholder {
+			color: var(--cosmere-color-faded);
+		}
+	}
+
+	.controls {
+		font-size: var(--font-size-16);
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+}
+
+.include-filter {
+	width: 100%;
+	--tag-bg: #2a780e;
+}
+
 .subentry-list:nth-child(2n) {
 	background: #0f061063;
 }
