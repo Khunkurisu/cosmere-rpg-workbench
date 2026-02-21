@@ -8,6 +8,7 @@ import { registerModuleSettings } from './module/settings';
 import { HOOKS } from './module/constants';
 import { CompendiumBrowser, CompendiumManager } from './module/applications';
 import { SetupDiceTray } from './module/hooks/modules/dice-tray';
+import { AnyObject } from '@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs';
 
 declare global {
 	var debug: typeof Logger
@@ -23,7 +24,7 @@ declare global {
 	};
 
 	interface CONFIG {
-		COSMERE: never;
+		COSMERE: AnyObject;
 		COSMERE_WORKBENCH: typeof COSMERE_WORKBENCH;
 	}
 };
